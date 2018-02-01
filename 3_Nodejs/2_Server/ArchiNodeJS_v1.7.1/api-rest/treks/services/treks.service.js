@@ -11,8 +11,8 @@ class TreksService {
         TreksDAO.create(idUser, trek, cb);
     }
 
-    static update(trek, cb) {
-        TreksDAO.update(trek, cb);
+    static update(idUser, trek, cb) {
+        TreksDAO.update(idUser, trek, cb);
     }
 
     static delete(id, cb) {

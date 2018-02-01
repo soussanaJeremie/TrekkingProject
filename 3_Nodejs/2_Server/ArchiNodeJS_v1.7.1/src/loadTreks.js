@@ -186,8 +186,8 @@ var LoadTreksManager = {
         var input = {
             'label': document.getElementById('label').value,
             'length': document.getElementById('length').value,
-            'time': document.getElementById('time').value,
-            'level': document.getElementById('level').value
+            'time': document.getElementById('time').value || null,
+            'level': document.getElementById('level').value || null
         };
 
         $http.update('/api-rest/treks/' + i, input, function(res) {
