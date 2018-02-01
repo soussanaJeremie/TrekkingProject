@@ -11,6 +11,9 @@ import "../../modules/camera"
 
 ColumnLayout {
 
+    property alias urlLastPhoto: maCam.urlLastPhoto
+    signal urlSet
+
     id : etat
 
     anchors.fill: parent
@@ -19,72 +22,22 @@ ColumnLayout {
 
     spacing: 0
 
-    //insert camera module
-
     Rectangle {
         id : cameraUI
+
         Layout.fillHeight: true
         Layout.fillWidth: true
-        //        color: "lightblue"
-
-        //        Rectangle {
-        //            width: parent.width
-        //            height: parent.height
 
         color: "black"
         state: "PhotoCapture"
 
-        states: [
-            State {
-                name: "PhotoCapture"
-                StateChangeScript {
-                    script: {
-                        camera.captureMode = Camera.CaptureStillImage
-                        camera.start()
-                    }
-                }
-            },
-            State {
-                name: "PhotoPreview"
-            }
-        ]
-        Camera {
-            id: camera
-            captureMode: Camera.CaptureStillImage // added
-
-            imageCapture {
-                onImageCaptured: {
-                    photoPreview.source = preview
-                    stillControls.previewAvailable = true
-                    cameraUI.state = "PhotoPreview"
-                }
-            }
-        }
-// added segment from here =>
-        PhotoPreview {
-            id : photoPreview
-            anchors.fill : parent
-            onClosed: cameraUI.state = "PhotoCapture"
-            visible: cameraUI.state == "PhotoPreview"
-            focus: visible
-        }
-// => til here;
-
-        VideoOutput {
-            id: viewfinder
-            visible: cameraUI.state == "PhotoCapture"
-            width: parent.width
-            height: parent.height
-            source: camera
-            autoOrientation: true
-        }
-        PhotoCaptureControls {
-            id: stillControls
+        MyCamera {
+            id : maCam
             anchors.fill: parent
-            camera: camera
-            visible: cameraUI.state == "PhotoCapture"
-            onPreviewSelected: cameraUI.state = "PhotoPreview"
+            onUrlLastPhotoChanged: {
+                console.log("camera.urlLastPhoto -> " + urlLastPhoto)
+                urlSet();
+            }
         }
     }
 }
-

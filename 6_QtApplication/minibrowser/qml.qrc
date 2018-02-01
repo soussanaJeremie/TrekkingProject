@@ -51,5 +51,6 @@
         <file>images/icon/pause.png</file>
         <file>qml/pages/PhotoPage/Etat3.qml</file>
         <file>qml/modules/camera/PhotoPreview.qml</file>
+        <file>qml/modules/camera/MyCamera.qml</file>
     </qresource>
 </RCC>

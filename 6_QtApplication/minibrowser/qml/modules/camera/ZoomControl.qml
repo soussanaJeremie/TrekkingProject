@@ -1,7 +1,7 @@
-import QtQuick 2.6
-import QtQuick.Window 2.3
+import QtQuick 2.9
+import QtQuick.Window 2.2
+import QtQuick.Controls 1.4
 import QtMultimedia 5.8
-import QtQuick.Controls 2.2
 
 Item {
     id : zoomControl
@@ -57,19 +57,6 @@ Item {
             radius: 8
             color: "white"
             opacity: 0.5
-        }
-        Text {
-            id: zoomText
-            anchors {
-                left: bar.right; leftMargin: 16
-            }
-            y: Math.min(parent.height - height, Math.max(0, groove.y - height / 2))
-            text: "x" + Math.round(zoomControl.currentZoom * 100) / 100
-            font.bold: true
-            color: "white"
-            style: Text.Raised; styleColor: "black"
-            opacity: 0.85
-            font.pixelSize: 18
         }
     }
 }

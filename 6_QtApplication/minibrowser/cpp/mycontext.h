@@ -10,6 +10,7 @@
 #include "trek.h"
 #include "user.h"
 #include "utils.h"
+#include "photo.h"
 
 
 // Faut peut-etre appeler la classe Utils une fois
@@ -22,10 +23,13 @@ class MyContext : public QObject
 
     Q_PROPERTY(Trek* myTrek READ getMyTrek WRITE setMyTrek NOTIFY myTrekChanged)
     Q_PROPERTY(QList<QObject*> trekList READ getTrekList WRITE setTrekList NOTIFY trekListChanged)
+    Q_PROPERTY(QString lastUrl READ getLastUrl WRITE setLastUrl NOTIFY lastUrlChanged)
+    Q_PROPERTY(Photo* myPhoto READ getMyPhoto WRITE setMyPhoto NOTIFY myPhotoChanged)
     Q_PROPERTY(User* user READ getUser WRITE setUser NOTIFY userChanged)
     Q_PROPERTY(FileManager* fileManager READ getFileManager WRITE setFileManager NOTIFY fileManagerChanged)
 
     Q_PROPERTY(QString errorMessage READ errorMessage WRITE setErrorMessage NOTIFY errorMessageChanged)
+
 
 
     QQmlContext* m_myContext;
@@ -35,6 +39,8 @@ class MyContext : public QObject
     QList<QObject*> m_trekList;
     User* m_user;
     Trek* m_myTrek;
+    QString m_lastUrl;
+    Photo* m_myPhoto;
 
     QString m_errorMessage;
 
@@ -43,6 +49,8 @@ class MyContext : public QObject
     void searchUserFile();
     void searchTrekFile();
     void searchPhotoFile();
+
+
 
 
 public:
@@ -60,6 +68,9 @@ public:
 
     Q_INVOKABLE void updateTrek (double const &latitude, double const &longitude);
     Q_INVOKABLE void startTrek (const QString &trekName, const double &latitude, const double &longitude);
+
+    Q_INVOKABLE void saveLastImageTakenUrl(const QString &path);
+    Q_INVOKABLE void photoTaken(QString title, QString url, bool privatePhoto);
 
     Q_INVOKABLE void saveUser (const int &id, QString username, QString password, QString mail);
     Q_INVOKABLE void deleteUser ();
@@ -93,6 +104,16 @@ public:
         return m_fileManager;
     }
 
+    Photo* getMyPhoto() const
+    {
+        return m_myPhoto;
+    }
+
+    QString getLastUrl() const
+    {
+        return m_lastUrl;
+    }
+
 signals:
 
     void myTrekChanged(Trek* myTrek);
@@ -100,6 +121,10 @@ signals:
     void trekListChanged(QList<QObject*> trekList);
     void userChanged(User* user);
     void fileManagerChanged(FileManager* fileManager);
+
+    void myPhotoChanged(Photo* myPhoto);
+
+    void lastUrlChanged(QString lastUrl);
 
 public slots:
 
@@ -146,6 +171,22 @@ public slots:
 
         m_fileManager = fileManager;
         emit fileManagerChanged(m_fileManager);
+    }
+    void setMyPhoto(Photo* myPhoto)
+    {
+        if (m_myPhoto == myPhoto)
+            return;
+
+        m_myPhoto = myPhoto;
+        emit myPhotoChanged(m_myPhoto);
+    }
+    void setLastUrl(QString lastUrl)
+    {
+        if (m_lastUrl == lastUrl)
+            return;
+
+        m_lastUrl = lastUrl;
+        emit lastUrlChanged(m_lastUrl);
     }
 };
 

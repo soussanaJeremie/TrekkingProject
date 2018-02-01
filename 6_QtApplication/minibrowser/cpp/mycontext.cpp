@@ -86,6 +86,24 @@ void MyContext::startTrek(const QString &trekName,const double &latitude, const 
     qDebug() << "New Trek Created";
 }
 
+void MyContext::saveLastImageTakenUrl(const QString &path)
+{
+    setLastUrl(path);
+    qDebug() << "url = " + m_lastUrl;
+}
+
+void MyContext::photoTaken(QString title, QString url, bool privatePhoto)
+{
+    url = m_lastUrl;
+
+    Photo *photo = nullptr;
+    photo = new Photo(title, url, privatePhoto);
+    photo->showPhotoData(photo);
+
+    setMyPhoto(photo);
+    m_myTrek->addPhoto(m_myPhoto);
+}
+
 void MyContext::saveUser(const int &id,  QString username,  QString password,  QString mail)
 {
     User* currentUser = new User;

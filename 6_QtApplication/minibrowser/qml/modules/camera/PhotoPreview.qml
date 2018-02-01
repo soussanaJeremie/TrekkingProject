@@ -1,7 +1,11 @@
-import QtQuick 2.0
-import QtMultimedia 5.0
+import QtQuick 2.9
+import QtQuick.Window 2.2
+import QtMultimedia 5.8
 
 Item {
+    id : test
+
+    property string urlLastPhoto: "aaa"
     property alias source : preview.source
     signal closed
 
@@ -11,11 +15,19 @@ Item {
         fillMode: Image.PreserveAspectFit
         smooth: true
     }
-
+    
     MouseArea {
         anchors.fill: parent
         onClicked: {
+            var path = "file:///" + camera.imageCapture.capturedImagePath;
+            MyContext.saveLastImageTakenUrl(path);
+            console.log("photoTaken: url -> " + path);
             parent.closed();
+            urlLastPhoto = path;
+            console.log("photoPreview.urlLastPhoto -> " + urlLastPhoto)
+
+            if(!camera.ActiveStatus)
+                camera.start()
         }
     }
 }

@@ -7,6 +7,7 @@
 
 #include "filemanager.h"
 #include "gpspoint.h"
+#include "photo.h"
 
 class Trek : public QObject
 {
@@ -16,6 +17,7 @@ class Trek : public QObject
     Q_PROPERTY(QString time READ getTime WRITE setTime NOTIFY timeChanged)
     Q_PROPERTY(QList<QObject*> path READ getPath WRITE setPath NOTIFY pathChanged)
     Q_PROPERTY(QList<QObject*> trace READ getTrace WRITE setTrace NOTIFY traceChanged)
+    Q_PROPERTY(QObjectList photos READ getPhotos WRITE setPhotos NOTIFY photosChanged)
     Q_PROPERTY(QString level READ getLevel WRITE setLevel NOTIFY levelChanged)
     Q_PROPERTY(bool done READ getDone WRITE setDone NOTIFY doneChanged)
 
@@ -26,8 +28,10 @@ class Trek : public QObject
     QString m_time;
     QList<QObject*> m_path;
     QList<QObject*> m_trace;
+    QObjectList m_photos;
     QString m_level;
     bool m_done;
+
 
 
 public:
@@ -39,6 +43,7 @@ public:
 
     void addNewGpsPoint (GpsPoint newGpsPoint);
     bool didUserMove (GpsPoint &newGpsPoint);
+    void addPhoto(Photo *myPhoto);
 
     QString getLabel() const
     {
@@ -75,6 +80,11 @@ public:
         return m_done;
     }
 
+    QObjectList getPhotos() const
+    {
+        return m_photos;
+    }
+
 signals:
 
     void labelChanged(QString label);
@@ -85,6 +95,8 @@ signals:
     void levelChanged(QString level);
     void doneChanged(bool done);
 
+
+    void photosChanged(QObjectList photos);
 
 public slots:
     void setLabel(QString label)
@@ -144,6 +156,14 @@ public slots:
         emit doneChanged(m_done);
     }
 
+    void setPhotos(QObjectList photos)
+    {
+        if (m_photos == photos)
+            return;
+
+        m_photos = photos;
+        emit photosChanged(m_photos);
+    }
 };
 
 #endif // TREK_H

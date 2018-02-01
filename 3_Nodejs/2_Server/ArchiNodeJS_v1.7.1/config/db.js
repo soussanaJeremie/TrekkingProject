@@ -4,7 +4,7 @@ let connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'afpa',
-    database: 'trek_test02'
+    database: 'trek_test'
 });
 
 connection.connect();

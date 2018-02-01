@@ -12,6 +12,7 @@ Page {
     property bool photo1_visibilite: false
     property bool photo2_visibilite: true
     property bool photo3_visibilite: false
+    property alias urlLastPhoto: etat1.urlLastPhoto
 
     header: Label {
         text: qsTr("Photo")
@@ -23,6 +24,12 @@ Page {
     Etat1 {
         id : etat1
         visible: photo1_visibilite
+        onUrlSet: {
+            etat2.currenturl = urlLastPhoto
+            console.log("etat2.currenturl -> " + etat2.currenturl)
+            etat3.currenturl = etat2.currenturl
+            console.log("etat3.currenturl -> " + etat3.currenturl)
+        }
     }
 
     Etat2 {
@@ -34,8 +41,6 @@ Page {
         id : etat3
         visible: photo3_visibilite
     }
-
-
 }
 
 
