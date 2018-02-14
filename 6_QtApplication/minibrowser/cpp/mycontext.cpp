@@ -134,6 +134,11 @@ int MyContext::getIdUser()
     return getUser()->getIdUser();
 }
 
+void MyContext::testUploadPhoto() //new
+{
+    HttpServer::post("C:/Users/34011-58-03/Pictures/panda.jpg", "petitPanda");
+}
+
 
 QString MyContext::truncateUrl(const QString &url)
 {

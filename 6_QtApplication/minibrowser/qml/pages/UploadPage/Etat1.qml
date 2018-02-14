@@ -98,7 +98,10 @@ ColumnLayout {
                 height: etat.height / 15
                 width: etat.width / 3
 
-                onClicked: console.log("sauvegarde de la photo & edition du LocalFile")
+                onClicked: {
+                    MyContext.testUploadPhoto();
+                    console.log("sauvegarde de la photo & edition du LocalFile")
+                }
             }
         }
 
@@ -241,12 +244,7 @@ ColumnLayout {
             Layout.fillWidth: true
             //color: "blue"
 
-            Image {
-                id: logoAfpa
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.bottom: parent.bottom
-                source: "../../../images/logoAfpa.jpg"
-            }
+            LogoAFPA {}
         }
     } // fin RowLayout
 

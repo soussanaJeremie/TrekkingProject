@@ -52,5 +52,8 @@
         <file>qml/pages/PhotoPage/Etat3.qml</file>
         <file>qml/modules/camera/PhotoPreview.qml</file>
         <file>qml/modules/camera/MyCamera.qml</file>
+        <file>qml/javascript/httpRequest.js</file>
+        <file>images/icon/logoAFPA.png</file>
+        <file>qml/modules/LogoAFPA.qml</file>
     </qresource>
 </RCC>

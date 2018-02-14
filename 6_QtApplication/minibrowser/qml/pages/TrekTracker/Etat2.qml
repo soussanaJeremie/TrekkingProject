@@ -85,12 +85,7 @@ ColumnLayout {
             Layout.fillWidth: true
             //color: "darkBlue"
 
-            Image {
-                id: logoAfpa
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.bottom: parent.bottom
-                source: "../../../images/logoAfpa.jpg"
-            }
+            LogoAFPA {}
         }
     }
 }
