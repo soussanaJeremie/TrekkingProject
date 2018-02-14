@@ -55,5 +55,6 @@
         <file>qml/javascript/httpRequest.js</file>
         <file>images/icon/logoAFPA.png</file>
         <file>qml/modules/LogoAFPA.qml</file>
+        <file>qml/pages/MyDebuggingPage.qml</file>
     </qresource>
 </RCC>

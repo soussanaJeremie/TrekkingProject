@@ -6,37 +6,50 @@ GpsPoint::GpsPoint(QObject *parent) : QObject(parent)
     m_longitude = 0.0;
 }
 
-GpsPoint::GpsPoint(const double &latitude, const double &longtitude, QObject *parent):
-    m_latitude(latitude), m_longitude(longtitude), QObject(parent)
-{
-    roundCoordinates();
-}
+GpsPoint::GpsPoint(const double &latitude, const double &longtitude, QObject *parent)
+    : QObject(parent), m_latitude(latitude), m_longitude(longtitude)
+{}
 
-GpsPoint::GpsPoint(const GpsPoint &aGpsPoint)
+GpsPoint::GpsPoint(const GpsPoint &aGpsPoint,  QObject *parent): QObject(parent)
 {
     m_latitude = aGpsPoint.m_latitude;
     m_longitude = aGpsPoint.m_longitude;
-    roundCoordinates();
 }
 
+
+QString GpsPoint::gpsPointSQLFormat()
+{
+    QString gpsData ("");
+
+    gpsData +=   "{\"lat\": \"" + QString::number(getLatitude())
+            +   "\", \"lng\": \"" + QString::number(getLongitude())
+            +   "\"}";
+
+    return gpsData;
+}
 
 bool GpsPoint::userMoved(const GpsPoint &previousGpsPoint)
 {
-    bool differentPoint = !(m_latitude == previousGpsPoint.m_latitude &&
-                            m_longitude == previousGpsPoint.m_longitude);
+    double rayon = pow((getLatitude() - previousGpsPoint.getLatitude()) , 2) +
+                    pow((getLongitude() - previousGpsPoint.getLongitude()) , 2) ;
 
-    return differentPoint;
+    return rayon > 10e-9;
 }
 
-void GpsPoint::roundCoordinates()
-{
-    setLatitude(roundFloat(m_latitude));
-    setLongitude(roundFloat(m_longitude));
-}
+///////////////////////////////////////
+/// CONSTRUCTOR NOT USED ANYMORE    ///
+/// DUE TO BETTER PARSING           ///
+/// AND CLEANING OF TREK DATA FILE  ///
+/// ///////////////////////////////////
 
-double GpsPoint::roundFloat(double &number)
-{
-    double tmp = (round(number * 20000) / 20000);
-    qDebug() <<  "tmp value:" << tmp;
-    return tmp;
-}
+//GpsPoint::GpsPoint(QString &gpsData, QObject *parent): QObject(parent)
+//{
+//    QRegularExpression re("[a-z] \":{}]");
+//    gpsData.remove(re);
+
+//    QStringList latLng = gpsData.split(",");
+
+//    m_latitude = latLng[0].toDouble();
+//    m_longitude = latLng[1].toDouble();
+
+//}

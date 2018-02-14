@@ -11,13 +11,22 @@ MyContext::MyContext(QObject *parent) : QObject(parent), m_myContext(nullptr)
     {
         QStringList userData = m_fileManager->loadFile("user", "info");
         m_user = new User(userData);
-        qDebug() << "User Constructed from file";
-        qDebug() << m_user->getUsername();
     }
 
     else
     {
         m_user = new User;
+    }
+
+    if(m_fileManager->fileExists("trek", "detail"))
+    {
+        QStringList trekData = m_fileManager->loadFile("trek", "detail");
+        m_myTrek = new Trek(trekData);
+    }
+    else
+    {
+//        m_myTrek = new Trek( "trek_trek_trek", 0.0 , 0.0);
+        m_myTrek = new Trek();
     }
 
     setErrorMessage("");
@@ -53,22 +62,6 @@ void MyContext::loadMyContext()
 }
 
 
-void MyContext::sendActionToCpp(QString nomAction, QString parameter, QString parameter2)
-{
-    qDebug() << "Calling SATC: nomAction = " << nomAction << endl;
-
-    if (nomAction == "action1")
-    {
-
-    }
-
-    if (nomAction == "action2")
-    {
-
-    }
-
-}
-
 void MyContext::updateTrek(const double &latitude, const double &longitude)
 {
     m_myTrek->addNewGpsPoint(GpsPoint(latitude, longitude));
@@ -78,12 +71,14 @@ void MyContext::updateTrek(const double &latitude, const double &longitude)
 
 void MyContext::startTrek(const QString &trekName,const double &latitude, const double &longitude)
 {
-    m_myTrek = nullptr;
     delete m_myTrek;
+    m_myTrek = nullptr;
     setMyTrek(new Trek (trekName, latitude, longitude));
+//    setMyTrek(new Trek());
 
     qDebug() << " # " << trekName;
     qDebug() << "New Trek Created";
+    setErrorMessage(m_errorMessage + "/nNew Trek created");
 }
 
 void MyContext::saveLastImageTakenUrl(const QString &path)
@@ -116,22 +111,27 @@ void MyContext::saveUser(const int &id,  QString username,  QString password,  Q
 
     //qDebug() << getUser()->getIdUser();
 
-    QStringList userData = getUser()->userQSLFormat();
-    getFileManager()->updateFile("user", "info", userData);
+    QStringList userData = getUser()->userSQLFormat();
+    getFileManager()->saveFile("user", "info", userData);
 
 
-    currentUser = nullptr;
     delete currentUser;
+    currentUser = nullptr;
 }
 
 void MyContext::deleteUser()
 {
+
     getFileManager()->deleteFile("user", "info");
 }
 
-int MyContext::getIdUser()
+void MyContext::saveTrek()
 {
-    return getUser()->getIdUser();
+//    QString trekName = getMyTrek()->getLabel().replace(" ", "_");
+    QStringList trekData = getMyTrek()->trekSQLFormat();
+
+//    m_fileManager->saveFile("trek", trekName , trekData);
+    m_fileManager->saveFile("trek", "detail", trekData);
 }
 
 void MyContext::testUploadPhoto() //new
@@ -139,29 +139,17 @@ void MyContext::testUploadPhoto() //new
     HttpServer::post("C:/Users/34011-58-03/Pictures/panda.jpg", "petitPanda");
 }
 
-
-QString MyContext::truncateUrl(const QString &url)
+void MyContext::deleteTrek()
 {
-    QString truncated = url;
-    return truncated.remove(0, 8);
+//    QString trekName = getMyTrek()->getLabel().replace(" ", "_");
+//    getFileManager()->deleteFile("trek", trekName);
+    getFileManager()->deleteFile("trek", "detail");
+
+    delete m_myTrek;
+    m_myTrek = nullptr;
 }
 
-
-// File Searching Functions
-
-void MyContext::searchUserFile()
+int MyContext::getIdUser()
 {
-    // if there is a file, instantiate a user && auto login
-    // else m_user = nulptr && no auto login
-}
-
-void MyContext::searchTrekFile()
-{
-    // if there is a file, load the trek && message (save, delete or continue)
-    // else m_myTrek = nullptr
-}
-
-void MyContext::searchPhotoFile()
-{
-    // what to do here??
+    return getUser()->getIdUser();
 }

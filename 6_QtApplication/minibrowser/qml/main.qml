@@ -37,6 +37,7 @@ ApplicationWindow {
         id: swipeView
         anchors.fill: parent
         currentIndex: tabBar.currentIndex
+        interactive: false  // swipe action inactive to avoid accidentally switching screens
 
         HomePage{
             id: homePage
@@ -56,6 +57,10 @@ ApplicationWindow {
 
         UploadPage{
             id: uploadPage
+        }
+
+        MyDebuggingPage{
+            id: debugPage
         }
 
     }

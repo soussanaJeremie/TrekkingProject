@@ -86,7 +86,10 @@ ColumnLayout {
                 text : "Sauver"
                 height: etat.height / 15
                 width: etat.width /3
-                onClicked: console.log("switch to UploadPage")
+                onClicked: {
+//                    console.log("switch to UploadPage")
+                    MyContext.saveTrek();
+                }
             }
 
             MyButton {
@@ -114,6 +117,7 @@ ColumnLayout {
                 width: etat.width /3
                 onClicked:
                 {
+                    MyContext.deleteTrek();
                     helloBox.visible = false
                     boutons.visible = false
                     check.visible = true
