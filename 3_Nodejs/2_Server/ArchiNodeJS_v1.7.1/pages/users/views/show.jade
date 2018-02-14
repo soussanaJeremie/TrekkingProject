@@ -1,6 +1,74 @@
 extends layout
 
 block content
+<<<<<<< HEAD
+  head
+      title
+      .Bandeau
+      section.small-12.medium-12.large-12.columns
+        img(src='../src/images/Bandeau.png', style='margin-bottom: 5px')
+        section.section
+          .top-border
+            .row
+              .small-12.medium-12.large-12.small-centered.columns
+            nav#nav
+              div
+                ul.inline-list-custom
+                  li
+                    a.current(href='/profil') Profil
+                  li
+                    a(href='/galerie') Galerie Photos
+                  li
+                    a(href='/PoI') Galerie Points d'intêret
+      
+        section#blocks_user
+          #container_user_profil
+            .user_profil_datas
+                h1 Profil
+          
+              .user_img
+                img.user(src='../src/images/user_logo.png', alt='user_logo')
+                
+              .user_datas
+                .field
+                  label Nom : #{user.lastname}
+                  //input#nom(type='text', name='nom')
+                  
+                .field
+                  label Prénom : #{user.firstname}
+                  //input#prenom(type='text', name='prenom')
+
+                .field
+                  label Pseudo : #{user.username}
+                  //input#pseudo(type='text', name='pseudo')
+
+                .field
+                  label Mail : #{user.mail}
+                  //input#mail(type='text', name='mail')
+
+                .field
+                  label Password : #{user.password}
+                  //input#password(type='text', name='password')
+
+              .user_btn
+                  button#btnEdit(onclick='updateUser()') MODIFIER
+                  button#btnDelete(onclick='delUser()') SUPPRIMER
+
+                
+          #container_user_trek
+            .row
+              .small-12.medium-12.large-12.columns
+                ul.small-block-grid-1.medium-block-grid-3.large-block-grid-3.inline-list-custom
+
+                  - for trek in user.treks
+                    li
+                      .thumbnail
+                        .thumbnail-img
+                          .thumbnail-hover
+                          img(src='../src/images/beach-2179624_1920.jpg', alt='Project 01')
+                          .thumbnail-caption
+                            a.caption-link(href='Detail.html') #{trek.label}                   
+=======
     .Bandeau
     section
       img(src='../src/images/Bandeau.png', style='margin-bottom: 5px')
@@ -63,6 +131,7 @@ block content
                       img(src='../src/images/beach-2179624_1920.jpg', alt='Project 01')
                       .thumbnail-caption
                         a.caption-link(href="../treks/" + "#{trek.id}") #{trek.label}                   
+>>>>>>> 752c03831a4bcab38af3790fb129f58d9df2a9f5
 
     .row
       .small-12.medium-12.large-12.columns
