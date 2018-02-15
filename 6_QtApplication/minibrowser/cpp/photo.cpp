@@ -55,6 +55,8 @@ void Photo::showPhotoData(Photo* photo)
     qDebug() << "currentUrl : " << photo->getCurrentUrl() << endl;
     qDebug() << "private : " << photo->getPrivatePhoto() << endl;
     qDebug() << "datePhoto : " << photo->getDatePhoto() << endl;
+    qDebug() << "fileName : " << photo->getFileName() << endl;
+    qDebug() << "databaseUrl : " << photo->getDatabaseUrl() << endl;
     qDebug() << endl;
 }
 
@@ -64,7 +66,8 @@ QStringList Photo::photoSQLFormat()
 
     photoData << getTitle()
               << getPrivatePhoto()
-              << getDatePhoto();
+              << getDatePhoto()
+              << getDatabaseUrl();
 
     return photoData;
 }

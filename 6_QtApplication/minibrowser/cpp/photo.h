@@ -30,6 +30,12 @@ public:
     Photo(const QString title, QString currentUrl, const bool privatePhoto, QDateTime datePhoto, QObject *parent = 0);
     Photo(const Photo &_photo, QObject *parent = 0);
 
+    QString getFileName() const;
+    void setFileName(const QString &fileName);
+
+    QString getDatabaseUrl() const;
+    void setDatabaseUrl(const QString &databaseUrl);
+
     void showPhotoData(Photo *photo);
     QStringList photoSQLFormat();
 
@@ -52,12 +58,6 @@ public:
     {
         return m_datePhoto;
     }
-
-    QString getFileName() const;
-    void setFileName(const QString &fileName);
-
-    QString getDatabaseUrl() const;
-    void setDatabaseUrl(const QString &databaseUrl);
 
 signals:
 
