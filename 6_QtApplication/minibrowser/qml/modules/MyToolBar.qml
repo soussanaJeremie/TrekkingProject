@@ -88,4 +88,16 @@ TabBar {
 
         }
     }
+    TabButton {
+        Image {
+            source: "../../../images/icon/upload_icon.png"
+
+            height: (1/10) * mainPage.height
+            fillMode: Image.PreserveAspectFit
+
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.horizontalCenter: parent.horizontalCenter
+
+        }
+    }
 }

@@ -21,9 +21,10 @@ ColumnLayout {
     spacing: 0
 
     onLapsedTimeChanged: {
-        if(lapsedTime % 30000 == 0)
+        if(lapsedTime % 10000 == 0)
         {
             MyContext.myTrek.setTime(timeInString);
+            MyContext.saveTrek();
         }
     }
 
@@ -252,10 +253,11 @@ ColumnLayout {
                             start.visible = false ;
                             pause.visible = false ;
 
-                            // code function to stop timer
-                            trekTimer.stop()
                             // code function to save Trek Object
                             MyContext.myTrek.setTime(etat.timeInString)
+                            MyContext.deleteTrek()
+                            // code function to stop timer
+                            trekTimer.stop()
 
                             console.log("stop Treck _ fin de la prise de pts GPS")}
                     }

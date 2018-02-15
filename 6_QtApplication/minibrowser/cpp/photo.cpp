@@ -5,7 +5,7 @@ using namespace std;
 Photo::Photo(QObject *parent) : QObject(parent) {}
 
 Photo::Photo(QString title, QString url, bool privatePhoto, /*GpsPoint* gpsPoint,*/ QObject *parent)
-    : m_title(title), m_url(url), m_privatePhoto(privatePhoto), /*m_gpsPoint(gpsPoint),*/ QObject(parent) {}
+    : QObject(parent), m_title(title), m_url(url), m_privatePhoto(privatePhoto) /*, m_gpsPoint(gpsPoint),*/  {}
 
 Photo::Photo(const Photo &_photo, QObject *parent) : QObject(parent)
 {

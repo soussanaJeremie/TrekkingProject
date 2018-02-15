@@ -18,34 +18,23 @@ User::User(const int &idUser, const QString &username, const QString &password,
 
 User::User( QStringList &userData, QObject *parent): QObject(parent)
 {
-    QStringList userAttributes;
-    QString userInfoLine;
-
-
-    for (QString line : userData)
+    if (userData.length() == 4)
     {
-        userInfoLine = line; // There should only be one line
-    }
-
-    userAttributes << userInfoLine.split(";");
-
-    if (userAttributes.length() == 4)
-    {
-        m_idUser = userAttributes[0].toInt();
-        m_username = userAttributes[1];
-        m_password = userAttributes[2];
-        m_email = userAttributes[3];
+        m_idUser = userData[0].toInt();
+        m_username = userData[1];
+        m_password = userData[2];
+        m_email = userData[3];
     }
 }
 
-QStringList User::userQSLFormat()
+QStringList User::userSQLFormat()
 {
-    QStringList userData("");
+    QStringList userData;
 
-    userData += QString::number(getIdUser()) + ";" +
-            getUsername() + ";" +
-            getPassword() + ";" +
-            getEmail();
+    userData << QString::number(getIdUser())
+            << getUsername()
+            << getPassword()
+            << getEmail();
 
     return userData;
 }

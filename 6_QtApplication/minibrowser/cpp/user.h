@@ -26,7 +26,7 @@ public:
             const QString &email, QObject *parent = nullptr );
     User(  QStringList &userData, QObject *parent = nullptr );
 
-    QStringList userQSLFormat();
+    QStringList userSQLFormat();
 
 
     //////////////////////////

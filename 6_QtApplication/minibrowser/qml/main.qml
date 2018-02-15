@@ -38,6 +38,7 @@ ApplicationWindow {
         id: swipeView
         anchors.fill: parent
         currentIndex: tabBar.currentIndex
+        interactive: false  // swipe action inactive to avoid accidentally switching screens
 
         HomePage{
             id: homePage
@@ -58,6 +59,10 @@ ApplicationWindow {
         UploadPage{
             id: uploadPage
 //            Component.onCompleted: etat1.implicitHeight = contentItem.implicitHeight;
+        }
+
+        MyDebuggingPage{
+            id: debugPage
         }
 
     }

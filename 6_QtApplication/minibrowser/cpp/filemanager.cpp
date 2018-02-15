@@ -73,7 +73,7 @@ void FileManager::addLine( const QString &fileType, const QString &fileName, con
     }
 }
 
-void FileManager::updateFile(const QString &fileType, const QString &fileName, const QStringList &data)
+void FileManager::saveFile(const QString &fileType, const QString &fileName, const QStringList &data)
 {
     QString fileUrl = getBasePath() + fileType + "_" + fileName + ".txt";
     QFile fileToUpdate (fileUrl);
