@@ -24,7 +24,7 @@ public:
     void initFolder();
     bool fileExists( const QString &fileType, const QString &fileName );
     QStringList loadFile( const QString &fileType, const QString &fileName );
-    void addLine( const QString &fileType, const QString &fileName, const QString &dataLine );
+//    void addLine( const QString &fileType, const QString &fileName, const QString &dataLine );
     void saveFile( const QString &fileType, const QString &fileName, const QStringList &data );
     void deleteFile( const QString &fileType, const QString &fileName );
 

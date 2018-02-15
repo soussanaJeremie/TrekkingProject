@@ -60,6 +60,8 @@ ColumnLayout {
                 height : parent.height
                 width : parent.width
 
+                content : MyContext.storageStatus
+
                 anchors.centerIn : parent
             }
         }

@@ -33,8 +33,8 @@ bool FileManager::fileExists( const QString &fileType, const QString &fileName )
 QStringList FileManager::loadFile( const QString &fileType, const QString &fileName )
 {
     QStringList data;
-    QString fileUrl = getBasePath() + fileType + "_" + fileName + ".txt";
 
+    QString fileUrl = getBasePath() + fileType + "_" + fileName + ".txt";
     QFile storedFile(fileUrl);
 
     if (!storedFile.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -55,23 +55,23 @@ QStringList FileManager::loadFile( const QString &fileType, const QString &fileN
     return data;
 }
 
-void FileManager::addLine( const QString &fileType, const QString &fileName, const QString &dataLine)
-{
-    QString fileUrl = getBasePath() + fileType + "_" + fileName + ".txt";
+//void FileManager::addLine( const QString &fileType, const QString &fileName, const QString &dataLine)
+//{
+//    QString fileUrl = getBasePath() + fileType + "_" + fileName + ".txt";
+//    QFile fileToUpdate (fileUrl);
 
-    QFile fileToUpdate (fileUrl);
-    if (!fileToUpdate.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Append)) {
-        qDebug() << "Ouverture Impossible" << fileUrl << "n'a pas pu être ouvert";
-    }
+//    if (!fileToUpdate.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Append)) {
+//        qDebug() << "Ouverture Impossible" << fileUrl << "n'a pas pu être ouvert";
+//    }
 
-    else {
-        QTextStream writeStream( &fileToUpdate );
-        writeStream.setCodec("UTF-8");
-        writeStream << endl << dataLine;
+//    else {
+//        QTextStream writeStream( &fileToUpdate );
+//        writeStream.setCodec("UTF-8");
+//        writeStream << endl << dataLine;
 
-        qDebug() << "Saved Line in :" << fileUrl;
-    }
-}
+//        qDebug() << "Saved Line in :" << fileUrl;
+//    }
+//}
 
 void FileManager::saveFile(const QString &fileType, const QString &fileName, const QStringList &data)
 {

@@ -7,6 +7,12 @@ MyContext::MyContext(QObject *parent) : QObject(parent), m_myContext(nullptr)
     m_fileManager = new FileManager;
     m_myTrek = new Trek;
 
+    //initialisation des messages d'erreurs
+    setErrorMessage("");
+    setWellDoneMessage("");
+    setStorageStatus("");
+
+
     if(m_fileManager->fileExists("user", "info"))
     {
         QStringList userData = m_fileManager->loadFile("user", "info");
@@ -22,6 +28,7 @@ MyContext::MyContext(QObject *parent) : QObject(parent), m_myContext(nullptr)
     {
         QStringList trekData = m_fileManager->loadFile("trek", "detail");
         m_myTrek = new Trek(trekData);
+        setStorageStatus("Un trek n'a pas été sauvegardé sur le serveur");
     }
     else
     {
@@ -29,8 +36,10 @@ MyContext::MyContext(QObject *parent) : QObject(parent), m_myContext(nullptr)
         m_myTrek = new Trek();
     }
 
-    setErrorMessage("");
-
+    if(m_fileManager->fileExists("photos", "detail"))
+    {
+        setStorageStatus(storageStatus() + "\nDes photos n'ont pas été sauvegardées sur le serveur");
+    }
 
 }
 
@@ -61,7 +70,6 @@ void MyContext::loadMyContext()
     }
 }
 
-
 void MyContext::updateTrek(const double &latitude, const double &longitude)
 {
     m_myTrek->addNewGpsPoint(GpsPoint(latitude, longitude));
@@ -78,7 +86,7 @@ void MyContext::startTrek(const QString &trekName,const double &latitude, const 
 
     qDebug() << " # " << trekName;
     qDebug() << "New Trek Created";
-    setErrorMessage(m_errorMessage + "/nNew Trek created");
+    setWellDoneMessage(m_wellDoneMessage + "/nNew Trek created");
 }
 
 void MyContext::saveLastImageTakenUrl(const QString &path)
@@ -110,10 +118,10 @@ void MyContext::saveUser(const int &id,  QString username,  QString password,  Q
     setUser(currentUser);
 
     //qDebug() << getUser()->getIdUser();
+    setWellDoneMessage(m_wellDoneMessage + "\nUser " + username + " saved");
 
     QStringList userData = getUser()->userSQLFormat();
     getFileManager()->saveFile("user", "info", userData);
-
 
     delete currentUser;
     currentUser = nullptr;
@@ -121,7 +129,6 @@ void MyContext::saveUser(const int &id,  QString username,  QString password,  Q
 
 void MyContext::deleteUser()
 {
-
     getFileManager()->deleteFile("user", "info");
 }
 
@@ -132,11 +139,6 @@ void MyContext::saveTrek()
 
 //    m_fileManager->saveFile("trek", trekName , trekData);
     m_fileManager->saveFile("trek", "detail", trekData);
-}
-
-void MyContext::testUploadPhoto() //new
-{
-    HttpServer::post("C:/Users/34011-58-03/Pictures/panda.jpg", "petitPanda");
 }
 
 void MyContext::deleteTrek()
@@ -152,4 +154,11 @@ void MyContext::deleteTrek()
 int MyContext::getIdUser()
 {
     return getUser()->getIdUser();
+}
+
+/* NEW FUNCTIONS */
+
+void MyContext::testUploadPhoto()
+{
+    HttpServer::post("C:/Users/34011-58-03/Pictures/panda.jpg", "petitPanda");
 }

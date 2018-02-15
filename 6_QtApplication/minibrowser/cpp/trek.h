@@ -4,7 +4,6 @@
 #include <QObject>
 #include <QDebug>
 
-#include "filemanager.h"
 #include "gpspoint.h"
 #include "photo.h"
 
@@ -137,6 +136,7 @@ public slots:
         m_time = time;
         emit timeChanged(m_time);
     }
+
     void setPath(QList<QObject*> path)
     {
         if (m_path == path)

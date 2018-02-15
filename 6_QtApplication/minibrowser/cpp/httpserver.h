@@ -18,8 +18,6 @@ public:
 
     static void post(QString uri, QString filename);
 
-
-
 public slots:
 signals:
 private:
