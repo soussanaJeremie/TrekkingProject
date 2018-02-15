@@ -10,8 +10,8 @@ import "../../modules"
 import "../../modules/camera"
 
 ColumnLayout {
-
-    property alias urlLastPhoto: maCam.urlLastPhoto
+    property alias camera: myCamera.camera
+    property alias urlLastPhoto: myCamera.urlLastPhoto
     signal urlSet
 
     id : etat
@@ -32,12 +32,13 @@ ColumnLayout {
         state: "PhotoCapture"
 
         MyCamera {
-            id : maCam
+            id : myCamera
             anchors.fill: parent
             onUrlLastPhotoChanged: {
                 console.log("camera.urlLastPhoto -> " + urlLastPhoto)
                 urlSet();
             }
+            Component.onCompleted: myCamera.camera.stop();
         }
     }
 }

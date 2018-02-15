@@ -11,7 +11,7 @@ import "../../../images"
 ColumnLayout {
 
     property string currenturl: "../../../images/defaultPhoto.png"
-    property Camera camera
+//    property Camera camera
 
     id : etat
 
@@ -27,7 +27,7 @@ ColumnLayout {
         Rectangle {
             Layout.fillHeight: true
             Layout.fillWidth: true
-            //color: "red"
+
             Image {
                 id: currentPhoto
                 source: currenturl
@@ -70,7 +70,6 @@ ColumnLayout {
                 Rectangle {
                     Layout.fillHeight: true
                     Layout.fillWidth: true
-                    //color: "lightBlue"
 
                     InputBox {
                         id : label
@@ -92,7 +91,6 @@ ColumnLayout {
                 Rectangle {
                     Layout.fillHeight: true
                     Layout.fillWidth: true
-                    //color: "blue"
 
                     ComboType {
                         id : poi_type
@@ -109,7 +107,6 @@ ColumnLayout {
                 Rectangle {
                     Layout.fillHeight: true
                     Layout.fillWidth: true
-                    //color: "red"
 
                     MySwitchButton {
                         id : privateStatus
@@ -133,7 +130,6 @@ ColumnLayout {
         Rectangle {
             Layout.fillHeight: true
             Layout.fillWidth: true
-            //color: "lightBlue"
 
             TextEditBox {
                 id : description
@@ -155,7 +151,6 @@ ColumnLayout {
         Rectangle {
             Layout.fillHeight: true
             Layout.fillWidth: true
-            //color: "grey"
 
             MyButton {
                 text : "Sauvegarder"
@@ -173,7 +168,6 @@ ColumnLayout {
         Rectangle {
             Layout.fillHeight: true
             Layout.fillWidth: true
-            //color: "grey"
 
             MyButton {
                 text : "Supprimer"
@@ -188,21 +182,22 @@ ColumnLayout {
                 }
             }
         }
-        Rectangle {
+
+        /*Rectangle {
             Layout.fillHeight: true
             Layout.fillWidth: true
-            //color: "grey"
 
             MyButton {
-                text : "Take photo"
+                text : "Appareil photo"
                 height: etat.height / 15
                 width: etat.width / 3
                 onClicked: {
+                    etat.camera.start();
                     photo2_visibilite = false;
                     photo1_visibilite = true;
                 }
             }
-        }
+        }*/
     } // fin RowLayout 4
 
 
@@ -228,7 +223,6 @@ ColumnLayout {
                 Rectangle {
                     Layout.fillHeight: true
                     Layout.fillWidth: true
-                    //color: "grey"
 
                     Text {
                         text : "Etes vous sûr ?"
@@ -252,7 +246,6 @@ ColumnLayout {
                 Rectangle {
                     Layout.fillHeight: true
                     Layout.fillWidth: true
-                    //color: "red"
 
                     MyButton {
                         id : valid
@@ -268,7 +261,6 @@ ColumnLayout {
                 Rectangle {
                     Layout.fillHeight: true
                     Layout.fillWidth: true
-                    //color: "red"
 
                     MyButton {
                         id: cancel

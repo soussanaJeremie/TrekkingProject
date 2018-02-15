@@ -8,20 +8,19 @@ import QtWebView 1.1
 import "../../modules"
 
 ColumnLayout {
-
+    spacing: 0
     id : etat
 
     anchors.fill: parent
     Layout.fillHeight: true
     Layout.fillWidth: true
 
-    spacing: 0
-
     RowLayout {
         spacing: 0
+
         Layout.preferredHeight: (1/12)*parent.height
-        Layout.fillHeight: true
         Layout.fillWidth: true
+        Layout.fillHeight: true
 
         Rectangle {
             Layout.fillHeight: true
@@ -30,9 +29,9 @@ ColumnLayout {
         }
     }
 
-
     RowLayout {
         spacing: 0
+
         Layout.preferredHeight: (1/12)*parent.height
         Layout.fillHeight: true
         Layout.fillWidth: true
@@ -53,10 +52,10 @@ ColumnLayout {
     }
 
     RowLayout {
-        id : status
-        visible : true
-
         spacing: 0
+        id : status
+
+        visible : true
         Layout.preferredHeight: (1/3)*parent.height
         Layout.fillHeight: true
         Layout.fillWidth: true
@@ -64,7 +63,6 @@ ColumnLayout {
         Rectangle {
             Layout.fillHeight: true
             Layout.fillWidth: true
-            //color: "yellow"
 
             TextBox {
                 id : localStorageStatus
@@ -72,18 +70,15 @@ ColumnLayout {
 
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
-
             }
-
-
         }
     }
 
     RowLayout {
-        id : boutons
-        visible : true
-
         spacing: 0
+        id : boutons
+
+        visible : true
         Layout.preferredHeight: (1/8)*parent.height
         Layout.fillHeight: true
         Layout.fillWidth: true
@@ -91,7 +86,6 @@ ColumnLayout {
         Rectangle {
             Layout.fillHeight: true
             Layout.fillWidth: true
-            //color: "grey"
 
             MyButton {
                 text : "Sauvegarder"
@@ -105,7 +99,6 @@ ColumnLayout {
         Rectangle {
             Layout.fillHeight: true
             Layout.fillWidth: true
-            //color: "grey"
 
             MyButton {
                 text : "Supprimer"
@@ -123,10 +116,10 @@ ColumnLayout {
     }
 
     RowLayout {
-        id : error
-        visible : true
-
         spacing: 0
+        id : error
+
+        visible : true
         Layout.preferredHeight: (1/8)*parent.height
         Layout.fillHeight: true
         Layout.fillWidth: true
@@ -134,33 +127,33 @@ ColumnLayout {
         Rectangle {
             Layout.fillHeight: true
             Layout.fillWidth: true
-            //color: "red"
 
             ErrorBox {
                 height : parent.height
                 width : parent.width
 
                 anchors.centerIn : parent
-
             }
         }
     }
 
     RowLayout {
-        id : check
-        visible: false
-
         spacing: 0
+        id : check
+
+        visible: false
         Layout.preferredHeight: (1/2)*parent.height
         Layout.fillHeight: true
         Layout.fillWidth: true
 
         ColumnLayout {
-            anchors.fill: parent
             spacing: 0
+
+            anchors.fill: parent
 
             RowLayout {
                 spacing: 0
+
                 Layout.preferredHeight: (1/3)*parent.height
                 Layout.fillHeight: true
                 Layout.fillWidth: true
@@ -168,7 +161,6 @@ ColumnLayout {
                 Rectangle {
                     Layout.fillHeight: true
                     Layout.fillWidth: true
-                    //color: "grey"
 
                     Text {
                         text : "Etes vous sûr ?"
@@ -182,9 +174,9 @@ ColumnLayout {
                 }
             } //fin rowlayout
 
-
             RowLayout {
                 spacing: 0
+
                 Layout.preferredHeight: (1/3)*parent.height
                 Layout.fillHeight: true
                 Layout.fillWidth: true
@@ -192,7 +184,6 @@ ColumnLayout {
                 Rectangle {
                     Layout.fillHeight: true
                     Layout.fillWidth: true
-                    //color: "red"
 
                     MyButton {
                         id : valid
@@ -208,7 +199,6 @@ ColumnLayout {
                 Rectangle {
                     Layout.fillHeight: true
                     Layout.fillWidth: true
-                    //color: "red"
 
                     MyButton {
                         id: cancel
@@ -226,12 +216,12 @@ ColumnLayout {
                     }
                 }
             }
-        } //fin rowlayout
-    }
-
+        } //fin Columnlayout
+    } // fin RowLayout
 
     RowLayout {
         spacing: 0
+
         Layout.preferredHeight: (1/4)*parent.height
         Layout.fillHeight: true
         Layout.fillWidth: true
@@ -239,15 +229,14 @@ ColumnLayout {
         Rectangle {
             Layout.fillHeight: true
             Layout.fillWidth: true
-            //color: "blue"
 
             Image {
                 id: logoAfpa
+
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.bottom: parent.bottom
                 source: "../../../images/logoAfpa.jpg"
             }
         }
     } // fin RowLayout
-
 }

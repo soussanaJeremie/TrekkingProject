@@ -19,15 +19,9 @@ Item {
     MouseArea {
         anchors.fill: parent
         onClicked: {
-            var path = "file:///" + camera.imageCapture.capturedImagePath;
-            MyContext.saveLastImageTakenUrl(path);
-            console.log("photoTaken: url -> " + path);
             parent.closed();
-            urlLastPhoto = path;
-            console.log("photoPreview.urlLastPhoto -> " + urlLastPhoto)
-
-            if(!camera.ActiveStatus)
-                camera.start()
+            //            if(!camera.ActiveStatus)
+            //                camera.start()
         }
     }
 }

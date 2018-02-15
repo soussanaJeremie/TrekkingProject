@@ -12,7 +12,7 @@ ColumnLayout {
 
     //    property string labelTrek: etat2.labelTrek
     //    property double lengthTrek: etat2.lengthTrek
-    //    property var timeTrek : etat2.timeTrek
+        property var timeTrek : etat2.timeTrek
 
     property int lapsedTime : 0
     property var timeInString : JSC.timeToString(etat.lapsedTime)
@@ -37,7 +37,6 @@ ColumnLayout {
         Rectangle {
             Layout.fillHeight: true
             Layout.fillWidth: true
-            //color: "red"
 
             Text {
                 id : label
@@ -177,7 +176,6 @@ ColumnLayout {
                 Rectangle {
                     Layout.fillHeight: true
                     Layout.fillWidth: true
-                    //color: "lightBlue"
 
                     MyButton {
                         id : start
@@ -223,7 +221,6 @@ ColumnLayout {
                 Rectangle {
                     Layout.fillHeight: true
                     Layout.fillWidth: true
-                    //color: "darkBlue"
 
                     MyButton {
                         id : returnButton

@@ -2,18 +2,19 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.1
 import QtQuick.Controls.Styles 1.2
+import QtMultimedia 5.8
 
 import "../modules"
 import "PhotoPage"
 
 Page {
-    id : photoPage
-
-    property bool photo1_visibilite: false
-    property bool photo2_visibilite: true
+    property bool photo1_visibilite: true
+    property bool photo2_visibilite: false
     property bool photo3_visibilite: false
     property alias urlLastPhoto: etat1.urlLastPhoto
+    property alias camera: etat1.camera
 
+    id : photoPage
     header: Label {
         text: qsTr("Photo")
         font.pixelSize: Qt.application.font.pixelSize * 2
@@ -35,6 +36,7 @@ Page {
     Etat2 {
         id : etat2
         visible: photo2_visibilite
+//        camera: etat1.camera
     }
 
     Etat3 {

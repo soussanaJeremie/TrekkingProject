@@ -24,13 +24,14 @@ ApplicationWindow {
     width: 384
     height: 640
 
-//    width: Screen.width
-//    height: Screen.height
+    //    width: Screen.width
+    //    height: Screen.height
 
     title: "Trecker _ Le tracker de trek"
 
     header: MyToolBar{
         id: tabBar
+        camera: photoPage.camera
     }
 
     SwipeView{
@@ -56,6 +57,7 @@ ApplicationWindow {
 
         UploadPage{
             id: uploadPage
+//            Component.onCompleted: etat1.implicitHeight = contentItem.implicitHeight;
         }
 
     }

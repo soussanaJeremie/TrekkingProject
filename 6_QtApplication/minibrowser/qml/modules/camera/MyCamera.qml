@@ -4,10 +4,10 @@ import QtQuick.Layouts 1.1
 import QtMultimedia 5.8
 
 Rectangle {
-    id: cameraUI
-
+    property Camera camera: camera
     property alias urlLastPhoto: photoPreview.urlLastPhoto
 
+    id: cameraUI
     color: "black"
     state: "PhotoCapture"
 
@@ -18,7 +18,6 @@ Rectangle {
             StateChangeScript {
                 script: {
                     camera.captureMode = Camera.CaptureStillImage
-                    camera.start()
                 }
             }
         },
@@ -26,6 +25,7 @@ Rectangle {
             name: "PhotoPreview"
         }
     ]
+
     Camera {
         id: camera
         captureMode: Camera.CaptureStillImage
@@ -43,6 +43,7 @@ Rectangle {
             frameRate: 30
         }
     }
+
     ZoomControl {
         x : 0
         y : 0
@@ -65,21 +66,22 @@ Rectangle {
         visible: cameraUI.state == "PhotoPreview"
         focus: visible
     }
+
     ColumnLayout {
         spacing: 10
 
         VideoOutput {
             id: viewfinder
-            visible: cameraUI.state == "PhotoCapture" /*|| cameraUI.state == "VideoCapture"*/
+            visible: cameraUI.state == "PhotoCapture"
+            Layout.alignment: Qt.AlignCenter
 
-            x: 0
-            y: 0
             width: cameraUI.width
             height: cameraUI.height - stillControls.height
 
             source: camera
             autoOrientation: true
         }
+
         PhotoCaptureControls {
             id: stillControls
 
@@ -89,8 +91,6 @@ Rectangle {
             camera: camera
             visible: cameraUI.state == "PhotoCapture"
             onPreviewSelected: cameraUI.state = "PhotoPreview"
-
-//            onVideoModeSelected: cameraUI.state = "VideoCapture"
         }
     }
 }

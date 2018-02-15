@@ -9,6 +9,7 @@ import "UploadPage"
 Page {
     id : uploadPage
 
+    property alias etat1: etat1
     property bool upload1_visibilite: true
 
     header: Label {
@@ -22,5 +23,4 @@ Page {
         id : etat1
         visible: upload1_visibilite
     }
-
 }

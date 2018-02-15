@@ -10,7 +10,7 @@ ColumnLayout {
     id : etat
 
     anchors.fill: parent
-    anchors.top : header.bottom
+//    anchors.top : header.bottom
     spacing: 0
 
     RowLayout {

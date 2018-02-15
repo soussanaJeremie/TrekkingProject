@@ -23,7 +23,6 @@ ColumnLayout {
         Rectangle {
             Layout.fillHeight: true
             Layout.fillWidth: true
-            //color: "red"
         }
     }
 
@@ -39,7 +38,6 @@ ColumnLayout {
         Rectangle {
             Layout.fillHeight: true
             Layout.fillWidth: true
-            //color: "grey"
 
             MyButton {
                 text : "Nouveau Trek"
@@ -67,7 +65,6 @@ ColumnLayout {
         Rectangle {
             Layout.fillHeight: true
             Layout.fillWidth: true
-            //color: "grey"
 
             MyButton {
                 text : "Charger un Trek"
@@ -98,7 +95,6 @@ ColumnLayout {
         Rectangle {
             Layout.fillHeight: true
             Layout.fillWidth: true
-            //color: "darkGreen"
 
             ErrorBox {
                 height : parent.height
@@ -137,7 +133,6 @@ ColumnLayout {
                 Rectangle {
                     Layout.fillHeight: true
                     Layout.fillWidth: true
-                    //color: "grey"
 
                     InputBox {
                         id : label
@@ -158,7 +153,6 @@ ColumnLayout {
                 Rectangle {
                     Layout.fillHeight: true
                     Layout.fillWidth: true
-                    //color: "red"
 
                     MyButton {
                         id : valid
@@ -185,7 +179,6 @@ ColumnLayout {
                 Rectangle {
                     Layout.fillHeight: true
                     Layout.fillWidth: true
-                    //color: "red"
 
                     MyButton {
                         id: cancel
@@ -217,7 +210,6 @@ ColumnLayout {
         Rectangle {
             Layout.fillHeight: true
             Layout.fillWidth: true
-            //color: "blue"
 
             Image {
                 id: logoAfpa

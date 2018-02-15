@@ -14,7 +14,7 @@ ColumnLayout {
     property var timeTrek : list.timeTrek
 
     anchors.fill: parent
-    anchors.top : header.bottom
+//    anchors.top : header.bottom
     spacing: 0
 
 
@@ -27,7 +27,6 @@ ColumnLayout {
         Rectangle {
             Layout.fillHeight: true
             Layout.fillWidth: true
-            //color: "red"
 
             MyList {id : list ; width : parent.width ;  height : parent.height}
 
@@ -43,7 +42,6 @@ ColumnLayout {
             Layout.fillHeight: true
             Layout.preferredWidth: 0.5*parent.width
             Layout.fillWidth: true
-            //color: "darkGreen"
 
             MyButton {
                 text : "Retour"
@@ -59,7 +57,6 @@ ColumnLayout {
         Rectangle {
             Layout.fillHeight: true
             Layout.preferredWidth: 0.5*parent.width
-            //color: "lightGreen"
 
             MyButton {
                 text : "Selectionner"
@@ -83,7 +80,6 @@ ColumnLayout {
         Rectangle {
             Layout.fillHeight: true
             Layout.fillWidth: true
-            //color: "darkBlue"
 
             Image {
                 id: logoAfpa

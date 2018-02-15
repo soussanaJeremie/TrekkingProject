@@ -5,15 +5,19 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls.Styles 1.2
 
 import QtPositioning 5.8
+import QtMultimedia 5.8
 
 //import "JSControl.js" as JSC
 
+
 TabBar {
+    property Camera camera
     currentIndex: swipeView.currentIndex
     contentHeight: (1/10) * mainPage.height
 
     TabButton {
-
+        onClicked: if(camera.ActiveState == 2)
+                       camera.stop();
         Image {
             source: "../../../images/icon/home.png"
 
@@ -27,6 +31,8 @@ TabBar {
     }
 
     TabButton {
+        onClicked: if(camera.ActiveState == 2)
+                       camera.stop();
         Image {
             source: "../../../images/icon/trekking_icon.png"
 
@@ -40,6 +46,8 @@ TabBar {
     }
 
     TabButton {
+        onClicked: if(camera.ActiveState == 2)
+                       camera.stop();
         Image {
             source: "../../../images/icon/current_trek_icon.png"
 
@@ -53,6 +61,7 @@ TabBar {
     }
 
     TabButton {
+        onClicked: camera.start();
         Image {
             source: "../../../images/icon/camera_icon.png"
 
@@ -66,6 +75,8 @@ TabBar {
     }
 
     TabButton {
+        onClicked: if(camera.ActiveState == 2)
+                       camera.stop();
         Image {
             source: "../../../images/icon/upload_icon.png"
 
