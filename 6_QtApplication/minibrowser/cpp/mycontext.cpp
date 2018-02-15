@@ -1,6 +1,9 @@
 #include "mycontext.h"
 #include <QDebug>
 
+////////////////////////////////////////////////////////////////////////////////
+///                                 MYCONTEXT
+////////////////////////////////////////////////////////////////////////////////
 
 MyContext::MyContext(QObject *parent) : QObject(parent), m_myContext(nullptr)
 {
@@ -25,7 +28,7 @@ MyContext::MyContext(QObject *parent) : QObject(parent), m_myContext(nullptr)
     }
     else
     {
-//        m_myTrek = new Trek( "trek_trek_trek", 0.0 , 0.0);
+        //        m_myTrek = new Trek( "trek_trek_trek", 0.0 , 0.0);
         m_myTrek = new Trek();
     }
 
@@ -61,6 +64,9 @@ void MyContext::loadMyContext()
     }
 }
 
+////////////////////////////////////////////////////////////////////////////////
+///                                 TREK
+////////////////////////////////////////////////////////////////////////////////
 
 void MyContext::updateTrek(const double &latitude, const double &longitude)
 {
@@ -74,12 +80,16 @@ void MyContext::startTrek(const QString &trekName,const double &latitude, const 
     delete m_myTrek;
     m_myTrek = nullptr;
     setMyTrek(new Trek (trekName, latitude, longitude));
-//    setMyTrek(new Trek());
+    //    setMyTrek(new Trek());
 
     qDebug() << " # " << trekName;
     qDebug() << "New Trek Created";
     setErrorMessage(m_errorMessage + "/nNew Trek created");
 }
+
+////////////////////////////////////////////////////////////////////////////////
+///                                 PHOTO
+////////////////////////////////////////////////////////////////////////////////
 
 void MyContext::saveLastImageTakenUrl(const QString &path)
 {
@@ -98,6 +108,10 @@ void MyContext::photoTaken(QString title, QString url, bool privatePhoto)
     setMyPhoto(photo);
     m_myTrek->addPhoto(m_myPhoto);
 }
+
+////////////////////////////////////////////////////////////////////////////////
+///                                FILEMANAGER
+////////////////////////////////////////////////////////////////////////////////
 
 void MyContext::saveUser(const int &id,  QString username,  QString password,  QString mail)
 {
@@ -127,21 +141,32 @@ void MyContext::deleteUser()
 
 void MyContext::saveTrek()
 {
-//    QString trekName = getMyTrek()->getLabel().replace(" ", "_");
+    //    QString trekName = getMyTrek()->getLabel().replace(" ", "_");
     QStringList trekData = getMyTrek()->trekSQLFormat();
 
-//    m_fileManager->saveFile("trek", trekName , trekData);
+    //    m_fileManager->saveFile("trek", trekName , trekData);
     m_fileManager->saveFile("trek", "detail", trekData);
 }
 
 void MyContext::deleteTrek()
 {
-//    QString trekName = getMyTrek()->getLabel().replace(" ", "_");
-//    getFileManager()->deleteFile("trek", trekName);
+    //    QString trekName = getMyTrek()->getLabel().replace(" ", "_");
+    //    getFileManager()->deleteFile("trek", trekName);
     getFileManager()->deleteFile("trek", "detail");
 
     delete m_myTrek;
     m_myTrek = nullptr;
+}
+
+void MyContext::savePhoto()
+{
+    QStringList photoData = getMyPhoto()->photoSQLFormat();
+    m_fileManager->saveFile("photo", "detail", photoData);
+}
+
+void MyContext::deletePhoto()
+{
+    getFileManager()->deleteFile("photo", "detail");
 }
 
 int MyContext::getIdUser()

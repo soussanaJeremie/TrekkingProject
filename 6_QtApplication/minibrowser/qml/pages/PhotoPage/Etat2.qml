@@ -11,7 +11,7 @@ import "../../../images"
 ColumnLayout {
 
     property string currenturl: "../../../images/defaultPhoto.png"
-//    property Camera camera
+    property Camera camera
 
     id : etat
 
@@ -183,7 +183,7 @@ ColumnLayout {
             }
         }
 
-        /*Rectangle {
+        Rectangle {
             Layout.fillHeight: true
             Layout.fillWidth: true
 
@@ -197,7 +197,7 @@ ColumnLayout {
                     photo1_visibilite = true;
                 }
             }
-        }*/
+        }
     } // fin RowLayout 4
 
 

@@ -66,6 +66,9 @@ public:
     Q_INVOKABLE void saveTrek();
     Q_INVOKABLE void deleteTrek();
 
+    Q_INVOKABLE void savePhoto();
+    Q_INVOKABLE void deletePhoto();
+
     Q_INVOKABLE int getIdUser ();
 
 

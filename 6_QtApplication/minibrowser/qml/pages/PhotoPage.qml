@@ -36,7 +36,7 @@ Page {
     Etat2 {
         id : etat2
         visible: photo2_visibilite
-//        camera: etat1.camera
+        camera: etat1.camera
     }
 
     Etat3 {
