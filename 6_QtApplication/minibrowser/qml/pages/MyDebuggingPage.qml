@@ -7,9 +7,8 @@ import "../modules"
 import "HomePage"
 
 Page {
+
     id : myDebugPage
-
-
 
     header: Label {
         text: qsTr("Debug")
@@ -19,31 +18,65 @@ Page {
     }
 
     ColumnLayout {
-        //        id : etat
+
+        id : etat
 
         anchors.fill: parent
-        anchors.top : header.bottom
+        Layout.fillHeight: true
+        Layout.fillWidth: true
+
         spacing: 0
 
         RowLayout {
             spacing: 0
-            Layout.preferredHeight: 0.25*parent.height
+            Layout.preferredHeight: (1/2)*parent.height
             Layout.fillHeight: true
             Layout.fillWidth: true
 
             Rectangle {
-                id: bobox
                 Layout.fillHeight: true
                 Layout.fillWidth: true
-                //color: "red"
+                color: "white"
 
-                TextArea{
-                    id: messageBox
-                    width: bobox.width
-                    height: bobox.height
-                    text: MyContext.errorMessage
+                Text {
+                    id : errorBox
+                    text : "List of Bugs : \n" + MyContext.errorMessage
+
+                    color : "red"
+                    font.family: "acumin-pro"
+                    font.pixelSize: Qt.application.font.pixelSize * 1.15
+
+                    anchors.centerIn : parent
+
                 }
             }
         }
+
+
+        RowLayout {
+            spacing: 0
+            Layout.preferredHeight: (1/2)*parent.height
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+
+            Rectangle {
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+                color: "lightGrey"
+
+                Text {
+                    id : succesBox
+                    text : "List of succes : \n" + MyContext.wellDoneMessage
+
+                    color : "green"
+                    font.family: "acumin-pro"
+                    font.pixelSize: Qt.application.font.pixelSize * 1.15
+
+                    anchors.centerIn : parent
+
+                }
+            }
+        }
+
     }
 }

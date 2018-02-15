@@ -27,7 +27,7 @@ private:
 
 public:
     explicit Photo(QObject *parent = nullptr);
-    Photo(const QString title, QString currentUrl, const bool privatePhoto, QDateTime datePhoto, QObject *parent = 0);
+    Photo(const QString title, QString currentUrl, const bool privatePhoto, QDateTime datePhoto = QDateTime::currentDateTime(), QObject *parent = 0);
     Photo(const Photo &_photo, QObject *parent = 0);
 
     QString getFileName() const;
@@ -36,6 +36,8 @@ public:
     QString getDatabaseUrl() const;
     void setDatabaseUrl(const QString &databaseUrl);
 
+    void createFileName();
+    void createDatabaseUrl();
     void showPhotoData(Photo *photo);
     QStringList photoSQLFormat();
 
@@ -80,7 +82,7 @@ public slots:
         emit titleChanged(m_title);
     }
 
-    void setcurrentUrl(QString currentUrl)
+    void setCurrentUrl(QString currentUrl)
     {
         if (m_currentUrl == currentUrl)
             return;

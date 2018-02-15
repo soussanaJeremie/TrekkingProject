@@ -13,37 +13,49 @@
 #include "photo.h"
 #include "httpserver.h"
 
-
-// Faut peut-etre appeler la classe Utils une fois
-
 class Utils;
 
 class MyContext : public QObject
 {
     Q_OBJECT
 
+/* trek manager */
     Q_PROPERTY(Trek* myTrek READ getMyTrek WRITE setMyTrek NOTIFY myTrekChanged)
     Q_PROPERTY(QList<QObject*> trekList READ getTrekList WRITE setTrekList NOTIFY trekListChanged)
+
+/* photo manager */
     Q_PROPERTY(QString lastUrl READ getLastUrl WRITE setLastUrl NOTIFY lastUrlChanged)
     Q_PROPERTY(Photo* myPhoto READ getMyPhoto WRITE setMyPhoto NOTIFY myPhotoChanged)
+
+/* user manager */
     Q_PROPERTY(User* user READ getUser WRITE setUser NOTIFY userChanged)
+
+/* save manager */
     Q_PROPERTY(FileManager* fileManager READ getFileManager WRITE setFileManager NOTIFY fileManagerChanged)
 
-    Q_PROPERTY(QString errorMessage READ errorMessage WRITE setErrorMessage NOTIFY errorMessageChanged)
+/* message manager */
+    Q_PROPERTY(QString errorMessage READ errorMessage WRITE setErrorMessage NOTIFY errorMessageChanged) //for debugPage
+    Q_PROPERTY(QString wellDoneMessage READ wellDoneMessage WRITE setWellDoneMessage NOTIFY wellDoneMessageChanged) //for debugPage
+
+    Q_PROPERTY(QString storageStatus READ storageStatus WRITE setStorageStatus NOTIFY storageStatusChanged)
 
 
-
+/* variables */
     QQmlContext* m_myContext;
 
-    /* variables */
-    FileManager* m_fileManager;
     QList<QObject*> m_trekList;
-    User* m_user;
     Trek* m_myTrek;
-    QString m_lastUrl;
+
     Photo* m_myPhoto;
+    QString m_lastUrl;
+
+    User* m_user;
+
+    FileManager* m_fileManager;
 
     QString m_errorMessage;
+    QString m_wellDoneMessage;
+    QString m_storageStatus;
 
 
 public:
@@ -54,51 +66,39 @@ public:
     void loadMyContext();
     void updateMyContext(QString modelName);
 
-
+/* trek manager */
     Q_INVOKABLE void updateTrek (double const &latitude, double const &longitude);
     Q_INVOKABLE void startTrek (const QString &trekName, const double &latitude, const double &longitude);
 
+/* photo manager */
     Q_INVOKABLE void saveLastImageTakenUrl(const QString &path);
     Q_INVOKABLE void photoTaken(QString title, QString url, bool privatePhoto);
 
+/* user manager */
+    Q_INVOKABLE int getIdUser ();
+
+/* save manager */
     Q_INVOKABLE void saveUser (const int &id, QString username, QString password, QString mail);
     Q_INVOKABLE void deleteUser ();
-
     Q_INVOKABLE void saveTrek();
     Q_INVOKABLE void deleteTrek();
 
     Q_INVOKABLE void savePhoto();
     Q_INVOKABLE void deletePhoto();
 
-    Q_INVOKABLE int getIdUser ();
-
     Q_INVOKABLE void testUploadPhoto();
 
+/* Get & Set functions of Q_PROPERTIES */
+/* *********************************** */
 
     Trek* getMyTrek() const
     {
         return m_myTrek;
     }
 
-    QString errorMessage() const
-    {
-        return m_errorMessage;
-    }
-
-
     QList<QObject*> getTrekList() const
     {
         return m_trekList;
-    }
-
-    User* getUser() const
-    {
-        return m_user;
-    }
-
-    FileManager* getFileManager() const
-    {
-        return m_fileManager;
     }
 
     Photo* getMyPhoto() const
@@ -111,17 +111,46 @@ public:
         return m_lastUrl;
     }
 
+    User* getUser() const
+    {
+        return m_user;
+    }
+
+    FileManager* getFileManager() const
+    {
+        return m_fileManager;
+    }
+
+    QString errorMessage() const
+    {
+        return m_errorMessage;
+    }
+
+    QString wellDoneMessage() const
+    {
+        return m_wellDoneMessage;
+    }
+
+    QString storageStatus() const
+    {
+        return m_storageStatus;
+    }
+
 signals:
 
     void myTrekChanged(Trek* myTrek);
-    void errorMessageChanged(QString errorMessage);
     void trekListChanged(QList<QObject*> trekList);
-    void userChanged(User* user);
-    void fileManagerChanged(FileManager* fileManager);
 
     void myPhotoChanged(Photo* myPhoto);
-
     void lastUrlChanged(QString lastUrl);
+
+    void userChanged(User* user);
+
+    void fileManagerChanged(FileManager* fileManager);
+
+    void errorMessageChanged(QString errorMessage);
+    void wellDoneMessageChanged(QString wellDoneMessage);
+    void storageStatusChanged(QString storageStatus);   
 
 public slots:
 
@@ -134,15 +163,6 @@ public slots:
         emit myTrekChanged(m_myTrek);
     }
 
-    void setErrorMessage(QString errorMessage)
-    {
-        if (m_errorMessage == errorMessage)
-            return;
-
-        m_errorMessage = errorMessage;
-        emit errorMessageChanged(m_errorMessage);
-    }
-
     void setTrekList(QList<QObject*> trekList)
     {
         if (m_trekList == trekList)
@@ -150,6 +170,23 @@ public slots:
 
         m_trekList = trekList;
         emit trekListChanged(m_trekList);
+    }
+
+    void setMyPhoto(Photo* myPhoto)
+    {
+        if (m_myPhoto == myPhoto)
+            return;
+
+        m_myPhoto = myPhoto;
+        emit myPhotoChanged(m_myPhoto);
+    }
+    void setLastUrl(QString lastUrl)
+    {
+        if (m_lastUrl == lastUrl)
+            return;
+
+        m_lastUrl = lastUrl;
+        emit lastUrlChanged(m_lastUrl);
     }
 
     void setUser(User* user)
@@ -169,21 +206,32 @@ public slots:
         m_fileManager = fileManager;
         emit fileManagerChanged(m_fileManager);
     }
-    void setMyPhoto(Photo* myPhoto)
+
+    void setErrorMessage(QString errorMessage)
     {
-        if (m_myPhoto == myPhoto)
+        if (m_errorMessage == errorMessage)
             return;
 
-        m_myPhoto = myPhoto;
-        emit myPhotoChanged(m_myPhoto);
+        m_errorMessage = errorMessage;
+        emit errorMessageChanged(m_errorMessage);
     }
-    void setLastUrl(QString lastUrl)
+
+    void setWellDoneMessage(QString wellDoneMessage)
     {
-        if (m_lastUrl == lastUrl)
+        if (m_wellDoneMessage == wellDoneMessage)
             return;
 
-        m_lastUrl = lastUrl;
-        emit lastUrlChanged(m_lastUrl);
+        m_wellDoneMessage = wellDoneMessage;
+        emit wellDoneMessageChanged(m_wellDoneMessage);
+    }
+
+    void setStorageStatus(QString storageStatus)
+    {
+        if (m_storageStatus == storageStatus)
+            return;
+
+        m_storageStatus = storageStatus;
+        emit storageStatusChanged(m_storageStatus);
     }
 };
 

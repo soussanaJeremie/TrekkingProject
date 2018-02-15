@@ -66,7 +66,7 @@ ColumnLayout {
 
             TextBox {
                 id : localStorageStatus
-                text : "aucune sauvegarde"
+                text : MyContext.storageStatus
 
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter

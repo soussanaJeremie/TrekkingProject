@@ -4,11 +4,8 @@ using namespace std;
 
 Photo::Photo(QObject *parent) : QObject(parent) {}
 
-Photo::Photo(QString title, QString currentUrl, bool privatePhoto, QDateTime datePhoto, QObject *parent)
-    : QObject(parent), m_title(title), m_currentUrl(currentUrl), m_privatePhoto(privatePhoto)
-{
-    m_datePhoto = datePhoto.currentDateTime();
-}
+Photo::Photo(const QString title, QString currentUrl, const bool privatePhoto, QDateTime datePhoto, QObject *parent)
+ : QObject(parent), m_title(title), m_currentUrl(currentUrl), m_privatePhoto(privatePhoto) {}
 
 Photo::Photo(const Photo &_photo, QObject *parent) : QObject(parent)
 {
@@ -16,6 +13,8 @@ Photo::Photo(const Photo &_photo, QObject *parent) : QObject(parent)
     m_currentUrl = _photo.m_currentUrl;
     m_privatePhoto = _photo.m_privatePhoto;
     m_datePhoto = _photo.m_datePhoto;
+    m_fileName = _photo.m_fileName;
+    m_databaseUrl = _photo.m_databaseUrl;
 }
 
 QString Photo::getFileName() const
@@ -40,7 +39,7 @@ void Photo::setDatabaseUrl(const QString &databaseUrl)
 
 void Photo::createFileName()
 {
-    setFileName(getDatePhoto() + getTitle());
+    setFileName( this->getDatePhoto().toString("yyyy.MM.dd hh:mm:ss") + getTitle());
 }
 
 void Photo::createDatabaseUrl()
@@ -65,8 +64,8 @@ QStringList Photo::photoSQLFormat()
     QStringList photoData;
 
     photoData << getTitle()
-              << getPrivatePhoto()
-              << getDatePhoto()
+              << QString::number(getPrivatePhoto())
+              << this->getDatePhoto().toString("yyyy.MM.dd hh:mm:ss")
               << getDatabaseUrl();
 
     return photoData;

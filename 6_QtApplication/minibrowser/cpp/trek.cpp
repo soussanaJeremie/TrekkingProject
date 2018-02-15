@@ -102,11 +102,16 @@ void Trek::addNewGpsPoint(GpsPoint newGpsPoint)
     /* si test en mouvement */
     if ( m_path.empty() || moving )
     {
-        QList<QObject*> tmp = getPath();
-        tmp.push_back(new GpsPoint(newGpsPoint));
+        //ab
+        m_path.push_back( new GpsPoint(newGpsPoint) );
+        emit pathChanged(m_path); // permet la mise à jour du QML
+        // à tester
+
+//        QList<QObject*> tmp = getPath();
+//        tmp.push_back(new GpsPoint(newGpsPoint));
         qDebug() << "Added Gps Point lat:" << qobject_cast<GpsPoint*>(m_path.back())->getLatitude()
                  << ", lng:" << qobject_cast<GpsPoint*>(m_path.back())->getLongitude();
-        setPath(tmp);
+//        setPath(tmp);
     }
     else
     {
@@ -170,3 +175,5 @@ QStringList Trek::trekSQLFormat()
 
     return trekData;
 }
+
+

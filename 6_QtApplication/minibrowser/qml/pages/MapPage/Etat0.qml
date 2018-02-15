@@ -64,9 +64,6 @@ ColumnLayout {
                 anchors.fill : parent
 
                 onClicked: anime === true ? anime = false : anime = true
-
-//                ToolTip.visible: hovered
-//                ToolTip.text: "arret de l'animation"
             }
         }
     }
