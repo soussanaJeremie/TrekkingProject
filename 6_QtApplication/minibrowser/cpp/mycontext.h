@@ -11,6 +11,7 @@
 #include "user.h"
 #include "utils.h"
 #include "photo.h"
+#include "httpserver.h"
 
 
 // Faut peut-etre appeler la classe Utils une fois
@@ -70,6 +71,8 @@ public:
     Q_INVOKABLE void deletePhoto();
 
     Q_INVOKABLE int getIdUser ();
+
+    Q_INVOKABLE void testUploadPhoto();
 
 
     Trek* getMyTrek() const

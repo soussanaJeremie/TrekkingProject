@@ -5,6 +5,7 @@ import QtQuick.Controls.Styles 1.2
 
 import "../../modules"
 import "../../../images"
+import "../../javascript/httpRequest.js" as HttpScript
 
 ColumnLayout {
     id : etat
@@ -79,41 +80,14 @@ ColumnLayout {
                 height: etat.height / 15
                 width: etat.width /3
                 onClicked: {
-                    console.log("# check datas and save profil in localFile : " + mail.text + " " + mdp.text);
+                    //console.log("# check datas and save profil in localFile : " + mail.text + " " + mdp.text);
 
                     var uri = "http://localhost:3000/api-rest/users/auth";
                     var datas = {
                         mail : mail.text,
-                        password : mdp.text};
+                        password : mdp.text };
 
-                    console.log(datas)
-
-                    var req = new XMLHttpRequest();
-
-                    req.open("POST", uri, true);
-
-                    req.setRequestHeader('Content-type','application/json; charset=utf-8');
-                    req.onreadystatechange = function() {
-
-                        if (req.readyState === XMLHttpRequest.DONE && req.status == 200) {
-                            console.log("#" + req.responseText);
-
-                            var result = JSON.parse(req.responseText);
-                            console.log("++" + JSON.stringify(result.user.id));
-
-                            MyContext.saveUser(JSON.stringify(result.user.id), JSON.stringify(result.user.username), mdp.text, JSON.stringify(result.user.mail))
-
-                            home1_visibilite = false;
-                            home2_visibilite = true;
-
-                        }
-                        else {
-                            console.log("error: " + req.status);
-                        }
-                    }
-                            req.send(JSON.stringify(datas));
-
-
+                    HttpScript.httpRequestPost(uri, datas)
                 }
             }
         }
@@ -148,12 +122,8 @@ ColumnLayout {
             Layout.fillWidth: true
             //color: "blue"
 
-            Image {
-                id: logoAfpa
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.bottom: parent.bottom
-                source: "../../../images/logoAfpa.jpg"
-            }
+            LogoAFPA {}
+
         }
     } // fin RowLayout
 

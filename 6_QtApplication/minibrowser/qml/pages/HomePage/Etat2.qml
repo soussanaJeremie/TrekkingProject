@@ -247,12 +247,7 @@ ColumnLayout {
             Layout.fillWidth: true
             //color: "blue"
 
-            Image {
-                id: logoAfpa
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.bottom: parent.bottom
-                source: "../../../images/logoAfpa.jpg"
-            }
+            LogoAFPA {}
         }
 
     } // fin RowLayout

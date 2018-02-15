@@ -148,6 +148,11 @@ void MyContext::saveTrek()
     m_fileManager->saveFile("trek", "detail", trekData);
 }
 
+void MyContext::testUploadPhoto() //new
+{
+    HttpServer::post("C:/Users/34011-58-03/Pictures/panda.jpg", "petitPanda");
+}
+
 void MyContext::deleteTrek()
 {
     //    QString trekName = getMyTrek()->getLabel().replace(" ", "_");

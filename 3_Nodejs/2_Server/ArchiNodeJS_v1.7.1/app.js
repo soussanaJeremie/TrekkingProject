@@ -4,6 +4,7 @@ var path = require('path');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var expressValidator = require('express-validator');
+var multer = require('multer');
 
 var app = express();
 
@@ -59,4 +60,32 @@ app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.redirect('/')
 });
+
+// Uploading photo from mobile application to server
+//set storage engine
+const storage = multer.diskStorage({
+    destination: 'pictures/uploads',
+    filename: function(req, file, cb) {
+      //cb(null, file.fieldname + '-' + Date.now() + file.originalname + path.extname(file.originalname));
+      cb(null, Date.now() + '-' + file.originalname);
+    }
+  });
+
+//Init upload
+const upload = multer({
+    storage: storage,
+  }).single('upload');
+  
+  app.use('/upload', (req, res) => {
+    console.log(req.body);
+    upload(req, res, (err) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(req.file);
+        res.end();
+      }
+    });
+  });
+  
 module.exports = app;
