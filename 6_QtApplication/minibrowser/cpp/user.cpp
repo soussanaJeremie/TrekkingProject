@@ -17,13 +17,14 @@ User::User(const int &idUser, const QString &username, const QString &password,
 }
 
 User::User( QStringList &userData, QObject *parent): QObject(parent)
-{
-    if (userData.length() == 4)
+{  
+    if (userData.length() == 1)
     {
-        m_idUser = userData[0].toInt();
-        m_username = userData[1];
-        m_password = userData[2];
-        m_email = userData[3];
+        QStringList datas = userData[0].split(";");
+        m_idUser = datas[0].toInt();
+        m_username =datas[1];
+        m_password = datas[2];
+        m_email = datas[3];
     }
 }
 
@@ -32,9 +33,9 @@ QStringList User::userSQLFormat()
     QStringList userData;
 
     userData << QString::number(getIdUser())
-            << getUsername()
-            << getPassword()
-            << getEmail();
+             << getUsername()
+             << getPassword()
+             << getEmail();
 
     return userData;
 }

@@ -4,7 +4,7 @@
 Trek::Trek(QObject *parent)
     : QObject(parent), m_label("trek_name"), m_length("1"), m_time("00:00:00"), m_path(), m_photos(), m_level("1"), m_done(1)
 {
-//      m_path = {new GpsPoint(43.462, 3.2527), new GpsPoint(43.462, 3.2527), new GpsPoint(43.463, 3.2528), new GpsPoint(43.464, 3.2529), new GpsPoint(43.466, 3.2530), new GpsPoint(43.462, 3.2527)};
+    //      m_path = {new GpsPoint(43.462, 3.2527), new GpsPoint(43.462, 3.2527), new GpsPoint(43.463, 3.2528), new GpsPoint(43.464, 3.2529), new GpsPoint(43.466, 3.2530), new GpsPoint(43.462, 3.2527)};
 }
 
 Trek::Trek(const QString &label,  const double &latitude, const double &longitude, QObject *parent)
@@ -19,7 +19,7 @@ Trek::Trek(const Trek &otherTrek, QObject *parent): QObject(parent)
     m_length = otherTrek.getLength();
     m_time = otherTrek.getTime();
     m_path = otherTrek.getPath();
-//    m_trace = otherTrek.getTrace();
+    //    m_trace = otherTrek.getTrace();
     m_photos = otherTrek.getPhotos();
     m_level = otherTrek.getLevel();
     m_done = otherTrek.getDone();
@@ -54,11 +54,13 @@ QList<QObject *> Trek::pathOfSavedTrek(QString &pathData)
 
 Trek::Trek(QStringList &trekData, QObject *parent): QObject(parent)
 {
-    m_label = trekData[0];
-    m_length = trekData[1];
-    m_time = trekData[2];
-    m_path = pathOfSavedTrek(trekData[3]);
-    m_level = trekData[4];
+    QStringList datas = trekData[0].split(";");
+
+    m_label = datas[0];
+    m_length = datas[1];
+    m_time = datas[2];
+    m_path = pathOfSavedTrek(datas[3]);
+    m_level = datas[4];
     m_done = true;
 }
 
@@ -72,13 +74,13 @@ Trek::~Trek()
         qDebug() << m_path.length();
     }
 
-//    while(m_trace.length() != 0)
-//    {
-//        delete m_trace.back();
-//        m_trace.back() = nullptr;
-//        m_trace.pop_back(); ;
-//        qDebug() << m_trace.length();
-//    }
+    //    while(m_trace.length() != 0)
+    //    {
+    //        delete m_trace.back();
+    //        m_trace.back() = nullptr;
+    //        m_trace.pop_back(); ;
+    //        qDebug() << m_trace.length();
+    //    }
 
     while(m_photos.length() != 0)
     {
@@ -107,11 +109,11 @@ void Trek::addNewGpsPoint(GpsPoint newGpsPoint)
         emit pathChanged(m_path); // permet la mise à jour du QML
         // à tester
 
-//        QList<QObject*> tmp = getPath();
-//        tmp.push_back(new GpsPoint(newGpsPoint));
+        //        QList<QObject*> tmp = getPath();
+        //        tmp.push_back(new GpsPoint(newGpsPoint));
         qDebug() << "Added Gps Point lat:" << qobject_cast<GpsPoint*>(m_path.back())->getLatitude()
                  << ", lng:" << qobject_cast<GpsPoint*>(m_path.back())->getLongitude();
-//        setPath(tmp);
+        //        setPath(tmp);
     }
     else
     {
@@ -165,11 +167,11 @@ QStringList Trek::trekSQLFormat()
     QStringList trekData;
 
     trekData << getLabel()
-    << getLength()
-    << getTime()
-    << pathSQLFormat()
-    << getLevel()
-    << "1";
+             << getLength()
+             << getTime()
+             << pathSQLFormat()
+             << getLevel()
+             << "1";
     //            + // 1 to indicate the trek is done. (done == true)
     //            pathSQLFormat();
 

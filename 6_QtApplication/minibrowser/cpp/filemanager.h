@@ -12,37 +12,23 @@
 #include <QObject>
 
 
-class FileManager : public QObject
+class FileManager
 {
-    Q_OBJECT
-
-    QString m_basePath;
 
 public:
-    explicit FileManager ( QObject *parent = nullptr );
+    FileManager();
 
-    void initFolder();
-    bool fileExists( const QString &fileType, const QString &fileName );
-    QStringList loadFile( const QString &fileType, const QString &fileName );
-//    void addLine( const QString &fileType, const QString &fileName, const QString &dataLine );
-    void saveFile( const QString &fileType, const QString &fileName, const QStringList &data );
-    void deleteFile( const QString &fileType, const QString &fileName );
+    static void initFolder();
+    static bool fileExists( const QString &fileType, const QString &fileName );
+    static QStringList loadFile( const QString &fileType, const QString &fileName );
+    static void addLine( const QString &fileType, const QString &fileName, const QString &dataLine );
+//    static void saveFile( const QString &fileType, const QString &fileName, const QStringList &data );
+    static void deleteFile( const QString &fileType, const QString &fileName );
 
+    static void saveInFile (const QString &fileType, const QString &fileName, const QStringList &data);
 
-    QString getBasePath() const
-    {
-        return m_basePath;
-    }
-    void setBasePath( const QString &basePath )
-    {
-        m_basePath = basePath;
-    }
-
-signals:
-
-
-public slots:
-
+private:
+    static QString m_basePath;
 
 };
 

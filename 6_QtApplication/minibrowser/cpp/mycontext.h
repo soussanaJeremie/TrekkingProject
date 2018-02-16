@@ -30,9 +30,6 @@ class MyContext : public QObject
 /* user manager */
     Q_PROPERTY(User* user READ getUser WRITE setUser NOTIFY userChanged)
 
-/* save manager */
-    Q_PROPERTY(FileManager* fileManager READ getFileManager WRITE setFileManager NOTIFY fileManagerChanged)
-
 /* message manager */
     Q_PROPERTY(QString errorMessage READ errorMessage WRITE setErrorMessage NOTIFY errorMessageChanged) //for debugPage
     Q_PROPERTY(QString wellDoneMessage READ wellDoneMessage WRITE setWellDoneMessage NOTIFY wellDoneMessageChanged) //for debugPage
@@ -50,8 +47,6 @@ class MyContext : public QObject
     QString m_lastUrl;
 
     User* m_user;
-
-    FileManager* m_fileManager;
 
     QString m_errorMessage;
     QString m_wellDoneMessage;
@@ -113,11 +108,6 @@ public:
         return m_user;
     }
 
-    FileManager* getFileManager() const
-    {
-        return m_fileManager;
-    }
-
     QString errorMessage() const
     {
         return m_errorMessage;
@@ -142,8 +132,6 @@ signals:
     void lastUrlChanged(QString lastUrl);
 
     void userChanged(User* user);
-
-    void fileManagerChanged(FileManager* fileManager);
 
     void errorMessageChanged(QString errorMessage);
     void wellDoneMessageChanged(QString wellDoneMessage);
@@ -193,15 +181,6 @@ public slots:
 
         m_user = user;
         emit userChanged(m_user);
-    }
-
-    void setFileManager(FileManager* fileManager)
-    {
-        if (m_fileManager == fileManager)
-            return;
-
-        m_fileManager = fileManager;
-        emit fileManagerChanged(m_fileManager);
     }
 
     void setErrorMessage(QString errorMessage)
