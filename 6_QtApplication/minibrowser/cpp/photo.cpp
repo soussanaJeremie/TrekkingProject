@@ -51,9 +51,13 @@ void Photo::createDatabaseUrl()
 
 void Photo::showPhotoData(Photo* photo)
 {
+    QString privatePhoto = QString::number(getPrivatePhoto());
+
+    qDebug() << "void Photo::showPhotoData(Photo* photo)" << endl;
+
     qDebug() << "title : " << photo->getTitle() << endl;
     qDebug() << "currentUrl : " << photo->getCurrentUrl() << endl;
-    qDebug() << "private : " << photo->QString::number(getPrivatePhoto()) << endl;
+    qDebug() << "private : " << privatePhoto << endl;
     qDebug() << "datePhoto : " << photo->getDatePhoto().toString("yyyy.MM.dd hh:mm:ss") << endl;
     qDebug() << "fileName : " << photo->getFileName() << endl;
     qDebug() << "databaseUrl : " << photo->getDatabaseUrl() << endl;
