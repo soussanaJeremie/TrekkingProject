@@ -85,11 +85,11 @@ void MyContext::updateTrek(const double &latitude, const double &longitude)
     //    m_myContext->setContextProperty("MyContext", this);
 }
 
-void MyContext::startTrek(const QString &trekName,const double &latitude, const double &longitude)
+void MyContext::startTrek(const QString &trekName,const double &latitude, const double &longitude, const QString &leafletTrace)
 {
     delete m_myTrek;
     m_myTrek = nullptr;
-    setMyTrek(new Trek (trekName, latitude, longitude));
+    setMyTrek(new Trek (trekName, latitude, longitude, leafletTrace));
     //    setMyTrek(new Trek());
 
     qDebug() << " # " << trekName;

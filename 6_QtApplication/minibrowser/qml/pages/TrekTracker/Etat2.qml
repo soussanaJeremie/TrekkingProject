@@ -12,6 +12,7 @@ ColumnLayout {
     property string labelTrek: list.labelTrek
     property double lengthTrek: list.lengthTrek
     property var timeTrek : list.timeTrek
+    property var pathwayTrek : list.pathwayTrek
 
     anchors.fill: parent
     anchors.top : header.bottom
@@ -52,6 +53,9 @@ ColumnLayout {
                 onClicked: {
                     trek2_visibilite = false ;
                     trek1_visibilite = true ;
+                    mapPage.leafletTrace = "" ;
+//                    labelTrek = "" ;
+//                    pathwayTrek = [] ;
                 }
             }
         }

@@ -26,5 +26,12 @@ Item{
             line.color: 'green'
             path: JSC.pathwayToJSon()
         }
+
+        MapPolyline {
+            id: lineOfTrace
+            line.width: 3
+            line.color: 'orange'
+            path: JSC.traceToJSon()
+        }
     }
 }

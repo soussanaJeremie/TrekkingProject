@@ -63,7 +63,7 @@ public:
 
 /* trek manager */
     Q_INVOKABLE void updateTrek (double const &latitude, double const &longitude);
-    Q_INVOKABLE void startTrek (const QString &trekName, const double &latitude, const double &longitude);
+    Q_INVOKABLE void startTrek (const QString &trekName, const double &latitude, const double &longitude, const QString &leafletTrace = "");
 
 /* photo manager */
     Q_INVOKABLE void saveLastImageTakenUrl(const QString &path);

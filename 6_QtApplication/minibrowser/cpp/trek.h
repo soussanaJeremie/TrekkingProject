@@ -14,10 +14,10 @@ class Trek : public QObject
     Q_PROPERTY(QString length READ getLength WRITE setLength NOTIFY lengthChanged)
     Q_PROPERTY(QString time READ getTime WRITE setTime NOTIFY timeChanged)
     Q_PROPERTY(QList<QObject*> path READ getPath WRITE setPath NOTIFY pathChanged)
-//    Q_PROPERTY(QList<QObject*> trace READ getTrace WRITE setTrace NOTIFY traceChanged)
     Q_PROPERTY(QList<QObject*> photos READ getPhotos WRITE setPhotos NOTIFY photosChanged)
     Q_PROPERTY(QString level READ getLevel WRITE setLevel NOTIFY levelChanged)
     Q_PROPERTY(bool done READ getDone WRITE setDone NOTIFY doneChanged)
+    Q_PROPERTY(QList<QObject*> trace READ getTrace WRITE setTrace NOTIFY traceChanged)
 
 //    Q_PROPERTY(QString test READ test WRITE setTest NOTIFY testChanged)
 
@@ -25,17 +25,17 @@ class Trek : public QObject
     QString m_length;
     QString m_time;
     QList<QObject*> m_path;
-//    QList<QObject*> m_trace;
     QList<QObject*> m_photos;
     QString m_level;
     bool m_done;
+    QList<QObject*> m_trace;
 
 
 public:
     explicit Trek(QObject *parent = nullptr);
 
     /// BASIC CONSTRUCTORS AND DESTRUCTOR
-    Trek(const QString &label, const double &latitude, const double &longitude, QObject *parent = 0);
+    Trek(const QString &label, const double &latitude, const double &longitude, const QString &trace = "", QObject *parent = 0);
     Trek(const Trek &otherTrek, QObject *parent = 0);
     ~Trek();
 
@@ -49,7 +49,7 @@ public:
     /////////////////////////////////
 
     Trek(QStringList &trekData, QObject *parent = nullptr);
-    QList<QObject*> pathOfSavedTrek(QString &pathData);
+    QList<QObject*> pathJSONToQList(QString &pathData);
     QString pathSQLFormat();
     QStringList trekSQLFormat();
 
@@ -78,11 +78,6 @@ public:
         return m_path;
     }
 
-//    QList<QObject*> getTrace() const
-//    {
-//        return m_trace;
-//    }
-
     QString getLevel() const
     {
         return m_level;
@@ -91,6 +86,11 @@ public:
     bool getDone() const
     {
         return m_done;
+    }
+
+    QList<QObject*> getTrace() const
+    {
+        return m_trace;
     }
 
     QList<QObject*> getPhotos() const
@@ -104,9 +104,9 @@ signals:
     void lengthChanged(QString length);
     void timeChanged(QString time);
     void pathChanged(QList<QObject*> path);
-//    void traceChanged(QList<QObject*> trace);
     void levelChanged(QString level);
     void doneChanged(bool done);
+    void traceChanged(QList<QObject*> trace);
 
 
     void photosChanged(QList<QObject*> photos);
@@ -145,14 +145,6 @@ public slots:
         m_path = path;
         emit pathChanged(m_path);
     }
-//    void setTrace(QList<QObject*> trace)
-//    {
-//        if (m_trace == trace)
-//            return;
-
-//        m_trace = trace;
-//        emit traceChanged(m_trace);
-//    }
     void setLevel(QString level)
     {
         if (m_level == level)
@@ -168,6 +160,15 @@ public slots:
 
         m_done = done;
         emit doneChanged(m_done);
+    }
+
+    void setTrace(QList<QObject*> trace)
+    {
+        if (m_trace == trace)
+            return;
+
+        m_trace = trace;
+        emit traceChanged(m_trace);
     }
 
     void setPhotos(QList<QObject*> photos)

@@ -41,6 +41,8 @@ Page {
                 Text {
                     id : errorBox
                     text : "List of Bugs : \n" + MyContext.errorMessage
+                    wrapMode: Text.WordWrap
+                    width: parent.width
 
                     color : "red"
                     font.family: "acumin-pro"
@@ -67,6 +69,9 @@ Page {
                 Text {
                     id : succesBox
                     text : "List of succes : \n" + MyContext.wellDoneMessage
+                    wrapMode: Text.WordWrap
+                    width: parent.width
+
 
                     color : "green"
                     font.family: "acumin-pro"
