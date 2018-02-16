@@ -45,6 +45,7 @@ void Photo::createFileName()
 void Photo::createDatabaseUrl()
 {
     QString adresseServer = "";
+    createFileName();
     setDatabaseUrl(adresseServer + "pictures/uploads" + getFileName());
 }
 
@@ -52,8 +53,8 @@ void Photo::showPhotoData(Photo* photo)
 {
     qDebug() << "title : " << photo->getTitle() << endl;
     qDebug() << "currentUrl : " << photo->getCurrentUrl() << endl;
-    qDebug() << "private : " << photo->getPrivatePhoto() << endl;
-    qDebug() << "datePhoto : " << photo->getDatePhoto() << endl;
+    qDebug() << "private : " << photo->QString::number(getPrivatePhoto()) << endl;
+    qDebug() << "datePhoto : " << photo->getDatePhoto().toString("yyyy.MM.dd hh:mm:ss") << endl;
     qDebug() << "fileName : " << photo->getFileName() << endl;
     qDebug() << "databaseUrl : " << photo->getDatabaseUrl() << endl;
     qDebug() << endl;
@@ -62,6 +63,7 @@ void Photo::showPhotoData(Photo* photo)
 QStringList Photo::photoSQLFormat()
 {
     QStringList photoData;
+    createDatabaseUrl();
 
     photoData << getTitle()
               << QString::number(getPrivatePhoto())
