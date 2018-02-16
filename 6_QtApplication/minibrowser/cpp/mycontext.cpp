@@ -170,13 +170,17 @@ void MyContext::saveTrek()
 
 void MyContext::savePhoto()
 {
+    setWellDoneMessage(m_wellDoneMessage + "\nPhoto " + m_myPhoto->getTitle() + " saved");
+
     QStringList photoData = getMyPhoto()->photoSQLFormat();
-    m_fileManager->saveFile("photo", "detail", photoData);
+
+    FileManager::saveInFile("photo", "detail", photoData);
+
 }
 
 void MyContext::deletePhoto()
 {
-    getFileManager()->deleteFile("photo", "detail");
+    FileManager::deleteFile("photo", "detail");
 }
 
 void MyContext::deleteTrek()
