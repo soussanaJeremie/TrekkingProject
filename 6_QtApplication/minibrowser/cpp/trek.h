@@ -50,7 +50,7 @@ public:
 
     Trek(QStringList &trekData, QObject *parent = nullptr);
     QList<QObject*> pathJSONToQList(QString &pathData);
-    QString pathSQLFormat();
+    QString pathSQLFormat(QString pathType);
     QStringList trekSQLFormat();
 
 

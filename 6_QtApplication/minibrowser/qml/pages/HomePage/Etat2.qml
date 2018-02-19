@@ -90,7 +90,7 @@ ColumnLayout {
                 width: etat.width /3
                 onClicked: {
 //                    console.log("switch to UploadPage")
-                    MyContext.saveTrek();
+//                    MyContext.saveTrek();
                 }
             }
 

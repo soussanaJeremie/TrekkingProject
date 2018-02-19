@@ -63,7 +63,7 @@ Rectangle {
             timeTrek = treksModel.get(view.currentIndex).time;
             pathwayTrek = treksModel.get(view.currentIndex).pathway;
 
-            mapPage.leafletTrace = pathwayTrek
+            mapPage.leafletTrace = treksModel.get(view.currentIndex).pathway;
 
             console.log(labelTrek + " ; " + lengthTrek + " ; " + timeTrek)
         }

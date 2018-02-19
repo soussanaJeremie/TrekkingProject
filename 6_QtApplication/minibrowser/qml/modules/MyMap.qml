@@ -18,7 +18,7 @@ Item{
         anchors.fill: parent
         plugin: mapPlugin
         center: QtPositioning.coordinate(JSC.lastLat(), JSC.lastLng()) // Oslo
-        zoomLevel: 14
+        zoomLevel: 18
 
         MapPolyline {
             id: lineOfPathway
