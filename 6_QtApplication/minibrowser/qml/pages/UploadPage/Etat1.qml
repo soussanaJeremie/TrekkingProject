@@ -7,9 +7,9 @@ import QtWebView 1.1
 
 import "../../modules"
 
-ColumnLayout {
+ColumnLayout {  
     spacing: 0
-    id : etat
+    id: etat
 
     anchors.fill: parent
     Layout.fillHeight: true
@@ -53,7 +53,7 @@ ColumnLayout {
 
     RowLayout {
         spacing: 0
-        id : status
+        id: status
 
         visible : true
         Layout.preferredHeight: (1/3)*parent.height
@@ -65,7 +65,7 @@ ColumnLayout {
             Layout.fillWidth: true
 
             TextBox {
-                id : localStorageStatus
+                id: localStorageStatus
                 text : MyContext.storageStatus
 
                 anchors.verticalCenter: parent.verticalCenter
@@ -76,7 +76,7 @@ ColumnLayout {
 
     RowLayout {
         spacing: 0
-        id : boutons
+        id: boutons
 
         visible : true
         Layout.preferredHeight: (1/8)*parent.height
@@ -91,7 +91,6 @@ ColumnLayout {
                 text : "Sauvegarder"
                 height: etat.height / 15
                 width: etat.width / 3
-
                 onClicked: {
                     MyContext.testUploadPhoto();
                     console.log("sauvegarde de la photo & edition du LocalFile")
@@ -120,7 +119,7 @@ ColumnLayout {
 
     RowLayout {
         spacing: 0
-        id : error
+        id: error
 
         visible : true
         Layout.preferredHeight: (1/8)*parent.height
@@ -140,87 +139,12 @@ ColumnLayout {
         }
     }
 
-    RowLayout {
-        spacing: 0
-        id : check
-
-        visible: false
-        Layout.preferredHeight: (1/2)*parent.height
-        Layout.fillHeight: true
-        Layout.fillWidth: true
-
-        ColumnLayout {
-            spacing: 0
-
-            anchors.fill: parent
-
-            RowLayout {
-                spacing: 0
-
-                Layout.preferredHeight: (1/3)*parent.height
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-
-                Rectangle {
-                    Layout.fillHeight: true
-                    Layout.fillWidth: true
-
-                    Text {
-                        text : "Etes vous sûr ?"
-
-                        font.family: "acumin-pro"
-                        font.pixelSize: Qt.application.font.pixelSize * 1.5
-                        font.bold: true
-
-                        anchors.centerIn : parent
-                    }
-                }
-            } //fin rowlayout
-
-            RowLayout {
-                spacing: 0
-
-                Layout.preferredHeight: (1/3)*parent.height
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-
-                Rectangle {
-                    Layout.fillHeight: true
-                    Layout.fillWidth: true
-
-                    MyButton {
-                        id : valid
-                        visible: true
-
-                        text : "OK"
-                        height: etat.height / 15
-                        width: etat.width /3
-                        onClicked: console.log("valid")
-                    }
-                }
-
-                Rectangle {
-                    Layout.fillHeight: true
-                    Layout.fillWidth: true
-
-                    MyButton {
-                        id: cancel
-                        visible : true
-
-                        text : "cancel"
-                        height: etat.height / 15
-                        width: etat.width /3
-                        onClicked: {
-                            status.visible = true
-                            boutons.visible = true
-                            check.visible = false
-                            console.log("cancel")
-                        }
-                    }
-                }
-            }
-        } //fin Columnlayout
-    } // fin RowLayout
+  Check {
+        id: check
+       /* statusV: status.visible
+        buttonV: boutons.visible
+        errorV: error.visible*/
+    }
 
     RowLayout {
         spacing: 0
@@ -233,13 +157,6 @@ ColumnLayout {
             Layout.fillHeight: true
             Layout.fillWidth: true
 
-            Image {
-                id: logoAfpa
-
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.bottom: parent.bottom
-                source: "../../../images/logoAfpa.jpg"
-            }
             LogoAFPA {}
         }
     } // fin RowLayout
