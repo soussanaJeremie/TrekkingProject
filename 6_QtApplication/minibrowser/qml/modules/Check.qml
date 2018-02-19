@@ -62,8 +62,8 @@ RowLayout {
                     visible: true
                     
                     text : "OK"
-                    height: etat.height / 15
-                    width: etat.width /3
+                    height: buttonHeight
+                    width: buttonWidth
                     onClicked: {
                         console.log("valid")
                         check.visible = false
@@ -80,8 +80,8 @@ RowLayout {
                     visible : true
                     
                     text : "cancel"
-                    height: etat.height / 15
-                    width: etat.width /3
+                    height: buttonHeight
+                    width: buttonWidth
                     onClicked: {
                         status.visible = true
                         boutons.visible = true

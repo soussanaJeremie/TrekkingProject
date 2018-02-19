@@ -89,8 +89,8 @@ ColumnLayout {
 
             MyButton {
                 text : "Sauvegarder"
-                height: etat.height / 15
-                width: etat.width / 3
+                height: buttonHeight
+                width: buttonWidth
                 onClicked: {
                     MyContext.testUploadPhoto();
                     console.log("sauvegarde de la photo & edition du LocalFile")
@@ -104,8 +104,8 @@ ColumnLayout {
 
             MyButton {
                 text : "Supprimer"
-                height: etat.height / 15
-                width: etat.width / 3
+                height: buttonHeight
+                width: buttonWidth
 
                 onClicked: {
                     status.visible = false
