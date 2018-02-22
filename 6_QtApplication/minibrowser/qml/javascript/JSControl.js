@@ -10,11 +10,13 @@ function call_window(window) {
 }
 
 function lastLat(){
-    return  MyContext.myTrek.path[MyContext.myTrek.path.length-1].latitude
+    var temp = MyContext.myTrek.path[MyContext.myTrek.path.length-1]
+    return temp ? temp.latitude : undefined
 }
 
 function lastLng(){
-    return MyContext.myTrek.path[MyContext.myTrek.path.length-1].longitude
+    var temp = MyContext.myTrek.path[MyContext.myTrek.path.length-1]
+    return temp ? temp.longitude : undefined
 }
 
 function pathwayToJSon(){
