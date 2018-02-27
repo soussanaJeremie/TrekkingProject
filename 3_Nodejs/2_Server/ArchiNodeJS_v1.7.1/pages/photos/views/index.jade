@@ -1,26 +1,21 @@
 extends layout
 
 block content
-  h2#trek galerie photos
-  title
-    h1 Galerie
-    h2 Photos
   .Bandeau
-  section
+  section.small-12.medium-12.large-12.columns  
     img(src='../src/images/Bandeau.png', style='margin-bottom: 5px')
     section.section
       .top-border
         .row
         .large-12
-          nav#nav-under
-            div
+          #nav-under
               ul.inline-list-custom
                 li
-                  a(href='/users') Profil
+                  a(href='/users/:idUser') Profil
                 li
-                  a.current(href='/photos') Galerie Photos
+                  a(href='/photos') Galerie Photos
                   .top-border
-        .row
+        .block_buttons
             button#allPhoto(onclick='loadPhotos()') Toutes
             button#sortPrivate(onclick='sortPrivate()') Privée
             button#sortPublic(onclick='sortPublic()') Publique
@@ -28,7 +23,20 @@ block content
             button#sortDateOlder(onclick='sortDateRecent()') date (ancien)
             button#sortTrek(onclick='sortTrek()') Treks
         .block_photos
-            #photos
+          ul
+            //- each photo in [trek.photos]
+            li#photos
+
+    #chevron
+      .backToTop
+            p.back-to-top-holder
+            a.back-to-top
+                a(href='#', Title="Retour en haut")
+                    i.fa.fa-chevron-circle-up.fa-3x
+
+
+            
+            
     
     script(src="/src/ajax.js")
     script(src="/src/loadPhotos.js")

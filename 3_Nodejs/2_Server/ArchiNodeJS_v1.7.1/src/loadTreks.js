@@ -83,7 +83,7 @@ var LoadTreksManager = {
         html += "</tr>";
         html += "<tr>";
         html += "<th> Temps estimés </th>";
-        html += "<td>" + '<textarea  name="" id="temps"></textarea>' + "</td>";
+        html += "<td>" + '<textarea  name="" id="temps", readonly></textarea>' + "</td>";
         html += "</tr>";
         html += "<tr>";
         html += "<th> Niveau de difficulté </th>";

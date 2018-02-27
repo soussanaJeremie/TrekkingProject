@@ -60,6 +60,9 @@ class UsersDAO {
 
     static find(id, cb) {
 
+        console.log("DAO" + id)
+
+
         let script = 'SELECT * FROM user '
         script += 'JOIN user_do_trek ON user.id_User = user_do_trek.id_User AND user.id_User = ? '
         script += 'JOIN trek ON user_do_trek.id_Trek = trek.id_Trek '
@@ -68,6 +71,7 @@ class UsersDAO {
         db.query(script, [id], (err, rows) => {
 
             if (rows && rows[0] !== undefined) {
+                console.log("dao1 passed")
 
                 var i = 0;
                 var treks = [];

@@ -1,21 +1,14 @@
 @media (min-width: 1025px) {
-
-body{
-    height: 100%;
-}
-
-.logo{
-    
-}
-
-footer {
-    
-    position: relative;
-    height: 85.53px;
-    z-index: 2;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
-}
-
+    body {
+        height: 100%;
+    }
+    .logo {}
+    footer {
+        position: absolute;
+        max-height: 50px;
+        z-index: 2;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+    }
 }

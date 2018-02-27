@@ -1,63 +1,49 @@
 @media (min-width: 1025px) {
-
-.conteneur_bandeau{
-    position: relative;
-    height: 40vh;
-    width: 100%;
-    z-index: 1;
+    .conteneur_bandeau {
+        position: relative;
+        height: 40vh;
+        width: 100%;
+        /* z-index: 1; */
+    }
+    #background {
+        position: absolute;
+        height: 100vh;
+        left: 0%;
+        width: 100%;
+        background: url('/src/images/home_page.jpeg') no-repeat;
+    }
+    .intro {
+        position: relative;
+        margin-top: 8%;
+        margin-right: 8%;
+        z-index: 0;
+        float: left;
+        margin-left: 6%;
+    }
+    .description {
+        border-radius: 2%;
+        border-style: groove;
+        background-color: rgba(255, 235, 205, 0.452);
+        box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.63);
+        width: 33%;
+        position: absolute;
+        top: 10%;
+        right: 10%;
+        z-index: 2;
+    }
+    .description h2 {
+        margin-top: 10%;
+        text-align: center;
+    }
+    .description p {
+        text-align: center;
+    }
+    html,
+    body {
+        height: 100vh;
+        position: relative;
+    }
 }
 
-#background{
-    position: absolute;
-    height: 100vh;
-    left: 0%;
-    width: 100%;
-    background: url('/src/images/home_page.jpeg') no-repeat;
-}
 
-.intro{
-    position: relative;
-    margin-top: 8%;
-    margin-right: 8%;
-    z-index: 0;
-    float: left;
-    margin-left: 6%;
-}
-
-.description{
-    border-radius: 2%;
-    border-style: groove;
-    background-color: rgba(255, 235, 205, 0.452);
-    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.63);
-    width:33%;
-    position: absolute;
-    top: 10%;
-    right: 10%;
-    z-index: 2;
-}
-
-.description h2{
-    margin-top: 10%;
-    text-align: center;
-}
-
-.description p{
-    text-align: center;
-}
-
-footer {
-    margin-top: 100px;
-    position: absolute;
-    
-    height: 85.53px;
-    z-index: 2;
-    bottom: 0%;
-    left: 0%;
-    right: 0%;
-}
-
-body{
-    height: 100vh;
-}
-
-} /* Fin de "l'objet" css pour ordinateur */
+/* Fin de "l'objet" css pour ordinateur */

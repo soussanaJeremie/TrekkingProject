@@ -1,46 +1,103 @@
-extends /core/views/layout
+extends layout
 
 block content
-  h2#trek signup
-  title
   .Bandeau
-    section.section
-      .top-border
-        .row
-        .large-12
-          nav#nav-under
-            div
-              ul.inline-list-custom
-                li
-                  a(href='/users') Profil
-                li
-                  a(href='/photos') Galerie Photos
-                  .top-border
-          .column
-            .front-frame
-              .front-frame-title Inscrivez-vous
-              .ui.form
-                .field
-                  label Nom
+     .limiter
+       .container-login100(style="background-image: url('/src/images/fond_signup.jpg');")
+         .wrap-login100.p-t-50.p-b-30
+            form#signupForm.login100-form.validate-form
+              .login100-form-avatar
+                  img(src='/src/images/login.png', alt='AVATAR')
+                span.login100-form-title.p-t-20.p-b-45
+                  p Inscription
+                .wrap-input100.validate-input.m-b-10               
                   input(name='lastname', id='nom', placeholder='Nom', type='text')
-                .field
-                  label Prenom
+                  span.focus-input100
+                  span.symbol-input100
+                    i.fa.fa-user
+                .wrap-input100.validate-input.m-b-10  
                   input(name='firstname', id='prenom', placeholder='Prenom', type='text')
-                .field
-                  label Pseudo
+                  span.focus-input100
+                  span.symbol-input100
+                    i.fa.fa-user
+                .wrap-input100.validate-input.m-b-10  
                   input(name='username', id='pseudo', placeholder='Pseudo', type='text')
-                .field
-                  label E-Mail
+                  span.focus-input100
+                  span.symbol-input100
+                    i.fa.fa-user
+                .wrap-input100.validate-input.m-b-10  
                   input(name='mail', id='mail', placeholder='email@provider.com', type='text')
-                .field
-                  label Mot de passe
-                  input(name='password', id='password', type='password')
-                .field
-                  label Confirmer mot de passe
-                  input(name='passwordConfirmation', id='passwordConfirmation', type='password')
-                button.ui.button(id="registerBtn" type='submit') S'inscrire
-                ul.notifications-container
+                  span.focus-input100
+                  span.symbol-input100
+                    i.fa.fa-at
+                .wrap-input100.validate-input.m-b-10  
+                  input(name='password', id='password', placeholder='mot de passe', type='password')
+                  span.focus-input100
+                  span.symbol-input100
+                    i.fa.fa-lock
+                .wrap-input100.validate-input.m-b-10  
+                  input(name='passwordConfirmation', id='passwordConfirmation', placeholder='confirmation du mot de passe', type='password')
+                  span.focus-input100
+                  span.symbol-input100
+                    i.fa.fa-lock
+                .container-login100-form-btn.p-t-10
+                  button.login100-form-btn
+                    p S'inscrire
 
   script(src="/src/ajax.js")
   script(src="/src/loadUsers.js")
   script(src="/src/signup.client.js")
+
+
+
+
+//- extends layout
+
+//- block content
+//-   .Bandeau
+//-     .limiter
+//-       .container-login100(style="background-image: url('/src/images/fond_signup.jpg');")
+//-         .wrap-login100.p-t-50.p-b-30
+//-           form.login100-form.validate-form
+//-             .login100-form-avatar
+//-               img(src='/src/images/login.png', alt='AVATAR')
+//-             span.login100-form-title.p-t-20.p-b-45
+//-               p s'inscrit toi
+//-             .wrap-input100.validate-input.m-b-10
+//-               input.input100(name='lastname', id='nom', placeholder='Nom', type='text')
+//-               span.focus-input100
+//-               span.symbol-input100
+//-                 i.fa.fa-user
+//-             .wrap-input100.validate-input.m-b-10
+//-               input.input100(name='firstname', id='prenom', placeholder='Prenom', type='text')
+//-               span.focus-input100
+//-               span.symbol-input100
+//-                 i.fa.fa-user
+//-             .wrap-input100.validate-input.m-b-10
+//-               input.input100(name='username', id='pseudo', placeholder='Pseudo', type='text')
+//-               span.focus-input100
+//-               span.symbol-input100
+//-                 i.fa.fa-user
+//-             .wrap-input100.validate-input.m-b-10
+//-               input.input100(name='mail', id='mail', placeholder='adresse e-mail', type='text')
+//-               span.focus-input100
+//-               span.symbol-input100
+//-                 i.fa.fa-at
+//-             .wrap-input100.validate-input.m-b-10
+//-               input.input100(name='password', id='password', placeholder='Mot de passe', type='password')
+//-               span.focus-input100
+//-               span.symbol-input100
+//-                 i.fa.fa-lock
+//-             .wrap-input100.validate-input.m-b-10
+//-               input.input100(name='passwordConfirmation', id='passwordConfirmation', placeholder='Comfirmation du mot de passe', type='password')
+//-               span.focus-input100
+//-               span.symbol-input100
+//-                 i.fa.fa-lock                 
+//-             .container-login100-form-btn.p-t-10
+//-               button.login100-form-btn
+//-                 p S'inscrire
+
+                
+//-   script(src="/src/ajax.js")
+//-   script(src="/src/loadUsers.js")
+//-   script(src="/src/signup.client.js")

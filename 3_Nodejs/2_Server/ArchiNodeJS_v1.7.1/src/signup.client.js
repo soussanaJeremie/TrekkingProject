@@ -3,7 +3,9 @@ var signUpController = {};
 (function(self) {
 
     self.init = function() {
-        $('#registerBtn').click(function() {
+
+        $('#signupForm').submit(function(e) {
+            e.preventDefault();
             var form = {
                 mail: $('input[name="mail"]').val(),
                 username: $('input[name="username"]').val(),
