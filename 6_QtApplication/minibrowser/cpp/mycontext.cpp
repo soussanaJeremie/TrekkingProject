@@ -135,27 +135,25 @@ int MyContext::getIdUser()
 
 void MyContext::saveUser(const int &id,  QString username,  QString password,  QString mail)
 {
-    User* currentUser = new User;
-    currentUser->setIdUser(id);
-    currentUser->setUsername(username.remove("\""));
-    currentUser->setPassword(password.remove("\""));
-    currentUser->setEmail(mail.remove("\""));
+    m_user->setIdUser(id);
+    m_user->setUsername(username.remove("\""));
+    m_user->setPassword(password.remove("\""));
+    m_user->setEmail(mail.remove("\""));
 
-    setUser(currentUser);
     setWellDoneMessage(m_wellDoneMessage + "\nUser " + username + " saved");
-
 
     QStringList userData = getUser()->userSQLFormat();
     //    FileManager::saveFile("user", "info", userData);
     FileManager::saveInFile("user", "info", userData);
-
-    delete currentUser;
-    currentUser = nullptr;
 }
 
 void MyContext::deleteUser()
 {
     FileManager::deleteFile("user", "info");
+    m_user->setIdUser(0);
+    m_user->setUsername("");
+    m_user->setPassword("");
+    m_user->setEmail("");
 }
 
 
