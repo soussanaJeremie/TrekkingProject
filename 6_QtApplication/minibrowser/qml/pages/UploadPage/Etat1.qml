@@ -7,7 +7,7 @@ import QtWebView 1.1
 
 import "../../modules"
 
-ColumnLayout {  
+ColumnLayout {
     spacing: 0
     id: etat
 
@@ -15,149 +15,62 @@ ColumnLayout {
     Layout.fillHeight: true
     Layout.fillWidth: true
 
-    RowLayout {
-        spacing: 0
-
+    MyRow {
+        blank: true
+        colorForBlank: "white"
         Layout.preferredHeight: (1/12)*parent.height
-        Layout.fillWidth: true
-        Layout.fillHeight: true
-
-        Rectangle {
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-            color: "white"
-        }
     }
 
-    RowLayout {
-        spacing: 0
-
-        Layout.preferredHeight: (1/12)*parent.height
-        Layout.fillHeight: true
-        Layout.fillWidth: true
-
-        Rectangle {
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-            color: "lightGrey"
-
-            TextBox {
-                text : "Etat actuel de la sauvegarde : "
-                font.family: "acumin-pro"
-
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.horizontalCenter: parent.horizontalCenter
-            }
-        }
+    MyRow {
+        textBox: true
+        colorForTextBox: "lightgrey"
+        text : "Etat actuel de la sauvegarde : "
     }
 
-    RowLayout {
-        spacing: 0
+    MyRow {
         id: status
-
+        textBox: true
         visible : true
         Layout.preferredHeight: (1/3)*parent.height
-        Layout.fillHeight: true
-        Layout.fillWidth: true
-
-        Rectangle {
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-
-            TextBox {
-                id: localStorageStatus
-                text : MyContext.storageStatus
-
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.horizontalCenter: parent.horizontalCenter
-            }
-        }
+        text : MyContext.storageStatus
     }
 
-    RowLayout {
-        spacing: 0
+    MyRow {
         id: boutons
-
         visible : true
         Layout.preferredHeight: (1/8)*parent.height
-        Layout.fillHeight: true
-        Layout.fillWidth: true
+        button: true
+        textButton: "Sauvegarder"
 
-        Rectangle {
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-
-            MyButton {
-                text : "Sauvegarder"
-                height: buttonHeight
-                width: buttonWidth
-                onClicked: {
-                    MyContext.testUploadPhoto();
-                    console.log("sauvegarde de la photo & edition du LocalFile")
-                }
-            }
+        onButtonClicked: {
+            MyContext.testUploadPhoto();
+            console.log("sauvegarde de la photo & edition du LocalFile")
         }
 
-        Rectangle {
-            Layout.fillHeight: true
-            Layout.fillWidth: true
+        button2: true
+        textButton2 : "Supprimer"
 
-            MyButton {
-                text : "Supprimer"
-                height: buttonHeight
-                width: buttonWidth
-
-                onClicked: {
-                    status.visible = false
-                    boutons.visible = false
-                    error.visible = false
-                    check.visible = true
-                }
-            }
+        onButton2Clicked: {
+            status.visible = false
+            boutons.visible = false
+            error.visible = false
+            check.visible = true
         }
     }
 
-    RowLayout {
-        spacing: 0
-        id: error
+//    MyRow {
+//        id: error
+//        visible : true
+//        Layout.preferredHeight: (1/8)*parent.height
+//        errorBox: true
+//    }
 
-        visible : true
-        Layout.preferredHeight: (1/8)*parent.height
-        Layout.fillHeight: true
-        Layout.fillWidth: true
 
-        Rectangle {
-            Layout.fillHeight: true
-            Layout.fillWidth: true
+//    Check {
+//        id: check
+//    }
 
-            ErrorBox {
-                height : parent.height
-                width : parent.width
-
-                anchors.centerIn : parent
-            }
-        }
-    }
-
-  Check {
-        id: check
-       /* statusV: status.visible
-        buttonV: boutons.visible
-        errorV: error.visible*/
-    }
-
-    RowLayout {
-        spacing: 0
-
-        Layout.preferredHeight: (1/4)*parent.height
-        Layout.fillHeight: true
-        Layout.fillWidth: true
-
-        Rectangle {
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-
-            LogoAFPA {}
-        }
-    } // fin RowLayout
+//    MyRow {
+//        logoAFPA: true
+//    }
 }

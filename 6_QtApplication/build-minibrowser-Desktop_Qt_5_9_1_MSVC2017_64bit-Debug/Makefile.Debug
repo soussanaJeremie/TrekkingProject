@@ -239,6 +239,7 @@ debug\qrc_qml.cpp: ..\minibrowser\qml.qrc \
 		..\minibrowser\qml\pages\PhotoPage\Etat3.qml \
 		..\minibrowser\qml\pages\PhotoPage\Etat2.qml \
 		..\minibrowser\qml\pages\PhotoPage\Etat1.qml \
+		..\minibrowser\qml\pages\UploadPage\MyRow.qml \
 		..\minibrowser\qml\pages\UploadPage\Etat1.qml \
 		..\minibrowser\qml\pages\MapPage\Etat0.qml \
 		..\minibrowser\qml\pages\MapPage\Etat1.qml \
