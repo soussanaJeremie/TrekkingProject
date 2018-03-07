@@ -3,8 +3,7 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.1
 import QtQuick.Controls.Styles 1.2
 
-import "../modules"
-import "HomePage"
+import "DebugPage"
 
 Page {
 
@@ -17,71 +16,13 @@ Page {
         padding: 10
     }
 
-    ColumnLayout {
+    Etat1 {
+        id: etat1
+        visible: true
+    }
 
-        id : etat
-
-        anchors.fill: parent
-        Layout.fillHeight: true
-        Layout.fillWidth: true
-
-        spacing: 0
-
-        RowLayout {
-            spacing: 0
-            Layout.preferredHeight: (1/2)*parent.height
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-
-            Rectangle {
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                color: "white"
-
-                Text {
-                    id : errorBox
-                    text : "List of Bugs : \n" + MyContext.errorMessage
-                    wrapMode: Text.WordWrap
-                    width: parent.width
-
-                    color : "red"
-                    font.family: "acumin-pro"
-                    font.pixelSize: Qt.application.font.pixelSize * 1.15
-
-                    anchors.centerIn : parent
-
-                }
-            }
-        }
-
-
-        RowLayout {
-            spacing: 0
-            Layout.preferredHeight: (1/2)*parent.height
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-
-            Rectangle {
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                color: "lightGrey"
-
-                Text {
-                    id : succesBox
-                    text : "List of succes : \n" + MyContext.wellDoneMessage
-                    wrapMode: Text.WordWrap
-                    width: parent.width
-
-
-                    color : "green"
-                    font.family: "acumin-pro"
-                    font.pixelSize: Qt.application.font.pixelSize * 1.15
-
-                    anchors.centerIn : parent
-
-                }
-            }
-        }
-
+    Etat1 {
+        id: etat2
+        visible: false
     }
 }

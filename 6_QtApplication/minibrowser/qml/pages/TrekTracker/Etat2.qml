@@ -15,7 +15,6 @@ ColumnLayout {
     property var pathwayTrek : list.pathwayTrek
 
     anchors.fill: parent
-    anchors.top : header.bottom
     spacing: 0
 
 
