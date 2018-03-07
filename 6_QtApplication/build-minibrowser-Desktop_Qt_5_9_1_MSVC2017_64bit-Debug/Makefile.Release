@@ -241,6 +241,7 @@ release\qrc_qml.cpp: ..\minibrowser\qml.qrc \
 		..\minibrowser\qml\pages\PhotoPage\Etat1.qml \
 		..\minibrowser\qml\pages\UploadPage\MyRow.qml \
 		..\minibrowser\qml\pages\UploadPage\Etat1.qml \
+		..\minibrowser\qml\pages\UploadPage\MyRowText.qml \
 		..\minibrowser\qml\pages\MapPage\Etat0.qml \
 		..\minibrowser\qml\pages\MapPage\Etat1.qml \
 		..\minibrowser\qml\pages\HomePage\Etat3.qml \

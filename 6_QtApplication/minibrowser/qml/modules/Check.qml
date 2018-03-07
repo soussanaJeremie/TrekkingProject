@@ -12,7 +12,7 @@ RowLayout {
     property bool buttonV
     property bool errorV*/
     spacing: 0
-    id: check
+    id: etat
     visible: false
     Layout.preferredHeight: (1/2)*parent.height
     Layout.fillHeight: true
@@ -62,11 +62,11 @@ RowLayout {
                     visible: true
                     
                     text : "OK"
-                    height: buttonHeight
-                    width: buttonWidth
+                    height: etat.height / 15
+                    width: etat.width / 3
                     onClicked: {
                         console.log("valid")
-                        check.visible = false
+                        etat.visible = false
                     }
                 }
             }
@@ -86,7 +86,7 @@ RowLayout {
                         status.visible = true
                         boutons.visible = true
                         error.visible = true
-                        check.visible = false
+                        etat.visible = false
                         console.log("cancel")
                     }
                 }

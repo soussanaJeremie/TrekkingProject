@@ -26,7 +26,7 @@ RowLayout {
     property alias errorBox: idErrorBox.visible
     property alias logoAFPA: idLogoAfpa.visible
 
-
+    id: etat
     spacing: 0
     Layout.fillWidth: true
     Layout.fillHeight: true
@@ -59,8 +59,8 @@ RowLayout {
         MyButton {
             id: idButton
             visible: false
-            height: buttonHeight
-            width: buttonWidth
+            height: etat.height / 15
+            width: etat.width / 3
             onClicked: buttonClicked()
         }
     }
@@ -86,8 +86,8 @@ RowLayout {
         MyButton {
             id: idButton2
             visible: false
-            height: buttonHeight
-            width: buttonWidth
+            height: etat.height / 15
+            width: etat.width / 3
             onClicked: button2Clicked()
         }
     }

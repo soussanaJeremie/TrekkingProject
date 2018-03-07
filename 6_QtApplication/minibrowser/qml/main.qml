@@ -82,7 +82,6 @@ ApplicationWindow {
 
         UploadPage{
             id: uploadPage
-//            Component.onCompleted: etat1.implicitHeight = contentItem.implicitHeight;
         }
 
         MyDebuggingPage {
