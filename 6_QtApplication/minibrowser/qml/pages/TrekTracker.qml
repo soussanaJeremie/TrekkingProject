@@ -38,6 +38,4 @@ Page {
         id : etat3
         visible: trek3_visibilite
     }
-
-
 }

@@ -4,6 +4,7 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls.Styles 1.2
 
 import "../../modules"
+import "../HomePage"
 
 ColumnLayout {
     
@@ -29,6 +30,8 @@ ColumnLayout {
             Text {
                 id : errorBox
                 text : "List of Bugs : \n" + MyContext.errorMessage
+                wrapMode: Text.WordWrap
+                width: parent.width
                 
                 color : "red"
                 font.family: "acumin-pro"
@@ -55,6 +58,9 @@ ColumnLayout {
             Text {
                 id : succesBox
                 text : "List of succes : \n" + MyContext.wellDoneMessage
+
+                wrapMode: Text.WordWrap
+                width: parent.width
                 
                 color : "green"
                 font.family: "acumin-pro"

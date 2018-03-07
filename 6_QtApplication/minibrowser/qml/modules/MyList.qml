@@ -13,6 +13,7 @@ Rectangle {
             label: "Titre du trek"
             length: 00
             time : "00:00:00"
+            pathway: ""
         }
     }
 
@@ -35,6 +36,7 @@ Rectangle {
                     font.family: "acumin-pro"
                     font.pixelSize: Qt.application.font.pixelSize * 1
                 }
+
             }
 
             MouseArea {
@@ -59,6 +61,9 @@ Rectangle {
             labelTrek = treksModel.get(view.currentIndex).label;
             lengthTrek = treksModel.get(view.currentIndex).length;
             timeTrek = treksModel.get(view.currentIndex).time;
+            pathwayTrek = treksModel.get(view.currentIndex).pathway;
+
+            mapPage.leafletTrace = treksModel.get(view.currentIndex).pathway;
 
             console.log(labelTrek + " ; " + lengthTrek + " ; " + timeTrek)
         }
@@ -94,8 +99,11 @@ Rectangle {
                     treksModel.append({
                                           "label": result.treks[ligne].label,
                                           "length": result.treks[ligne].length,
-                                          "time": result.treks[ligne].time
-                                      })
+                                          "time": result.treks[ligne].time,
+                                          "pathway": result.treks[ligne].pathway
+                                      });
+                    MyContext.setWellDoneMessage("\n" + result.treks[ligne].pathway);
+
                 }
 
 

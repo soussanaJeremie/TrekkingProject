@@ -22,7 +22,7 @@ Page {
         visible: true
     }
 
-    Etat2 {
+    Etat1 {
         id: etat2
         visible: false
     }

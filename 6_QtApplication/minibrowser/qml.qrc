@@ -35,6 +35,7 @@
         <file>qml/pages/HomePage/Etat2.qml</file>
         <file>qml/pages/MapPage/Etat0.qml</file>
         <file>qml/pages/MapPage/Etat1.qml</file>
+        <file>qml/pages/DebugPage/Etat1.qml</file>
         <file>qml/pages/PhotoPage/Etat1.qml</file>
         <file>qml/pages/PhotoPage/Etat2.qml</file>
         <file>qml/pages/DebugPage/Etat1.qml</file>

@@ -26,11 +26,25 @@ function pathwayToJSon(){
     while(index < MyContext.myTrek.path.length)
     {
         pathway.push( {  latitude : MyContext.myTrek.path[index].latitude ,
-                         longitude :MyContext.myTrek.path[index].longitude });
+                         longitude :MyContext.myTrek.path[index].longitude } );
         index++
     }
 
     return pathway
+}
+
+function traceToJSon(){
+    var trace = [];
+    var index = 0;
+
+    while(index < MyContext.myTrek.trace.length)
+    {
+        trace.push( {   latitude : MyContext.myTrek.trace[index].latitude ,
+                        longitude :MyContext.myTrek.trace[index].longitude } );
+        index++
+    }
+
+    return trace
 }
 
 

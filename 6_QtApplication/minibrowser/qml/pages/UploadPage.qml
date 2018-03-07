@@ -24,7 +24,7 @@ Page {
         visible: upload1_visibilite
     }
 
-    Etat2 {
+    Etat1 {
         id : etat2
         visible: false
     }
