@@ -1,5 +1,5 @@
 import QtQuick 2.9
-import QtQuick.Controls 2.2
+import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.1
 import QtQuick.Controls.Styles 1.2
 
@@ -18,7 +18,7 @@ ColumnLayout {
     
     RowLayout {
         spacing: 0
-        Layout.preferredHeight: (1/2)*parent.height
+
         Layout.fillHeight: true
         Layout.fillWidth: true
         
@@ -26,50 +26,29 @@ ColumnLayout {
             Layout.fillHeight: true
             Layout.fillWidth: true
             color: "white"
-            
-            Text {
-                id : errorBox
-                text : "List of Bugs : \n" + MyContext.errorMessage
-                wrapMode: Text.WordWrap
-                width: parent.width
-                
-                color : "red"
-                font.family: "acumin-pro"
-                font.pixelSize: Qt.application.font.pixelSize * 1.15
-                
-                anchors.centerIn : parent
-                
+
+            ListView {
+                anchors.fill: parent
+
+                delegate : Rectangle {
+                    height: txt.contentHeight + 2
+                    width: etat.width
+
+                    Text{
+                        id: txt
+                        anchors.fill: parent
+                        text : modelData
+
+                        padding: 5
+                        wrapMode: Text.Wrap
+                        font.family: "acumin-pro"
+                        font.pixelSize: Qt.application.font.pixelSize * 1.25
+                    }
+                }
+                spacing: 4
+
+                model : MyContext.dbgInfos
             }
         }
     }
-    
-    
-    RowLayout {
-        spacing: 0
-        Layout.preferredHeight: (1/2)*parent.height
-        Layout.fillHeight: true
-        Layout.fillWidth: true
-        
-        Rectangle {
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-            color: "lightGrey"
-            
-            Text {
-                id : succesBox
-                text : "List of succes : \n" + MyContext.wellDoneMessage
-                wrapMode: Text.WordWrap
-                width: parent.width
-                
-                
-                color : "green"
-                font.family: "acumin-pro"
-                font.pixelSize: Qt.application.font.pixelSize * 1.15
-                
-                anchors.centerIn : parent
-                
-            }
-        }
-    }
-    
 }

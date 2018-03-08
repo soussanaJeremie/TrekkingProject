@@ -200,7 +200,7 @@ ColumnLayout {
 
                             trekTimer.start() ;
 
-                            console.log("start Treck _ debut de la prise de pts GPS") }
+                            Context.debug("start Treck _ debut de la prise de pts GPS") }
                     }
 
                     MyButton {
@@ -258,11 +258,10 @@ ColumnLayout {
 
                             // code function to save Trek Object
                             MyContext.myTrek.setTime(etat.timeInString)
-                            MyContext.deleteTrek()
                             // code function to stop timer
                             trekTimer.stop()
 
-                            console.log("stop Treck _ fin de la prise de pts GPS")}
+                            MyContext.debug("stop Treck _ fin de la prise de pts GPS")}
                     }
                 }
             }

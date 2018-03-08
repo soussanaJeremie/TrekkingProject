@@ -35,7 +35,7 @@ ColumnLayout {
             id : maCam
             anchors.fill: parent
             onUrlLastPhotoChanged: {
-                console.log("camera.urlLastPhoto -> " + urlLastPhoto)
+                MyContext.debug("camera.urlLastPhoto -> " + urlLastPhoto)
                 urlSet();
             }
         }

@@ -31,10 +31,7 @@ ColumnLayout {
                 onLoadingChanged: {
                     if (loadRequest.errorString)
                     {
-                        console.error(loadRequest.errorString)
-                        // Comment lines below until server is online
-//                        mapPage.map0_visibilite = true
-//                        mapPage.map1_visibilite = false
+                        MyContext.debug(loadRequest.errorString);
                     };
                 }
             }
@@ -57,7 +54,6 @@ ColumnLayout {
                 height: etat.height / 15
                 width: etat.width /3
                 onClicked: {
-                    console.log("retour");
                     home3_visibilite = false;
                     home1_visibilite = true
                 }

@@ -9,20 +9,15 @@ FileManager::FileManager()
 
 void FileManager::initFolder()
 {
-    // verif dossier de sauvegarde.exists() et cree au cas ou
-
     QDir dir(m_basePath);
     QDir storage(m_basePath + "minibrowser/storage");
 
     if (!storage.exists())
     {
-        qDebug() << "no directory";
         dir.mkdir("storage");
     }
-    m_basePath += "/minibrowser/storage/";
 
-    QString test = m_basePath;
-    qDebug() << "#test" << test;
+    m_basePath += "/minibrowser/storage/";
 }
 
 bool FileManager::fileExists( const QString &fileType, const QString &fileName )
@@ -40,7 +35,7 @@ QStringList FileManager::loadFile( const QString &fileType, const QString &fileN
 
     if (!storedFile.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        qDebug() << "cannot open file:" << fileUrl;
+        DebugClass::getInstance()->saveDebugMsg("Error", "cannot open file: " + fileUrl);
     }
 
     else
@@ -62,7 +57,7 @@ void FileManager::addLine( const QString &fileType, const QString &fileName, con
     QFile fileToUpdate (fileUrl);
 
     if (!fileToUpdate.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Append)) {
-        qDebug() << "Ouverture Impossible" << fileUrl << "n'a pas pu être ouvert";
+        DebugClass::getInstance()->saveDebugMsg("Error", "cannot open file: " + fileUrl);
     }
 
     else {
@@ -70,30 +65,12 @@ void FileManager::addLine( const QString &fileType, const QString &fileName, con
         writeStream.setCodec("UTF-8");
         writeStream << endl << dataLine;
 
-        qDebug() << "Saved Line in :" << fileUrl;
+        if(!fileUrl.contains("debug_log"))
+        {
+            DebugClass::getInstance()->saveDebugMsg("Success", "Saved Line in : " + fileUrl);
+        }
     }
 }
-
-//void FileManager::saveFile(const QString &fileType, const QString &fileName, const QStringList &data)
-//{
-//    QString fileUrl = m_basePath + fileType + "_" + fileName + ".txt";
-//    QFile fileToUpdate (fileUrl);
-
-//    if (!fileToUpdate.open(QIODevice::WriteOnly | QIODevice::Text)) {
-//        qDebug() << "Ouverture Impossible" << fileUrl << "n'a pas pu être ouvert";
-//    }
-
-//    else {
-//        QTextStream writeStream( &fileToUpdate );
-//        writeStream.setCodec("UTF-8");
-
-//        for (QString dataLine : data)
-//        {
-//            writeStream << dataLine << endl;
-//        }
-//        qDebug() << "Saved Line in :" << fileUrl;
-//    }
-//}
 
 void FileManager::deleteFile( const QString &fileType, const QString &fileName )
 {
@@ -102,11 +79,11 @@ void FileManager::deleteFile( const QString &fileType, const QString &fileName )
 
     if(fileToDelete.remove())
     {
-        qDebug() << fileUrl + " was deleted";
+        DebugClass::getInstance()->saveDebugMsg("Success", fileUrl + " was deleted");
     }
     else
     {
-        qDebug() << fileUrl + " could not be deleted";
+        DebugClass::getInstance()->saveDebugMsg("Error", fileUrl + " could not be deleted");
     }
 }
 
@@ -116,7 +93,7 @@ void FileManager::saveInFile(const QString &fileType, const QString &fileName, c
     QFile fileToUpdate (fileUrl);
 
     if (!fileToUpdate.open(QIODevice::WriteOnly | QIODevice::Text)) {
-        qDebug() << "Ouverture Impossible" << fileUrl << "n'a pas pu être ouvert";
+        DebugClass::getInstance()->saveDebugMsg("Error", "cannot open file: " + fileUrl);
     }
 
     else {
@@ -127,7 +104,31 @@ void FileManager::saveInFile(const QString &fileType, const QString &fileName, c
         {
             writeStream << dataLine << ";" ;
         }
-        qDebug() << "Saved Line in :" << fileUrl;
+        DebugClass::getInstance()->saveDebugMsg("Success", fileUrl + " was append");
     }
+}
+
+QString FileManager::readFile(const QString &fileType, const QString &fileName)
+{
+    QString datas;
+
+    QString fileUrl = m_basePath + fileType + "_" + fileName + ".txt";
+    QFile fileToRead (fileUrl);
+
+    if (!fileToRead.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        DebugClass::getInstance()->saveDebugMsg("Error", fileUrl + " could not be deleted");
+    }
+    else
+    {
+        QTextStream readingStream(&fileToRead);
+        readingStream.setCodec("UTF-8");
+        while (!readingStream.atEnd())
+        {
+            datas += readingStream.readLine() + '\r';
+        }
+        fileToRead.close();
+    }
+    return datas;
 }
 

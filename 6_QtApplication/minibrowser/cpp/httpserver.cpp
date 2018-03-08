@@ -7,28 +7,28 @@ HttpServer::HttpServer()
 
 void HttpServer::post(QString uri, QString filename)
 {
-    qDebug() << "httpserver ready";
+    DebugClass::getInstance()->saveDebugMsg("info", "httpserver ready");
 
-    // On crée le boundary
+    // Boundary
     QByteArray boundary = "---------------------------87142694621188";
 
-    // On initie la requete
+    // Initialization of the request
     QUrl url = QUrl("http://localhost:3000/upload");
     QNetworkRequest requete(url);
     QNetworkAccessManager *m = new QNetworkAccessManager;
 
-    // Creation des headers
+    // Creation of the headers
     QByteArray ct = QString("Content-Type").toLatin1().constData();
     QByteArray mp = QString("multipart/form-data; boundary=" + boundary).toLatin1().constData();
     requete.setRawHeader(ct, mp);
 
 
-    // On ouvre le fichier à envoyer
+    // Open file
     QFile file( uri );
     file.open( QIODevice::ReadOnly );
 
 
-    //creation de la variable passee a POST
+    //Variable
     QByteArray data = "--" + boundary + "\r\n";
     data += "Content-Disposition: form-data; name=\"upload\"; filename=\"" + filename + ".jpg\";\r\n";
     data += "Content-Type: image/jpeg\r\n\r\n" + file.readAll() + "\r\n";
@@ -41,9 +41,11 @@ void HttpServer::post(QString uri, QString filename)
 
 
     QNetworkReply *r = m->post( requete, data );
+
+    if (r->error())
+        DebugClass::getInstance()->saveDebugMsg("Error", "An error was found during the processing of the request");
+
     r->finished();
     file.close();
-
-
 }
 

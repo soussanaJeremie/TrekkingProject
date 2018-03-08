@@ -12,6 +12,7 @@
 #include "utils.h"
 #include "photo.h"
 #include "httpserver.h"
+#include "debugclass.h"
 
 class Utils;
 
@@ -31,11 +32,11 @@ class MyContext : public QObject
     Q_PROPERTY(User* user READ getUser WRITE setUser NOTIFY userChanged)
 
 /* message manager */
-    Q_PROPERTY(QString errorMessage READ errorMessage WRITE setErrorMessage NOTIFY errorMessageChanged) //for debugPage
-    Q_PROPERTY(QString wellDoneMessage READ wellDoneMessage WRITE setWellDoneMessage NOTIFY wellDoneMessageChanged) //for debugPage
-
+    Q_PROPERTY(QString debugMessage READ debugMessage WRITE setDebugMessage NOTIFY debugMessageChanged) //for debugPage
     Q_PROPERTY(QString storageStatus READ storageStatus WRITE setStorageStatus NOTIFY storageStatusChanged)
 
+/* debug manager */
+    Q_PROPERTY(QStringList dbgInfos READ dbgInfos WRITE setDbgInfos NOTIFY dbgInfosChanged)
 
 /* variables */
     QQmlContext* m_myContext;
@@ -48,10 +49,9 @@ class MyContext : public QObject
 
     User* m_user;
 
-    QString m_errorMessage;
-    QString m_wellDoneMessage;
+    QString m_debugMessage;
     QString m_storageStatus;
-
+    QStringList m_dbgInfos;
 
 public:
 
@@ -78,6 +78,9 @@ public:
     Q_INVOKABLE void saveTrek();
     Q_INVOKABLE void deleteTrek();
     Q_INVOKABLE void testUploadPhoto();
+
+/* debug manager */
+    Q_INVOKABLE void debug(QString message);
 
 
 /* Get & Set functions of Q_PROPERTIES */
@@ -108,19 +111,19 @@ public:
         return m_user;
     }
 
-    QString errorMessage() const
+    QString debugMessage() const
     {
-        return m_errorMessage;
-    }
-
-    QString wellDoneMessage() const
-    {
-        return m_wellDoneMessage;
+        return m_debugMessage;
     }
 
     QString storageStatus() const
     {
         return m_storageStatus;
+    }
+
+    QStringList dbgInfos() const
+    {
+        return m_dbgInfos;
     }
 
 signals:
@@ -133,11 +136,13 @@ signals:
 
     void userChanged(User* user);
 
-    void errorMessageChanged(QString errorMessage);
-    void wellDoneMessageChanged(QString wellDoneMessage);
+    void debugMessageChanged(QString debugMessage);
     void storageStatusChanged(QString storageStatus);   
 
+    void dbgInfosChanged(QStringList dbgInfos);
+
 public slots:
+    void valueChanged();
 
     void setMyTrek(Trek* myTrek)
     {
@@ -183,22 +188,13 @@ public slots:
         emit userChanged(m_user);
     }
 
-    void setErrorMessage(QString errorMessage)
+    void setDebugMessage(QString debugMessage)
     {
-        if (m_errorMessage == errorMessage)
+        if (m_debugMessage == debugMessage)
             return;
 
-        m_errorMessage = errorMessage;
-        emit errorMessageChanged(m_errorMessage);
-    }
-
-    void setWellDoneMessage(QString wellDoneMessage)
-    {
-        if (m_wellDoneMessage == wellDoneMessage)
-            return;
-
-        m_wellDoneMessage = wellDoneMessage;
-        emit wellDoneMessageChanged(m_wellDoneMessage);
+        m_debugMessage = debugMessage;
+        emit debugMessageChanged(m_debugMessage);
     }
 
     void setStorageStatus(QString storageStatus)
@@ -208,6 +204,14 @@ public slots:
 
         m_storageStatus = storageStatus;
         emit storageStatusChanged(m_storageStatus);
+    }
+    void setDbgInfos(QStringList dbgInfos)
+    {
+        if (m_dbgInfos == dbgInfos)
+            return;
+
+        m_dbgInfos = dbgInfos;
+        emit dbgInfosChanged(m_dbgInfos);
     }
 };
 

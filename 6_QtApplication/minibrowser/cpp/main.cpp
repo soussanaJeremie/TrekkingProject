@@ -9,8 +9,11 @@
 #include <QtWebView/QtWebView>
 
 #include "mycontext.h"
+#include "debugclass.h"
 
 using namespace std;
+
+DebugClass *DebugClass::_singleton = nullptr;
 
 
 int main(int argc, char *argv[])

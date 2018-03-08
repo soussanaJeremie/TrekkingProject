@@ -4,8 +4,7 @@ import "../javascript/JSControl.js" as MyScript
 Rectangle {
     id : myListView
 
-        property bool active : trekPage.trek2_visibilite
-    //property bool active : trekPage.trek2_loadTrek
+    property bool active : trekPage.trek2_visibilite
 
     ListModel {
         id: treksModel
@@ -36,7 +35,6 @@ Rectangle {
                     font.family: "acumin-pro"
                     font.pixelSize: Qt.application.font.pixelSize * 1
                 }
-
             }
 
             MouseArea {
@@ -56,26 +54,18 @@ Rectangle {
         highlight: Rectangle { color: 'orange' ; radius : 4 }
         focus: true
         onCurrentItemChanged: {
-            console.log(treksModel.get(view.currentIndex).label)
-
             labelTrek = treksModel.get(view.currentIndex).label;
             lengthTrek = treksModel.get(view.currentIndex).length;
             timeTrek = treksModel.get(view.currentIndex).time;
             pathwayTrek = treksModel.get(view.currentIndex).pathway;
 
             mapPage.leafletTrace = treksModel.get(view.currentIndex).pathway;
-
-            console.log(labelTrek + " ; " + lengthTrek + " ; " + timeTrek)
         }
-
-
         spacing: 4
     }
 
-
     onActiveChanged : {
         if (active) {
-            console.log("ok")
             getTreksJSON()
         }
     }
@@ -91,11 +81,9 @@ Rectangle {
 
                 treksModel.clear();
 
-                //console.log("response", request.responseText)
                 var result = JSON.parse(request.responseText)
 
                 for (var ligne in result.treks) {
-
                     treksModel.append({
                                           "label": result.treks[ligne].label,
                                           "length": result.treks[ligne].length,
@@ -103,12 +91,10 @@ Rectangle {
                                           "pathway": result.treks[ligne].pathway
                                       });
                     MyContext.setWellDoneMessage("\n" + result.treks[ligne].pathway);
-
                 }
 
-
             } else {
-                console.log("HTTP:", request.status, request.statusText)
+                MyContext.debug("HTTP:", request.status, request.statusText)
             }
         }
 

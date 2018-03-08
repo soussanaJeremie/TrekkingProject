@@ -16,7 +16,6 @@ GpsPoint::GpsPoint(const GpsPoint &aGpsPoint,  QObject *parent): QObject(parent)
     m_longitude = aGpsPoint.m_longitude;
 }
 
-
 QString GpsPoint::gpsPointSQLFormat()
 {
     QString gpsData ("");
@@ -35,21 +34,3 @@ bool GpsPoint::userMoved(const GpsPoint &previousGpsPoint)
 
     return rayon > 10e-9;
 }
-
-///////////////////////////////////////
-/// CONSTRUCTOR NOT USED ANYMORE    ///
-/// DUE TO BETTER PARSING           ///
-/// AND CLEANING OF TREK DATA FILE  ///
-/// ///////////////////////////////////
-
-//GpsPoint::GpsPoint(QString &gpsData, QObject *parent): QObject(parent)
-//{
-//    QRegularExpression re("[a-z] \":{}]");
-//    gpsData.remove(re);
-
-//    QStringList latLng = gpsData.split(",");
-
-//    m_latitude = latLng[0].toDouble();
-//    m_longitude = latLng[1].toDouble();
-
-//}

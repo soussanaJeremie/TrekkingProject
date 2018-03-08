@@ -15,7 +15,7 @@ ApplicationWindow {
 
     property var pixelRatio: Screen.devicePixelRatio
     property var pixelDensity: Screen.pixelDensity
-    property bool debugVisibility : false;
+    property bool debugVisibility : true;
 
     visible: true
 
@@ -49,7 +49,6 @@ ApplicationWindow {
 
             if( magicCode == currentCode)
             {
-                console.log("bingo");
                 debugVisibility === false ? debugVisibility = true : debugVisibility = false ;
             }
 

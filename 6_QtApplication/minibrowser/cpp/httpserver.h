@@ -9,6 +9,8 @@
 #include <QFile>
 #include <QDebug>
 
+#include "debugclass.h"
+
 
 class HttpServer
 {

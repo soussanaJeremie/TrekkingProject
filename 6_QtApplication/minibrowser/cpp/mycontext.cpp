@@ -7,15 +7,21 @@
 
 MyContext::MyContext(QObject *parent) : QObject(parent), m_myContext(nullptr)
 {
+    QObject::connect(DebugClass::getInstance(), &DebugClass::valueChanged , this, &MyContext::valueChanged );
+
     m_myTrek = new Trek;
 
     //initialisation des messages d'erreurs
-    setErrorMessage("");
-    setWellDoneMessage("");
+    setDebugMessage("");
     setStorageStatus("");
 
     //Initialisation des fichiers de sauvegarde
     FileManager::initFolder();
+
+    if(FileManager::fileExists("debug", "log"))
+    {
+        FileManager::deleteFile("debug", "log");
+    }
 
     if(FileManager::fileExists("user", "info"))
     {
@@ -36,7 +42,6 @@ MyContext::MyContext(QObject *parent) : QObject(parent), m_myContext(nullptr)
     }
     else
     {
-        //        m_myTrek = new Trek( "trek_trek_trek", 0.0 , 0.0);
         m_myTrek = new Trek();
     }
 
@@ -44,7 +49,6 @@ MyContext::MyContext(QObject *parent) : QObject(parent), m_myContext(nullptr)
     {
         setStorageStatus(storageStatus() + "\nDes photos n'ont pas été sauvegardées sur le serveur");
     }
-
 }
 
 void MyContext::initMyContext(/*QQmlApplicationEngine &engine,*/ QQmlContext *myContext)
@@ -53,9 +57,7 @@ void MyContext::initMyContext(/*QQmlApplicationEngine &engine,*/ QQmlContext *my
 
     QString initialUrl = QStringLiteral("localhost:3000");
 
-    //    m_myContext->setContextProperty(QStringLiteral("utils"), new Utils(&engine));
-    m_myContext->setContextProperty(QStringLiteral("initialUrl"),
-                                    Utils::fromUserInput(initialUrl));
+    m_myContext->setContextProperty(QStringLiteral("initialUrl"), Utils::fromUserInput(initialUrl));
     m_myContext->setContextProperty("MyContext", this);
 }
 
@@ -70,7 +72,7 @@ void MyContext::loadMyContext()
     }
     else
     {
-        qDebug() << "Context has not been instantiated";
+        DebugClass::getInstance()->saveDebugMsg("Error", "Context has not been instantiated");
     }
 }
 
@@ -81,8 +83,6 @@ void MyContext::loadMyContext()
 void MyContext::updateTrek(const double &latitude, const double &longitude)
 {
     m_myTrek->addNewGpsPoint(GpsPoint(latitude, longitude));
-
-    //    m_myContext->setContextProperty("MyContext", this);
 }
 
 void MyContext::startTrek(const QString &trekName,const double &latitude, const double &longitude, const QString &leafletTrace)
@@ -90,11 +90,8 @@ void MyContext::startTrek(const QString &trekName,const double &latitude, const 
     delete m_myTrek;
     m_myTrek = nullptr;
     setMyTrek(new Trek (trekName, latitude, longitude, leafletTrace));
-    //    setMyTrek(new Trek());
 
-    qDebug() << " # " << trekName;
-    qDebug() << "New Trek Created";
-    setWellDoneMessage(m_wellDoneMessage + "/nNew Trek created");
+    DebugClass::getInstance()->saveDebugMsg("Success", "New Trek created with name " + trekName);
 }
 
 
@@ -105,7 +102,8 @@ void MyContext::startTrek(const QString &trekName,const double &latitude, const 
 void MyContext::saveLastImageTakenUrl(const QString &path)
 {
     setLastUrl(path);
-    qDebug() << "url = " + m_lastUrl;
+
+    DebugClass::getInstance()->saveDebugMsg("Success", "Photo saved at url " +  m_lastUrl);
 }
 
 void MyContext::photoTaken(QString title, QString url, bool privatePhoto)
@@ -140,10 +138,9 @@ void MyContext::saveUser(const int &id,  QString username,  QString password,  Q
     m_user->setPassword(password.remove("\""));
     m_user->setEmail(mail.remove("\""));
 
-    setWellDoneMessage(m_wellDoneMessage + "\nUser " + username + " saved");
+    DebugClass::getInstance()->saveDebugMsg("Success", "User " + username + " saved");
 
     QStringList userData = getUser()->userSQLFormat();
-    //    FileManager::saveFile("user", "info", userData);
     FileManager::saveInFile("user", "info", userData);
 }
 
@@ -156,20 +153,14 @@ void MyContext::deleteUser()
     m_user->setEmail("");
 }
 
-
 void MyContext::saveTrek()
 {
-    //    QString trekName = getMyTrek()->getLabel().replace(" ", "_");
     QStringList trekData = getMyTrek()->trekSQLFormat();
-
-    //    FileManager::saveFile("trek", trekName , trekData);
     FileManager::saveInFile("trek", "detail", trekData);
 }
 
 void MyContext::deleteTrek()
 {
-    //    QString trekName = getMyTrek()->getLabel().replace(" ", "_");
-    //    FileManager::deleteFile("trek", trekName);
     FileManager::deleteFile("trek", "detail");
 
     delete m_myTrek;
@@ -184,3 +175,14 @@ void MyContext::testUploadPhoto()
 {
     HttpServer::post("C:/Users/34011-58-03/Pictures/panda.jpg", "petitPanda");
 }
+
+void MyContext::debug(QString message)
+{
+    DebugClass::getInstance()->saveDebugMsg("QML", message);
+}
+
+void MyContext::valueChanged()
+{
+    setDbgInfos( DebugClass::getInstance()->infosDebug() );
+}
+

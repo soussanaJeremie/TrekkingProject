@@ -79,14 +79,13 @@ ColumnLayout {
                 height: etat.height / 15
                 width: etat.width /3
                 onClicked: {
-                    //console.log("# check datas and save profil in localFile : " + mail.text + " " + mdp.text);
-
                     var uri = "http://localhost:3000/api-rest/users/auth";
                     var datas = {
                         mail : mail.text,
                         password : mdp.text };
 
                     HttpScript.httpRequestPost(uri, datas)
+                    MyContext.debug("QML Connect")
                 }
             }
         }
@@ -101,7 +100,6 @@ ColumnLayout {
                 height: etat.height / 15
                 width: etat.width /3
                 onClicked: {
-                    console.log("connexion to webAppli");
                     home1_visibilite = false;
                     home3_visibilite = true;
                 }

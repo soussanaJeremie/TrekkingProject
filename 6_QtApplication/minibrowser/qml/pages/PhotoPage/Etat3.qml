@@ -9,7 +9,6 @@ import "../../../images"
 ColumnLayout {
 
     property string currenturl: "../../../images/defaultPhoto.png"
-
     property bool portraitView : false
 
     id : etat

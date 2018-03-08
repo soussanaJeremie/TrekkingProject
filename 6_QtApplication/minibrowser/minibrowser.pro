@@ -12,7 +12,8 @@ SOURCES += cpp/main.cpp \
     cpp/filemanager.cpp \
     cpp/user.cpp \
     cpp/photo.cpp \
-    cpp/httpserver.cpp
+    cpp/httpserver.cpp \
+    cpp/debugclass.cpp
 
 RESOURCES += qml.qrc
 
@@ -32,4 +33,5 @@ HEADERS += \
     cpp/filemanager.h \
     cpp/user.h \
     cpp/photo.h \
-    cpp/httpserver.h
+    cpp/httpserver.h \
+    cpp/debugclass.h

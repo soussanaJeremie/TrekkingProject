@@ -74,7 +74,6 @@ ColumnLayout {
                 height: etat.height / 15
                 width: etat.width / 2
                 onClicked: {
-                    console.log("changement de page > TrekTracker.etat2");
                     trek2_loadTrek = true;
                     trek1_visibilite = false;
                     trek2_visibilite = true;
@@ -168,12 +167,8 @@ ColumnLayout {
                         height: etat.height / 15
                         width: etat.width /3
                         onClicked: {
-                            console.log("valid " + label.text)
                             trek1_visibilite = false;
                             trek3_visibilite = true;
-
-//                            mapPage.trekName = label.text;
-//                            mapPage.startNewTrek = true;
 
                             etat2.labelTrek = label.text;
                             etat2.lengthTrek = 0;

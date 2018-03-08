@@ -11,6 +11,8 @@
 #include <QStandardPaths>
 #include <QObject>
 
+#include "mycontext.h"
+
 
 class FileManager
 {
@@ -22,10 +24,10 @@ public:
     static bool fileExists( const QString &fileType, const QString &fileName );
     static QStringList loadFile( const QString &fileType, const QString &fileName );
     static void addLine( const QString &fileType, const QString &fileName, const QString &dataLine );
-//    static void saveFile( const QString &fileType, const QString &fileName, const QStringList &data );
     static void deleteFile( const QString &fileType, const QString &fileName );
 
     static void saveInFile (const QString &fileType, const QString &fileName, const QStringList &data);
+    static QString readFile (const QString &fileType, const QString &fileName);
 
 private:
     static QString m_basePath;

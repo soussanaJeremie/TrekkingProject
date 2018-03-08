@@ -1,13 +1,10 @@
 #include "trek.h"
+#include "debugclass.h"
 
-/////////////////////////////////
-/// CONSTRUCTORS & DESTRUCTORS///
-/////////////////////////////////
 
 Trek::Trek(QObject *parent)
     : QObject(parent), m_label("trek_name"), m_length("1"), m_time("00:00:00"), m_path(), m_photos(), m_level("1"), m_done(1), m_trace()
 {
-    //      m_path = {new GpsPoint(43.462, 3.2527), new GpsPoint(43.462, 3.2527), new GpsPoint(43.463, 3.2528), new GpsPoint(43.464, 3.2529), new GpsPoint(43.466, 3.2530), new GpsPoint(43.462, 3.2527)};
 }
 
 Trek::Trek(const QString &label,  const double &latitude, const double &longitude, const QString &trace, QObject *parent)
@@ -50,7 +47,7 @@ Trek::~Trek()
         delete m_path.back();
         m_path.back() = nullptr;
         m_path.pop_back(); ;
-        qDebug() << m_path.length();
+        DebugClass::getInstance()->saveDebugMsg( "Info", "pathLength : " + m_path.length());
     }
 
     while(m_trace.length() != 0)
@@ -72,9 +69,8 @@ Trek::~Trek()
 
 
 ///////////////////////////
-/// MOVEMENT MONITORING ///
+/// MOVEMENT MONITORING
 ///////////////////////////
-
 
 void Trek::addNewGpsPoint(GpsPoint newGpsPoint)
 {
@@ -91,18 +87,17 @@ void Trek::addNewGpsPoint(GpsPoint newGpsPoint)
     {
         //ab
         m_path.push_back( new GpsPoint(newGpsPoint) );
-        emit pathChanged(m_path); // permet la mise à jour du QML
-        // à tester
+        emit pathChanged(m_path);
 
-        //        QList<QObject*> tmp = getPath();
-        //        tmp.push_back(new GpsPoint(newGpsPoint));
-        qDebug() << "Added Gps Point lat:" << qobject_cast<GpsPoint*>(m_path.back())->getLatitude()
-                 << ", lng:" << qobject_cast<GpsPoint*>(m_path.back())->getLongitude();
-        //        setPath(tmp);
+        DebugClass::getInstance()->saveDebugMsg("Info", "Added Gps Point lat:"
+                                                + QString::number(qobject_cast<GpsPoint*>(m_path.back())->getLatitude())
+                                                + ", lng:"
+                                                + QString::number(qobject_cast<GpsPoint*>(m_path.back())->getLongitude())
+                                                );
     }
     else
     {
-        qDebug() << "User is not moving";
+        DebugClass::getInstance()->saveDebugMsg("Error", "User is not moving");
     }
 }
 
@@ -111,11 +106,9 @@ bool Trek::didUserMove(GpsPoint &newGpsPoint)
     return newGpsPoint.userMoved(*qobject_cast<GpsPoint*>(m_path.back()));
 }
 
-
-///////////////////////
-/// PHOTO RECORDING ///
-///////////////////////
-
+///////////////////////////
+/// PHOTO RECORDING
+///////////////////////////
 
 void Trek::addPhoto(Photo* myPhoto)
 {
@@ -123,17 +116,12 @@ void Trek::addPhoto(Photo* myPhoto)
     tmp.push_back(new Photo(myPhoto));
     setPhotos(tmp);
 
-    qDebug() << "Photo added, il y a " << m_photos.length() + 1;
-    if( m_photos.length() == 0 )
-        qDebug() << " photo";
-    else qDebug() << " photos";
-    qDebug() << " dans ce trek !";
+    DebugClass::getInstance()->saveDebugMsg("Success", "Photo added");
 }
 
-
-/////////////////////////////////////
-/// SAVE & LOAD FUNCTIONS ///////////
-/////////////////////////////////////
+/////////////////////////////
+/// SAVE & LOAD FUNCTIONS
+/////////////////////////////
 
 
 QList<QObject *> Trek::pathJSONToQList(QString &pathData)

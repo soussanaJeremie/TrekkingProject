@@ -21,10 +21,10 @@ Item {
         onClicked: {
             var path = "file:///" + camera.imageCapture.capturedImagePath;
             MyContext.saveLastImageTakenUrl(path);
-            console.log("photoTaken: url -> " + path);
+            MyContext.debug("photoTaken: url -> " + path);
             parent.closed();
             urlLastPhoto = path;
-            console.log("photoPreview.urlLastPhoto -> " + urlLastPhoto)
+            MyContext.debug("photoPreview.urlLastPhoto -> " + urlLastPhoto)
 
             if(!camera.ActiveStatus)
                 camera.start()

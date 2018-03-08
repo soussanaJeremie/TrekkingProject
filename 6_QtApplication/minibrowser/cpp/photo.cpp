@@ -1,4 +1,5 @@
 #include "photo.h"
+#include "debugclass.h"
 
 using namespace std;
 
@@ -17,8 +18,7 @@ Photo::Photo(const Photo &_photo, QObject *parent) : QObject(parent)
 
 void Photo::showPhotoData(Photo* photo)
 {
-    qDebug() << "title : " << photo->title() << endl;
-    qDebug() << "url : " << photo->url() << endl;
-    qDebug() << "private : " << photo->privatePhoto() << endl;
-    qDebug() << endl;
+    DebugClass::getInstance()->saveDebugMsg( "Info",  "Photo.title : " + photo->title());
+    DebugClass::getInstance()->saveDebugMsg( "Info",  "Photo.url : " + photo->url() );
+    DebugClass::getInstance()->saveDebugMsg( "Info",  "Photo.private : " + photo->privatePhoto() );
 }

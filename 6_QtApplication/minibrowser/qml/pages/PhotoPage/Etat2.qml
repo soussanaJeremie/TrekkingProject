@@ -31,8 +31,6 @@ ColumnLayout {
             Image {
                 id: currentPhoto
                 source: currenturl
-
-
                 height: parent.height
                 fillMode: Image.PreserveAspectFit
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -163,9 +161,8 @@ ColumnLayout {
                 width: etat.width / 3
 
                 onClicked: {
-                    console.log("sauvegarde de la photo & edition du LocalFile")
-                    console.log("datas : " + label.text + " ; " + poi_type.currentText + " ; " + privateStatus.checkedValue + " ; " + description.text)
                     MyContext.photoTaken(label.text,urlLastPhoto, privateStatus.checkedValue)
+                    MyContext.debug("datas : " + label.text + " ; " + poi_type.currentText + " ; " + privateStatus.checkedValue + " ; " + description.text)
                 }
             }
         }

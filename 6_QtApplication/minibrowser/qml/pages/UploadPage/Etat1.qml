@@ -100,7 +100,6 @@ ColumnLayout {
 
                 onClicked: {
                     MyContext.testUploadPhoto();
-                    console.log("sauvegarde de la photo & edition du LocalFile")
                 }
             }
         }
