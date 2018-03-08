@@ -90,7 +90,6 @@ Rectangle {
                                           "time": result.treks[ligne].time,
                                           "pathway": result.treks[ligne].pathway
                                       });
-                    MyContext.setWellDoneMessage("\n" + result.treks[ligne].pathway);
                 }
 
             } else {
