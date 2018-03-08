@@ -31,10 +31,12 @@ ColumnLayout {
                 anchors.fill: parent
 
                 delegate : Rectangle {
-                    height: txt.contentHeight + 2
+                    height: txt.contentHeight + 8
                     width: etat.width
 
+                    color : index%2 ? "#eeeeff" : "#ffffff"
                     Text{
+                         y : 4
                         id: txt
                         anchors.fill: parent
                         text : modelData

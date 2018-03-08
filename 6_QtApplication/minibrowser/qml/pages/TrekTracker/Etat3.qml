@@ -77,7 +77,7 @@ ColumnLayout {
                     color: "lightGrey"
 
                     TextBox {
-                        text : "temps estimé : " + timeTrek
+                        text : "temps estimé : " + timeTrek || ""
                     }
                 }
             }
