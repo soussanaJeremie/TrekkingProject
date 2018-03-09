@@ -1,7 +1,7 @@
 TEMPLATE = app
 TARGET = minibrowser
 
-QT += qml quick webview sql\
+QT += qml quick webview sql network\
     positioning core widgets
 
 SOURCES += cpp/main.cpp \
@@ -11,7 +11,8 @@ SOURCES += cpp/main.cpp \
     cpp/gpspoint.cpp \
     cpp/filemanager.cpp \
     cpp/user.cpp \
-    cpp/photo.cpp
+    cpp/photo.cpp \
+    cpp/httpserver.cpp
 
 RESOURCES += qml.qrc
 
@@ -30,4 +31,5 @@ HEADERS += \
     cpp/gpspoint.h \
     cpp/filemanager.h \
     cpp/user.h \
-    cpp/photo.h
+    cpp/photo.h \
+    cpp/httpserver.h

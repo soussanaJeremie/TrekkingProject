@@ -2,10 +2,8 @@
 #define TREK_H
 
 #include <QObject>
-//#include <QString>
 #include <QDebug>
 
-#include "filemanager.h"
 #include "gpspoint.h"
 #include "photo.h"
 
@@ -16,10 +14,10 @@ class Trek : public QObject
     Q_PROPERTY(QString length READ getLength WRITE setLength NOTIFY lengthChanged)
     Q_PROPERTY(QString time READ getTime WRITE setTime NOTIFY timeChanged)
     Q_PROPERTY(QList<QObject*> path READ getPath WRITE setPath NOTIFY pathChanged)
-    Q_PROPERTY(QList<QObject*> trace READ getTrace WRITE setTrace NOTIFY traceChanged)
-    Q_PROPERTY(QObjectList photos READ getPhotos WRITE setPhotos NOTIFY photosChanged)
+    Q_PROPERTY(QList<QObject*> photos READ getPhotos WRITE setPhotos NOTIFY photosChanged)
     Q_PROPERTY(QString level READ getLevel WRITE setLevel NOTIFY levelChanged)
     Q_PROPERTY(bool done READ getDone WRITE setDone NOTIFY doneChanged)
+    Q_PROPERTY(QList<QObject*> trace READ getTrace WRITE setTrace NOTIFY traceChanged)
 
 //    Q_PROPERTY(QString test READ test WRITE setTest NOTIFY testChanged)
 
@@ -27,23 +25,38 @@ class Trek : public QObject
     QString m_length;
     QString m_time;
     QList<QObject*> m_path;
-    QList<QObject*> m_trace;
-    QObjectList m_photos;
+    QList<QObject*> m_photos;
     QString m_level;
     bool m_done;
-
+    QList<QObject*> m_trace;
 
 
 public:
     explicit Trek(QObject *parent = nullptr);
 
-    Trek(const QString &label, const double &latitude, const double &longitude, QObject *parent = 0);
+    /// BASIC CONSTRUCTORS AND DESTRUCTOR
+    Trek(const QString &label, const double &latitude, const double &longitude, const QString &trace = "", QObject *parent = 0);
     Trek(const Trek &otherTrek, QObject *parent = 0);
     ~Trek();
 
+    /// OBJECT MODIFIERS
     void addNewGpsPoint (GpsPoint newGpsPoint);
     bool didUserMove (GpsPoint &newGpsPoint);
     void addPhoto(Photo *myPhoto);
+
+    /////////////////////////////////
+    /// SAVING AND LOADING METHODS///
+    /////////////////////////////////
+
+    Trek(QStringList &trekData, QObject *parent = nullptr);
+    QList<QObject*> pathJSONToQList(QString &pathData);
+    QString pathSQLFormat(QString pathType);
+    QStringList trekSQLFormat();
+
+
+    //////////////////////////
+    /// GETTERS AND SETTERS///
+    //////////////////////////
 
     QString getLabel() const
     {
@@ -65,11 +78,6 @@ public:
         return m_path;
     }
 
-    QList<QObject*> getTrace() const
-    {
-        return m_trace;
-    }
-
     QString getLevel() const
     {
         return m_level;
@@ -80,7 +88,12 @@ public:
         return m_done;
     }
 
-    QObjectList getPhotos() const
+    QList<QObject*> getTrace() const
+    {
+        return m_trace;
+    }
+
+    QList<QObject*> getPhotos() const
     {
         return m_photos;
     }
@@ -91,12 +104,12 @@ signals:
     void lengthChanged(QString length);
     void timeChanged(QString time);
     void pathChanged(QList<QObject*> path);
-    void traceChanged(QList<QObject*> trace);
     void levelChanged(QString level);
     void doneChanged(bool done);
+    void traceChanged(QList<QObject*> trace);
 
 
-    void photosChanged(QObjectList photos);
+    void photosChanged(QList<QObject*> photos);
 
 public slots:
     void setLabel(QString label)
@@ -123,6 +136,7 @@ public slots:
         m_time = time;
         emit timeChanged(m_time);
     }
+
     void setPath(QList<QObject*> path)
     {
         if (m_path == path)
@@ -130,14 +144,6 @@ public slots:
 
         m_path = path;
         emit pathChanged(m_path);
-    }
-    void setTrace(QList<QObject*> trace)
-    {
-        if (m_trace == trace)
-            return;
-
-        m_trace = trace;
-        emit traceChanged(m_trace);
     }
     void setLevel(QString level)
     {
@@ -156,7 +162,16 @@ public slots:
         emit doneChanged(m_done);
     }
 
-    void setPhotos(QObjectList photos)
+    void setTrace(QList<QObject*> trace)
+    {
+        if (m_trace == trace)
+            return;
+
+        m_trace = trace;
+        emit traceChanged(m_trace);
+    }
+
+    void setPhotos(QList<QObject*> photos)
     {
         if (m_photos == photos)
             return;

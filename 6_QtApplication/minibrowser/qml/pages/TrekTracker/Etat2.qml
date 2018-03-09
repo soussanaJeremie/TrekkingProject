@@ -12,9 +12,9 @@ ColumnLayout {
     property string labelTrek: list.labelTrek
     property double lengthTrek: list.lengthTrek
     property var timeTrek : list.timeTrek
+    property var pathwayTrek : list.pathwayTrek
 
     anchors.fill: parent
-    anchors.top : header.bottom
     spacing: 0
 
 
@@ -52,6 +52,9 @@ ColumnLayout {
                 onClicked: {
                     trek2_visibilite = false ;
                     trek1_visibilite = true ;
+                    mapPage.leafletTrace = "" ;
+//                    labelTrek = "" ;
+//                    pathwayTrek = [] ;
                 }
             }
         }
@@ -85,12 +88,7 @@ ColumnLayout {
             Layout.fillWidth: true
             //color: "darkBlue"
 
-            Image {
-                id: logoAfpa
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.bottom: parent.bottom
-                source: "../../../images/logoAfpa.jpg"
-            }
+            LogoAFPA {}
         }
     }
 }

@@ -3,28 +3,26 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.1
 import QtQuick.Controls.Styles 1.2
 
-import "../modules"
-import "UploadPage"
+import "DebugPage"
 
 Page {
-    id : uploadPage
 
-    property bool upload1_visibilite: true
+    id : myDebugPage
 
     header: Label {
-        text: qsTr("Upload Page")
+        text: qsTr("Debug")
         font.pixelSize: Qt.application.font.pixelSize * 2
         font.family: "acumin-pro"
         padding: 10
     }
 
     Etat1 {
-        id : etat1
-        visible: upload1_visibilite
+        id: etat1
+        visible: true
     }
 
     Etat1 {
-        id : etat2
+        id: etat2
         visible: false
     }
 }

@@ -60,6 +60,8 @@ ColumnLayout {
                 height : parent.height
                 width : parent.width
 
+                content : MyContext.storageStatus
+
                 anchors.centerIn : parent
             }
         }
@@ -86,7 +88,10 @@ ColumnLayout {
                 text : "Sauver"
                 height: etat.height / 15
                 width: etat.width /3
-                onClicked: console.log("switch to UploadPage")
+                onClicked: {
+//                    console.log("switch to UploadPage")
+//                    MyContext.saveTrek();
+                }
             }
 
             MyButton {
@@ -114,6 +119,7 @@ ColumnLayout {
                 width: etat.width /3
                 onClicked:
                 {
+                    MyContext.deleteTrek();
                     helloBox.visible = false
                     boutons.visible = false
                     check.visible = true
@@ -243,12 +249,7 @@ ColumnLayout {
             Layout.fillWidth: true
             //color: "blue"
 
-            Image {
-                id: logoAfpa
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.bottom: parent.bottom
-                source: "../../../images/logoAfpa.jpg"
-            }
+            LogoAFPA {}
         }
 
     } // fin RowLayout
