@@ -75,19 +75,19 @@ var LoadTreksManager = {
         var html = "";
         html += "<tr>";
         html += "<th> Nom du trek </th>";
-        html += "<td>" + '<textarea name="" id="nom"></textarea>' + "</td>";
+        html += "<td>" + '<input name="" id="nom"></input>' + "</td>";
         html += "</tr>";
         html += "<tr>";
         html += "<th> Distance du trek </th>";
-        html += "<td>" + '<textarea name="" id="distance", readonly></textarea>' + "</td>";
+        html += "<td>" + '<input name="" id="distance", readonly></input>' + "</td>";
         html += "</tr>";
         html += "<tr>";
         html += "<th> Temps estimés </th>";
-        html += "<td>" + '<textarea  name="" id="temps", readonly></textarea>' + "</td>";
+        html += "<td>" + '<input  name="" id="temps", readonly></input>' + "</td>";
         html += "</tr>";
         html += "<tr>";
         html += "<th> Niveau de difficulté </th>";
-        html += "<td>" + '<textarea  name="" id="difficulte"></textarea>' + "</td>";
+        html += "<td>" + '<input  name="" id="difficulte"></input>' + "</td>";
         html += "</tr>";
         html += "<tr>";
 

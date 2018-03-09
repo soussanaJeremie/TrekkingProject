@@ -4,7 +4,7 @@
 
 'use strict';
 
-(function (factory, window) {
+(function(factory, window) {
 
     if (typeof define === 'function' && define.amd) {
         define(['leaflet'], factory);
@@ -16,7 +16,7 @@
         }
         factory(window.L);
     }
-}(function (L) {
+}(function(L) {
 
     /**
      * The Offline Layer should work in the same way as the Tile Layer does
@@ -34,7 +34,7 @@
          * Tile Layer, there are no additional parameters. Check their documentation
          * for up-to-date information.
          */
-        initialize: function (url, tilesDb, options) {
+        initialize: function(url, tilesDb, options) {
             this._url = url;
             this._tilesDb = tilesDb;
 
@@ -73,7 +73,7 @@
          * @returns {HTMLElement} An <img> HTML element with the appropriate
          * image URL.
          */
-        createTile: function (coords, done) {
+        createTile: function(coords, done) {
             var tile = document.createElement('img');
 
             L.DomEvent.on(tile, 'load', L.bind(this._tileOnLoad, this, done, tile));
@@ -87,9 +87,9 @@
 
             tile.setAttribute('role', 'presentation');
 
-            this.getTileUrl(coords).then(function (url) {
+            this.getTileUrl(coords).then(function(url) {
                 tile.src = url;
-            }).catch(function (err) {
+            }).catch(function(err) {
                 throw err;
             });
 
@@ -105,16 +105,16 @@
          * @param {Object} coords Coordinates of the tile.
          * @returns {String} The URL for a tile image.
          */
-        getTileUrl: function (coords) {
+        getTileUrl: function(coords) {
             var url = L.TileLayer.prototype.getTileUrl.call(this, coords);
             var dbStorageKey = this._getStorageKey(url);
 
-            var resultPromise = this._tilesDb.getItem(dbStorageKey).then(function (data) {
+            var resultPromise = this._tilesDb.getItem(dbStorageKey).then(function(data) {
                 if (data && typeof data === 'object') {
                     return URL.createObjectURL(data);
                 }
                 return url;
-            }).catch(function (err) {
+            }).catch(function(err) {
                 throw err;
             });
 
@@ -133,7 +133,7 @@
          * @returns {Array} An array containing all the URLs inside the given
          * bounds.
          */
-        getTileUrls: function (bounds, zoom) {
+        getTileUrls: function(bounds, zoom) {
             var tiles = [];
             var originalurl = this._url;
 
@@ -169,7 +169,7 @@
          * @returns {String} The key that will be used on the database layer
          * to find a tile image.
          */
-        _getStorageKey: function (url) {
+        _getStorageKey: function(url) {
             var key = null;
 
             if (url.indexOf('{s}')) {
@@ -191,14 +191,14 @@
      * Tile Layer, there are no additional parameters. Check their documentation
      * for up-to-date information.
      */
-    L.tileLayer.offline = function (url, tilesDb, options) {
+    L.tileLayer.offline = function(url, tilesDb, options) {
         return new L.TileLayer.Offline(url, tilesDb, options);
     };
 }, window));
 
 'use strict';
 
-(function (factory, window) {
+(function(factory, window) {
 
     if (typeof define === 'function' && define.amd) {
         define(['leaflet'], factory);
@@ -210,7 +210,7 @@
         }
         factory(window.L);
     }
-}(function (L) {
+}(function(L) {
 
     /**
      * The Offline Control to be used together with the Offline Layer.
@@ -238,7 +238,7 @@
          * @param {Object} options This is the same parameter as the Leaflet
          * Control, but it has some additions. Check the README for more.
          */
-        initialize: function (baseLayer, tilesDb, options) {
+        initialize: function(baseLayer, tilesDb, options) {
             this._baseLayer = baseLayer;
             this._tilesDb = tilesDb;
 
@@ -252,14 +252,14 @@
          * @param {Object} map The Leaflet map.
          * @returns {HTMLElement} The DOM element for the control.
          */
-        onAdd: function (map) {
-            var container = L.DomUtil.create('div', 'leaflet-control-offline leaflet-bar');
+        // onAdd: function (map) {
+        //     var container = L.DomUtil.create('div', 'leaflet-control-offline leaflet-bar');
 
-            this._createButton(this.options.saveButtonHtml, this.options.saveButtonTitle, 'save-tiles-button', container, this._saveTiles);
-            this._createButton(this.options.removeButtonHtml, this.options.removeButtonTitle, 'remove-tiles-button', container, this._removeTiles);
+        //     this._createButton(this.options.saveButtonHtml, this.options.saveButtonTitle, 'save-tiles-button', container, this._saveTiles);
+        //     this._createButton(this.options.removeButtonHtml, this.options.removeButtonTitle, 'remove-tiles-button', container, this._removeTiles);
 
-            return container;
-        },
+        //     return container;
+        // },
 
         /**
          * Auxiliary method that creates a button DOM element.
@@ -274,7 +274,7 @@
          * is clicked.
          * @returns {HTMLElement} A button DOM element.
          */
-        _createButton: function (html, title, className, container, fn) {
+        _createButton: function(html, title, className, container, fn) {
             var link = L.DomUtil.create('a', className, container);
             link.innerHTML = html;
             link.href = '#';
@@ -291,7 +291,7 @@
         /**
          * The function executed when the button to save tiles is clicked.
          */
-        _saveTiles: function () {
+        _saveTiles: function() {
             var self = this;
 
             var bounds = null;
@@ -324,15 +324,15 @@
             }
 
 
-            var continueSaveTiles = function () {
+            var continueSaveTiles = function() {
                 self._baseLayer.fire('offline:save-start', {
                     nTilesToSave: tileUrls.length
 
                 });
 
-                self._tilesDb.saveTiles(tileUrls).then(function () {
+                self._tilesDb.saveTiles(tileUrls).then(function() {
                     self._baseLayer.fire('offline:save-end');
-                }).catch(function (err) {
+                }).catch(function(err) {
                     self._baseLayer.fire('offline:save-error', {
                         error: err
                     });
@@ -349,15 +349,15 @@
         /**
          * The function executed when the button to remove tiles is clicked.
          */
-        _removeTiles: function () {
+        _removeTiles: function() {
             var self = this;
 
-            var continueRemoveTiles = function () {
+            var continueRemoveTiles = function() {
                 self._baseLayer.fire('offline:remove-start');
 
-                self._tilesDb.clear().then(function () {
+                self._tilesDb.clear().then(function() {
                     self._baseLayer.fire('offline:remove-end');
-                }).catch(function (err) {
+                }).catch(function(err) {
                     self._baseLayer.fire('offline:remove-error', {
                         error: err
                     });
@@ -382,18 +382,17 @@
      * @param {Object} options This is the same parameter as the Leaflet
      * Control, but it has some additions. Check the README for more.
      */
-    L.control.offline = function (baseLayer, tilesDb, options) {
+    L.control.offline = function(baseLayer, tilesDb, options) {
         return new L.Control.Offline(baseLayer, tilesDb, options);
     };
 }, window));
 
 'use strict';
 
-(function (factory) {
+(function(factory) {
     if (typeof define === 'function' && define.amd) {
         define(['./TileLayer.Offline', './Control.Offline'], factory);
     } else if (typeof exports === 'object' && module.exports) {
         module.exports = factory(require('./TileLayer.Offline'), require('./Control.Offline'));
     }
-}(function (TileLayerOffline, ControlOffline) {
-}));
+}(function(TileLayerOffline, ControlOffline) {}));

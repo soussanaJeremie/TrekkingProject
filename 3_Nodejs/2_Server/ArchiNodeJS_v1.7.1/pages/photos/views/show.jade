@@ -37,18 +37,18 @@ block content
                         input(type='radio', name="radio", value=1, checked='checked') 
                         label Photo privée
                   p#date #{photo.date_photo}
+                  .row
+                    #buttons
+                      .update  
+                        button#updatePhoto(onclick='updatePhoto()') Modifier Photo
+                      .delete
+                        button#deletPhoto(onclick='deletePhoto(#{photo.id})') Supprimer Photo               
+                      .saveupdate
+                        button#saveUpdate(onclick='saveUpdatePhoto(#{photo.id})') Sauvegarder modification
+                      .cancelupdate
+                        button#cancel(onclick='cancelupdate(#{photo.id})') annuler modification
                     #photoDiv
                       img(src="#{photo.url}")
-            .row
-              #buttons
-                .update  
-                  button#updatePhoto(onclick='updatePhoto()') Modifier Photo
-                .delete
-                  button#deletPhoto(onclick='deletePhoto(#{photo.id})') Supprimer Photo               
-                .saveupdate
-                  button#saveUpdate(onclick='saveUpdatePhoto(#{photo.id})') Sauvegarder modification
-                .cancelupdate
-                  button#cancel(onclick='cancelupdate(#{photo.id})') annuler modification
 
     #chevron
       .backToTop

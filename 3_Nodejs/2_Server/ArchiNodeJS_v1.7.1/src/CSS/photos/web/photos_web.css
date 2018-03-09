@@ -8,12 +8,6 @@
     #button {
         float: right;
     }
-    .update {
-        visibility: visible;
-    }
-    .delete:hover {
-        background-color: red;
-    }
     .pic {
         max-width: 200px;
         max-height: 150px;

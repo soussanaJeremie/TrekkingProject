@@ -21,15 +21,16 @@ class TreksDAO {
 
         let script = 'CALL trek_all (?, ?, ?, ?, ?); ';
 
-        db.query(script, [idUser, trek.label, trek.length, trek.level, JSON.stringify(trek.pathway)], (err, result) => { // id_user à mettre en variables
-            trek.id = result.insertId;
-            if (result) {
-                console.log('message inséré : !!' + result.insertId);
+        db.query(script, [idUser, trek.label, trek.length, trek.level, JSON.stringify(trek.pathway)],
+            (err, result) => { // id_user à mettre en variables
+                trek.id = result.insertId;
+                if (result) {
+                    console.log('message inséré : !!' + result.insertId);
 
-            } else {
-                console.log("erreur à l insertion : " + err)
-            }
-        });
+                } else {
+                    console.log("erreur à l insertion : " + err)
+                }
+            });
     }
 
     static update(trek, cb) {
