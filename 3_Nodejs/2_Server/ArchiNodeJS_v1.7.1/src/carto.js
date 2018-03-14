@@ -9,30 +9,30 @@ var CartoManager = {
 
 
     //Get GPS points (json object of Leaflet) of a drawn trail 
-    outputPoints: function (datas) {
+    outputPoints: function(datas) {
         var points = datas;
         return datas;
     },
 
     //Get length of a drawn trail
-    outputLength: function (data) {
+    outputLength: function(data) {
         var length_in_km = data / 1000;
         document.getElementById('distance').innerHTML = selfCarto._round(length_in_km, 2);
     },
 
     // Rounded
-    _round: function (num, len) {
+    _round: function(num, len) {
         return Math.round(num * (Math.pow(10, len))) / (Math.pow(10, len));
     },
 
     // Truncation of GPS point
-    strLatLng: function (latlng) {
+    strLatLng: function(latlng) {
         return "(" + selfCarto._round(latlng.lat, 6) + ", " + selfCarto._round(latlng.lng, 6) + ")";
     },
 
 
     // Initialization map
-    init: function () {
+    init: function() {
         selfCarto = this; //Permet d'accéder à "this" dans toutes les fonction, même CallBacks.
         selfCarto.map.setView([43.58506, 3.86021], 10);
         // Load Tiles of map
@@ -56,11 +56,11 @@ var CartoManager = {
                 minZoom: 5
             })
         }, {
-                'drawlayer': selfCarto.drawnItems
-            }, {
-                position: 'topleft',
-                collapsed: false
-            }).addTo(selfCarto.map);
+            'drawlayer': selfCarto.drawnItems
+        }, {
+            position: 'topleft',
+            collapsed: false
+        }).addTo(selfCarto.map);
 
         selfCarto.addKmlLayers();
         selfCarto.activeOfflineMode();
@@ -69,16 +69,16 @@ var CartoManager = {
     },
 
     //Offline mode
-    activeOfflineMode: function () {
-        
+    activeOfflineMode: function() {
+
         var progress = 0;
 
         var tilesDb = {
-            getItem: function (key) {
+            getItem: function(key) {
                 return localforage.getItem(key);
             },
 
-            saveTiles: function (tileUrls) {
+            saveTiles: function(tileUrls) {
                 var self = this;
                 progress = 1;
 
@@ -89,16 +89,16 @@ var CartoManager = {
                     console.log(tileUrl);
 
 
-                    promises[i] = new Promise(function (resolve, reject) {
+                    promises[i] = new Promise(function(resolve, reject) {
                         var request = new XMLHttpRequest();
                         request.open('GET', tileUrl.url, true);
                         request.responseType = 'blob';
-                        request.onreadystatechange = function () {
+                        request.onreadystatechange = function() {
                             if (request.readyState === XMLHttpRequest.DONE) {
 
                                 if (request.status === 200) {
                                     resolve(self._saveTile(tileUrl.key, request.response));
-                                    
+
 
                                     document.getElementById('progress').innerHTML = progress++
 
@@ -120,17 +120,17 @@ var CartoManager = {
                 return Promise.all(promises);
             },
 
-            clear: function () {
+            clear: function() {
                 return localforage.clear();
             },
 
-            _saveTile: function (key, value) {
-                return this._removeItem(key).then(function () {
+            _saveTile: function(key, value) {
+                return this._removeItem(key).then(function() {
                     return localforage.setItem(key, value);
                 });
             },
 
-            _removeItem: function (key) {
+            _removeItem: function(key) {
                 return localforage.removeItem(key);
             }
         };
@@ -146,12 +146,12 @@ var CartoManager = {
         var offlineControl = L.control.offline(offlineLayer, tilesDb, {
             saveButtonHtml: '<i class="fa fa-download" aria-hidden="true"></i>',
             removeButtonHtml: '<i class="fa fa-trash" aria-hidden="true"></i>',
-            confirmSavingCallback: function (nTilesToSave, continueSaveTiles) {
+            confirmSavingCallback: function(nTilesToSave, continueSaveTiles) {
                 if (window.confirm('Save ' + nTilesToSave + '?')) {
                     continueSaveTiles();
                 }
             },
-            confirmRemovalCallback: function (continueRemoveTiles) {
+            confirmRemovalCallback: function(continueRemoveTiles) {
                 if (window.confirm('Remove all the tiles?')) {
                     continueRemoveTiles();
                 }
@@ -163,16 +163,16 @@ var CartoManager = {
         offlineLayer.addTo(selfCarto.map);
         offlineControl.addTo(selfCarto.map);
 
-        offlineLayer.on('offline:below-min-zoom-error', function () {
+        offlineLayer.on('offline:below-min-zoom-error', function() {
             alert('Can not save tiles below minimum zoom level 12.');
         });
 
-        offlineLayer.on('offline:higher-max-zoom-error', function () {
+        offlineLayer.on('offline:higher-max-zoom-error', function() {
             alert('Can not save tiles after max zoom level 15.');
         });
 
 
-        offlineLayer.on('offline:save-start', function (data) {
+        offlineLayer.on('offline:save-start', function(data) {
             console.log('Saving ' + data.nTilesToSave + ' tiles.');
 
             var total = data.nTilesToSave
@@ -184,7 +184,7 @@ var CartoManager = {
 
         });
 
-        offlineLayer.on('offline:save-end', function () {
+        offlineLayer.on('offline:save-end', function() {
 
             document.getElementById('loader_section').innerHTML = "";
             document.getElementById('progress').innerHTML = "";
@@ -193,25 +193,25 @@ var CartoManager = {
             alert('All the tiles were saved.');
         });
 
-        offlineLayer.on('offline:save-error', function (err) {
+        offlineLayer.on('offline:save-error', function(err) {
             console.error('Error when saving tiles: ' + err);
         });
 
-        offlineLayer.on('offline:remove-start', function () {
+        offlineLayer.on('offline:remove-start', function() {
             console.log('Removing tiles.');
         });
 
-        offlineLayer.on('offline:remove-end', function () {
+        offlineLayer.on('offline:remove-end', function() {
             alert('All the tiles were removed.');
         });
 
-        offlineLayer.on('offline:remove-error', function (err) {
+        offlineLayer.on('offline:remove-error', function(err) {
             console.error('Error when removing tiles: ' + err);
         });
     },
 
     // Add drawing Tools
-    addDrawTools: function () {
+    addDrawTools: function() {
 
         // Add control buttons
         selfCarto.map.addControl(new L.Control.Draw({
@@ -229,7 +229,7 @@ var CartoManager = {
             }
         }));
 
-        selfCarto.map.on(L.Draw.Event.CREATED, function (event) {
+        selfCarto.map.on(L.Draw.Event.CREATED, function(event) {
             var layer = event.layer;
 
             selfCarto.drawnItems.addLayer(layer);
@@ -238,7 +238,7 @@ var CartoManager = {
         // Bind trail and information GPS _ Generate a popup content based on layer type
         // - Returns HTML string, or null if unknown object
 
-        var getPopupContent = function (layer) {
+        var getPopupContent = function(layer) {
 
             // Marker - add lat/long
             if (layer instanceof L.Marker || layer instanceof L.CircleMarker) {
@@ -290,7 +290,7 @@ var CartoManager = {
 
 
         /* Object created - bind popup to layer, add to feature group */
-        selfCarto.map.on(L.Draw.Event.CREATED, function (event) {
+        selfCarto.map.on(L.Draw.Event.CREATED, function(event) {
             var layer = event.layer;
             var content = getPopupContent(layer);
             if (content !== null) {
@@ -300,10 +300,10 @@ var CartoManager = {
         });
 
         // Object(s) edited - update popups
-        selfCarto.map.on(L.Draw.Event.EDITED, function (event) {
+        selfCarto.map.on(L.Draw.Event.EDITED, function(event) {
             var layers = event.layers,
                 content = null;
-            layers.eachLayer(function (layer) {
+            layers.eachLayer(function(layer) {
                 content = getPopupContent(layer);
                 if (content !== null) {
                     layer.setPopupContent(content);
@@ -313,7 +313,7 @@ var CartoManager = {
     },
 
     // Add KML files
-    addKmlLayers: function () {
+    addKmlLayers: function() {
 
         // KML without popups
         /* omnivore.kml('gr-kml/gr60b.kml').addTo(map); */
@@ -336,7 +336,7 @@ var CartoManager = {
         // Change color trails KML
         var customLayer = L.geoJson(null, {
             /* http://leafletjs.com/reference.html#geojson-style */
-            style: function (feature) {
+            style: function(feature) {
                 return {
                     color: 'purple',
                     weight: 2
@@ -349,10 +349,10 @@ var CartoManager = {
         while (i < tabKml.length) {
 
             var runLayer = omnivore.kml(tabKml[i], null, customLayer)
-                .on('ready', function () {
+                .on('ready', function() {
                     /* map.fitBounds(runLayer.getBounds()); */
 
-                    runLayer.eachLayer(function (layer) {
+                    runLayer.eachLayer(function(layer) {
                         layer.bindPopup(layer.feature.properties.name);
                     })
                 }).addTo(selfCarto.map);
@@ -361,7 +361,7 @@ var CartoManager = {
     },
 
     // Draw trail from Database
-    drawTrek: function (datas) {
+    drawTrek: function(datas) {
 
         var points = datas.chemin;
         var polylinePoints = [];

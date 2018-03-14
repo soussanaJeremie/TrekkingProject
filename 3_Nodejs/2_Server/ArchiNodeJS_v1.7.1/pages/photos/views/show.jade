@@ -1,57 +1,62 @@
 extends layout
 
 block content
-  h2#trek photo
-  title
   .Bandeau
-  section
+  section.small-12.medium-12.large-12.columns  
     img(src='../src/images/Bandeau.png', style='margin-bottom: 5px')
     section.section
       .top-border
         .row
         .large-12
-          nav#nav-under
-            div
+          #nav-under
               ul.inline-list-custom
                 li
-                  a(href='/users') Profil
+                  a(href='/users/:idUser') Profil
                 li
                   a(href='/photos') Galerie Photos
                   .top-border
-  h1 #{photo.title}
-    .row
-      .small-12.medium-12.large-12.columns
-          #container_details
-            .photo_datas
-              .field
-                  #urlDiv
-                    input#url(type="text", value=photo.url)
-                  #titleDiv
-                    input#title(type='text', value=photo.title)
-                  #statusDiv
-                    - if (photo.private === 0)
-                      input(type='radio', name="radio", value=0, checked='checked') 
-                      label Photo publique
-                      input(type='radio', name="radio", value=1) 
-                      label Photo privée
-                    - else
-                      input(type='radio', name="radio", value=0) 
-                      label Photo publique
-                      input(type='radio', name="radio", value=1, checked='checked') 
-                      label Photo privée
-                p#date #{photo.date_photo}
-                  #photoDiv
-                    img(src="#{photo.url}")
-          .row
-            #buttons
-              .update  
-                button#updatePhoto(onclick='updatePhoto()') Modifier Photo
-              .delete
-                button#deletPhoto(onclick='deletePhoto(#{photo.id})') Supprimer Photo               
-              .saveupdate
-                button#saveUpdate(onclick='saveUpdatePhoto(#{photo.id})') Sauvegarder modification
-              .cancelupdate
-                button#cancel(onclick='cancelupdate(#{photo.id})') annuler modification
+    h1 #{photo.title}
+      .row
+        .small-12.medium-12.large-12.columns
+            #container_details
+              .photo_datas
+                .field
+                    #urlDiv
+                      input#url(type="text", value=photo.url)
+                    #titleDiv
+                      input#title(type='text', value=photo.title)
+                    #statusDiv
+                      - if (photo.private === 0)
+                        input(type='radio', name="radio", value=0, checked='checked') 
+                        label Photo publique
+                        input(type='radio', name="radio", value=1) 
+                        label Photo privée
+                      - else
+                        input(type='radio', name="radio", value=0) 
+                        label Photo publique
+                        input(type='radio', name="radio", value=1, checked='checked') 
+                        label Photo privée
+                  p#date #{photo.date_photo}
+                    #photoDiv
+                      img(src="#{photo.url}")
+            .row
+              #buttons
+                .update  
+                  button#updatePhoto(onclick='updatePhoto()') Modifier Photo
+                .delete
+                  button#deletPhoto(onclick='deletePhoto(#{photo.id})') Supprimer Photo               
+                .saveupdate
+                  button#saveUpdate(onclick='saveUpdatePhoto(#{photo.id})') Sauvegarder modification
+                .cancelupdate
+                  button#cancel(onclick='cancelupdate(#{photo.id})') annuler modification
+
+    #chevron
+      .backToTop
+            p.back-to-top-holder
+            a.back-to-top
+                a(href='#', Title="Retour en haut")
+                    i.fa.fa-chevron-circle-up.fa-3x
+
 
     script(src="/src/ajax.js")
     script(src="/src/loadPhotos.js")

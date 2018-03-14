@@ -1,57 +1,56 @@
 extends layout
 
 block content
-  h2#trek treks
   .Bandeau
   section.small-12.medium-12.large-12.columns
-      img(src='src//images/View_from_connors_hill_panorama.jpg', style='margin-bottom: 5px')
-      section.section
-        .top-border
+    img(src='../src/images/Bandeau.png', style='margin-bottom: 5px')
+    section.section
+      .top-border
         .row
-            .small-12.medium-12.large-12.small-centered.columns
-            nav#nav
-              div
-                ul.inline-list-custom
-                  li
-                    a(href='/users') Profil
-                  li
-                    a(href='/photos') Galerie Photos
-        div#containerMessageToUser
-          p#messageToUser
-        #conteneur_carte
-          .block1_infos
-            table#idTableau(style='width:100%')
-            #buttons
-              .newtrek  
-                button#newtrek(onclick='LoadTreksManager.createNewTrek()') Créer nouveau trek
-              .detail
-                button#detail(onclick="LoadTreksManager.showTrek(idCombo.selectedIndex - 1)") Détails trek               
-              .save
-                button#btnAdd(onclick='LoadTreksManager.addTrek()') Sauvegarder
-            table#coordonnees(style='width:100%')
-            table#length(style='width:100%')
-              
-          .block2_maps
-            div.map(onload="CartoManager.init()")
-                #map(style='height : 625px' )
-                div
-                #progressBar
-                  #progress 
-                  p / 
-                  #total
-                div#loader_section
-                                    
-          .block3_buttons
-            select#idCombo(onchange="LoadTreksManager.infoTrek(idCombo.selectedIndex - 1)")
-            #buttons
-              .reset
-                button#reset(onclick="LoadTreksManager.resetPage()") Reset
-      .row
-        .small-12.medium-12.large-12.columns
-          p.back-to-top-holder
+        .large-12
+          #nav-under
+              ul.inline-list-custom
+                li
+                  a(href='/users/:idUser') Profil
+                li
+                  a(href='/photos') Galerie Photos
+                  .top-border
+      #containerMessageToUser
+        p#messageToUser
+      #conteneur_carte
+        .block1_infos
+          table#idTableau(style='width:100%')
+          #buttons
+            .newtrek  
+              button#newtrek(onclick='LoadTreksManager.createNewTrek()') Créer nouveau trek
+            .detail
+              button#detail(onclick="LoadTreksManager.showTrek(idCombo.selectedIndex - 1)") Détails trek               
+            .save
+              button#btnAdd(onclick='LoadTreksManager.addTrek()') Sauvegarder
+          table#coordonnees(style='width:100%')
+          table#length(style='width:100%')
+            
+        .block2_maps
+          .map(onload="CartoManager.init()")
+            #map(style='height : 625px' )
+              #progressBar
+                #progress 
+                p / 
+                #total
+              #loader_section
+                                  
+        .block3_buttons
+          select#idCombo(onchange="LoadTreksManager.infoTrek(idCombo.selectedIndex - 1)")
+          #buttons
+            .reset
+              button#reset(onclick="LoadTreksManager.resetPage()") Reset
+    #chevron
+      .backToTop
+            p.back-to-top-holder
             a.back-to-top
-              a(href='#')
-                  i.fa.fa-chevron-circle-up.fa-3x
+                a(href='#', Title="Retour en haut")
+                    i.fa.fa-chevron-circle-up.fa-3x
+      
 
   script(src="/src/ajax.js")
   script(src="/src/loadTreks.js")

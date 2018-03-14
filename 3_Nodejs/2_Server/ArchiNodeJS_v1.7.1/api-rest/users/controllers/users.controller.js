@@ -73,9 +73,12 @@ module.exports.create = function(req, res) {
  * Read a user
  */
 module.exports.read = function(req, res) {
-    UsersService.find(req.params.idUser, (err, user) => { // à voir pour utiliser le middleware userByID
+    //UsersService.find(req.params.idUser, (err, user) => { // à voir pour utiliser le middleware userByID
+    console.log("##############" + req.session.user.id)
+    UsersService.find(req.session.user.id, (err, user) => { // à voir pour utiliser le middleware userByID
+
         res.json(user); // user est du type UserModel, pas besoin d'écrire toJSON  ##1
-        console.log("#" +  JSON.stringify(user))
+        console.log("#" + JSON.stringify(user))
     });
 }
 

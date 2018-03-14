@@ -1,40 +1,38 @@
-extends /core/views/layout
+extends layout
 
 block content
-  h2#trek login
   title
   .Bandeau
-  section.section
-      .top-border
-        .row
-        .large-12
-          nav#nav-under
-            div
-              ul.inline-list-custom
-                li
-                  a(href='/users') Profil
-                li
-                  a(href='/photos') Galerie Photos
-                  .top-border
-
-          .column
-            .front-frame
-              .front-frame-title Connectez-vous
-              .ui.form
-                .field
-                    label Email
-                  input(name='email', placeholder='email@provider.com', type='text')
-                .field
-                  label Mot de passe
-                  input(name='password', placeholder='mot de passe', type='password')
-              button.ui.button(id='loginBtn', type='submit') Connexion
-              ul.notifications-container
-
-            .front-frame.alert-register
-              .front-frame-title Inscrivez-vous
-              p Vous n'avez pas encore de compte chez nous ?
-              a(href='/signup')
-                button.ui.button S'inscrire maintenant
+    .limiter
+      .container-login100(style="background-image: url('/src/images/img-01.jpg');")
+        .wrap-login100.p-t-120.p-b-30
+          form.login100-form.validate-form
+            .login100-form-avatar
+              img(src='/src/images/Image1.png', alt='AVATAR')
+            span.login100-form-title.p-t-20.p-b-45
+              p Se connecter
+            .wrap-input100.validate-input.m-b-10
+              input.input100(type='text', name='email', placeholder='email@provider.com')
+              span.focus-input100
+              span.symbol-input100
+                i.fa.fa-user
+            .wrap-input100.validate-input.m-b-10
+              input.input100(type='password', name='password', placeholder='mot de passe')
+              span.focus-input100
+              span.symbol-input100
+                i.fa.fa-unlock
+            .container-login100-form-btn.p-t-10
+              button.login100-form-btn(id='loginBtn', type='submit') 
+                p Connexion
+                
+          .text-center.w-full.p-t-25.p-b-230
+            p Vous n'avez pas encore de compte ?
+            p Créez votre compte maintenant !
+            .container-signup100-form-btn.p-t-10
+                a(href='/signup') 
+                  button.signup100-form-btn.m-t-25
+                    p S'inscrire      
+                  
 
   script(src="/src/ajax.js")
   script(src="/src/loadUsers.js")

@@ -9,9 +9,9 @@ function buildTable(i) {
     var html = "";
 
     for (var j = 0; j < i.length; j++) {
-        html += i[j].title
-        html += '<div class=\"lien_show\"> <img src=\"' + i[j].url + '\" class=\"pic\" alt=\"photo\"/ onclick="goToShow(' + i[j].id + ')"> </div>'
-
+        html += '<ul>'
+        html += '<li class=\"lien_show\"> <img src=\"' + i[j].url + '\" class=\"pic\" alt=\"photo\"/ onclick="goToShow(' + i[j].id + ')"> </li>'
+        html += i[j].title + '</ul>'
     }
     document.getElementById('photos').innerHTML = html;
 };
@@ -170,13 +170,17 @@ function sortTrek() {
 
     // liste les photos pour chaque id du tableau créé précédement
     for (var i = 0; i < tabTrek.length; i++) {
+        html += '<ul>'
         html += "<h3>" + tabLabel[i] + "</h3>";
         for (var j = 0; j < _photos.length; j++) {
+            html += '<li>'
             if (_photos[j].idTrek == tabTrek[i]) {
+                html += '<li class=\"lien_show\"> <img src=\"' + _photos[j].url + '\" class=\"pic\" alt=\"photo\"/ onclick="goToShow(' + _photos[j].id + ')"> </li>'
                 html += _photos[j].title
-                html += '<div class=\"lien_show\"> <img src=\"' + _photos[j].url + '\" class=\"pic\" alt=\"photo\"/ onclick="goToShow(' + _photos[j].id + ')"> </div>'
             }
         }
+        html += '</il>'
+        html += '</ul>'
     }
     document.getElementById('photos').innerHTML = html;
 }

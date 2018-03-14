@@ -1,9 +1,15 @@
 doctype html
 html
+
   head
+
     title= title
+
+    link(rel='icon', type='image/png', href='/src/images/favicon.png')
+
     link(rel='stylesheet', href='/src/style.css')
-    link(rel='stylesheet', href='/src/layout.css')
+    link(rel='stylesheet', href='/src/header_new.css')
+    link(rel='stylesheet', href='/src/CSS/footer.css')    
     link(rel='stylesheet', href='/src/font-awesome-4.7.0/css/font-awesome.min.css')
 
     link(rel='stylesheet', href='/src/leaflet/leaflet.css')
@@ -13,13 +19,8 @@ html
     link(rel='stylesheet', href='/src/CSS/treks/mobile/treks_mobile.css')
     link(rel='stylesheet', href='/src/CSS/treks/web/treks_web.css')
 
-
-
-
   body
    
     include /core/views/header
     
     block content
-
-    include /core/views/footer

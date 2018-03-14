@@ -1,19 +1,16 @@
 extends layout
 
 block content
-  h2#trek profil user
   .Bandeau
   section.small-12.medium-12.large-12.columns
     img(src='src/images/Bandeau.png', style='margin-bottom: 5px')
     section.section
       .top-border
-      .row
-        .small-12.medium-12.large-12.small-centered.columns
-        nav#nav
-          div
+        .row
+          .small-12.medium-12.large-12.small-centered.columns
             ul.inline-list-custom
               li
-                a.current(href='/users') Profil
+                a.current(href='/users/:idUser') Profil
               li
                 a(href='/photos') Galerie Photos
 
@@ -47,10 +44,13 @@ block content
 
       .row
         .small-12.medium-12.large-12.columns
+  #chevron
+    .backToTop
           p.back-to-top-holder
-            a.back-to-top
-              a(href='#')
-                i.fa.fa-chevron-circle-up.fa-3x
+          a.back-to-top
+              a(href='#', Title="Retour en haut")
+                  i.fa.fa-chevron-circle-up.fa-3x
 
+  
   script(src="/src/ajax.js")
   script(src="/src/loadUsers.js")
