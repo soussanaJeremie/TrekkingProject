@@ -15,8 +15,9 @@ module.exports.index = function(req, res) {
 module.exports.show = function(req, res) {
 
     console.log('page d affichage des user demandée')
+    console.log(req.session.user.id)
 
-    UsersService.find(req.params.idUser, (err, user) => {
+    UsersService.find(req.session.user.id, (err, user) => {
         if (err) {
             console.log('page d affichage des utilisateurs : erreur' + err)
             res.end(err)

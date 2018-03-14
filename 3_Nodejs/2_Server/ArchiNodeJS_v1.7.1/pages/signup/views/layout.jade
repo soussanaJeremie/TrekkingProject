@@ -1,20 +1,26 @@
 doctype html
 html
+
   head
+
     title= title
+
+    meta(name='viewport', content='width=device-width')
+
+    link(rel='icon', type='image/png', href='/src/images/favicon.png')
+
     link(rel='stylesheet', href='/src/style.css')
-    link(rel='stylesheet', href='/src/layout.css')
-    link(rel='stylesheet', href='/src/CSS/signups/web/signups_web.css')
-    link(rel='stylesheet', href='/src/CSS/signups/mobile/signups_mobile.css')
+    link(rel='stylesheet', href='/src/header_new.css')
+    link(rel='stylesheet', href='/src/css/footer.css')
+    link(rel='stylesheet', type='text/css', href='/src/css/login/util.css')
+    link(rel='stylesheet', type='text/css', href='/src/css/login/main.css')
     link(rel='stylesheet', href='/src/font-awesome-4.7.0/css/font-awesome.min.css')
+    
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+    
 
   body
     
     include /core/views/header
     
     block content
-
-      
-
-
-    include /core/views/footer

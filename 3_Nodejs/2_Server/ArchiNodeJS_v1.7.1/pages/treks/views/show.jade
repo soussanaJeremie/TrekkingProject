@@ -1,20 +1,17 @@
 extends layout
 
 block content
-  h2#trek detail trek
-  title
   .Bandeau
-  section
+  section.small-12.medium-12.large-12.columns  
     img(src='../src/images/Bandeau.png', style='margin-bottom: 5px')
     section.section
       .top-border
         .row
         .large-12
-          nav#nav-under
-            div
+          #nav-under
               ul.inline-list-custom
                 li
-                  a(href='/users') Profil
+                  a(href='/users/:idUser') Profil
                 li
                   a(href='/photos') Galerie Photos
                   .top-border
@@ -69,11 +66,13 @@ block content
                         img(src='#{photo.url}' , alt='Photo du trek')
                         .thumbnail-caption
                           a.caption-link(href='../photos/' + photo.id) #{photo.title} 
-    .row
-        p.back-to-top-holder
-          a.back-to-top
-            a(href='#')
-              i.fa.fa-chevron-circle-up.fa-3x
+
+    #chevron
+      .backToTop
+            p.back-to-top-holder
+            a.back-to-top
+                a(href='#', Title="Retour en haut")
+                    i.fa.fa-chevron-circle-up.fa-3x
 
 
   script(src="/src/ajax.js")

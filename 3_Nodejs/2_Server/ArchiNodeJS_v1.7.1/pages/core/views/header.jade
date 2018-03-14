@@ -1,11 +1,17 @@
-#conteneur_nav
-    div.element1
-        a(href="/treks") Maps
-    div.element2
-        a(href="/users") Profil
-    div.element3
-        a(href="/") Home
-    div.element4
-        a(href="/login") Login
-    div.element5
-        a(href="/signup") Inscription
+nav
+    ul
+        li: a(href="/")
+            i.fa.fa-home(title="Page d'accueil",style='font-size:30px; color:white; text-shadow:2px 2px 4px #000000;')
+        li: a(href="/treks")
+            i.fa.fa-map(title="Page carte",style='font-size:30px; color:white; text-shadow:2px 2px 4px #000000;')
+        li: a(href="/users/:idUser")
+            i.fa.fa-user.alt(title="Page de profil",style='font-size:30px; color:white; text-shadow:2px 2px 4px #000000;')
+        li(style="float:right"): a(href="/signup")
+            i.fa.fa-user-plus(title="Page d'inscription",style='font-size:30px; color:white; text-shadow:2px 2px 4px #000000;')
+        li(style="float:right"): a(href="/login")
+            i.fa.fa-sign-in.alt(title="Page de connexion",style='font-size:30px; color:white; text-shadow:2px 2px 4px #000000;')
+        
+        li(title="Page de l'Afpa",style="float:right")
+            a(href="https://www.afpa.fr/centre/centre-de-montpellier-st-jean" target="_blank")
+                .logo
+                    img(src='../src/images/pin-afpa.svg', style='margin-top: 0px')  

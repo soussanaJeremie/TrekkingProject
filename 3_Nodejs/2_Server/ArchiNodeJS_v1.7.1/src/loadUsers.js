@@ -67,7 +67,7 @@ function selectUser(index) {
 function loadUsers() {
     $http.get('/api-rest/users', function(res) {
         _users = res;
-        buildTable();
+        // buildTable();
     }, 'json');
 }
 
@@ -96,11 +96,9 @@ function addUser() {
 /**
  * Delete selected user
  */
-function delUser() {
-    $http.delete('/api-rest/users/' + selectedUser.id, function() {
-        _users.splice(_users.indexOf(selectedUser), 1);
-        buildTable();
-    });
+function delUser(id) {
+    $http.delete('/api-rest/users/' + id, function() {});
+    window.location.replace('/')
 }
 
 /**
@@ -118,7 +116,7 @@ function updateUser() {
 
     $http.update('/api-rest/users/' + selectedUser.id, input, function(res) {
         _users[_users.indexOf(selectedUser)] = res.user;
-        buildTable();
+        // buildTable();
     }, 'json');
     window.location.replace('/users')
 }

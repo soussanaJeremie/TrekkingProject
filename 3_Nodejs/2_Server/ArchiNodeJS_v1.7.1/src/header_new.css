@@ -1,0 +1,38 @@
+nav {
+    margin: 0;
+}
+
+nav ul {
+    z-index: 3;
+    position: fixed;
+    background-color: #333d41;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow: hidden;
+}
+
+nav li {
+    float: left;
+    text-align: center;
+}
+
+nav li a {
+    font-family: "Open Sans", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    text-align: center;
+    display: block;
+    color: white;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+nav li a:hover {
+    background-color: aquamarine;
+}
+
+.logo {
+    max-height: 30px;
+    max-width: 30px;
+}

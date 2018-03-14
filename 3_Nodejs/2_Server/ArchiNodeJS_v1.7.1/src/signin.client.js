@@ -17,8 +17,8 @@ var signInController = {};
                     data: form
                 })
                 .done(function() {
-                    window.location.replace('/users');
-                })
+                    window.location.replace('/users/:idUser');
+                });
         });
     }
 

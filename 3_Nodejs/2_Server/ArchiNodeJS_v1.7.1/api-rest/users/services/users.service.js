@@ -22,6 +22,7 @@ class UsersService {
     }
 
     static find(id, cb) {
+        console.log("service" + id)
         return UsersDAO.find(id, (err, user) => {
             cb(err, user);
         });

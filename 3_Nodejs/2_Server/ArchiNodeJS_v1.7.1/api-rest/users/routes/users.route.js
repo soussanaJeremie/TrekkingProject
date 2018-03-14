@@ -14,4 +14,5 @@ router.route('/:idUser')
     .get(users.read)
     .put(users.update)
     .delete(users.delete);
+
 module.exports = router;
