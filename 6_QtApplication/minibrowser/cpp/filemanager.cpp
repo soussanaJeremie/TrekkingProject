@@ -1,27 +1,28 @@
 #include "filemanager.h"
 
 
-FileManager::FileManager(QObject *parent) : QObject(parent)
+QString FileManager::m_basePath = QStandardPaths::standardLocations(QStandardPaths::AppLocalDataLocation)[0];
+
+FileManager::FileManager()
 {
-    initFolder();
 }
 
 void FileManager::initFolder()
 {
     // verif dossier de sauvegarde.exists() et cree au cas ou
-    QString _basePath = QStandardPaths::standardLocations(QStandardPaths::AppLocalDataLocation)[0];
-    qDebug() << "#" << _basePath;
 
-    QDir dir(_basePath);
-    QDir storage(_basePath + "/storage");
+    QDir dir(m_basePath);
+    QDir storage(m_basePath + "minibrowser/storage");
 
     if (!storage.exists())
     {
         qDebug() << "no directory";
         dir.mkdir("storage");
     }
-    setBasePath(_basePath + "/storage/");
-    qDebug() << getBasePath();
+    m_basePath += "/minibrowser/storage/";
+
+    QString test = m_basePath;
+    qDebug() << "#test" << test;
 }
 
 bool FileManager::fileExists( const QString &fileType, const QString &fileName )
@@ -33,8 +34,8 @@ bool FileManager::fileExists( const QString &fileType, const QString &fileName )
 QStringList FileManager::loadFile( const QString &fileType, const QString &fileName )
 {
     QStringList data;
-    QString fileUrl = getBasePath() + fileType + "_" + fileName + ".txt";
 
+    QString fileUrl = m_basePath + fileType + "_" + fileName + ".txt";
     QFile storedFile(fileUrl);
 
     if (!storedFile.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -57,9 +58,9 @@ QStringList FileManager::loadFile( const QString &fileType, const QString &fileN
 
 void FileManager::addLine( const QString &fileType, const QString &fileName, const QString &dataLine)
 {
-    QString fileUrl = getBasePath() + fileType + "_" + fileName + ".txt";
-
+    QString fileUrl = m_basePath + fileType + "_" + fileName + ".txt";
     QFile fileToUpdate (fileUrl);
+
     if (!fileToUpdate.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Append)) {
         qDebug() << "Ouverture Impossible" << fileUrl << "n'a pas pu être ouvert";
     }
@@ -73,9 +74,45 @@ void FileManager::addLine( const QString &fileType, const QString &fileName, con
     }
 }
 
-void FileManager::updateFile(const QString &fileType, const QString &fileName, const QStringList &data)
+//void FileManager::saveFile(const QString &fileType, const QString &fileName, const QStringList &data)
+//{
+//    QString fileUrl = m_basePath + fileType + "_" + fileName + ".txt";
+//    QFile fileToUpdate (fileUrl);
+
+//    if (!fileToUpdate.open(QIODevice::WriteOnly | QIODevice::Text)) {
+//        qDebug() << "Ouverture Impossible" << fileUrl << "n'a pas pu être ouvert";
+//    }
+
+//    else {
+//        QTextStream writeStream( &fileToUpdate );
+//        writeStream.setCodec("UTF-8");
+
+//        for (QString dataLine : data)
+//        {
+//            writeStream << dataLine << endl;
+//        }
+//        qDebug() << "Saved Line in :" << fileUrl;
+//    }
+//}
+
+void FileManager::deleteFile( const QString &fileType, const QString &fileName )
 {
-    QString fileUrl = getBasePath() + fileType + "_" + fileName + ".txt";
+    QString fileUrl = m_basePath + fileType + "_" + fileName + ".txt";
+    QFile fileToDelete (fileUrl);
+
+    if(fileToDelete.remove())
+    {
+        qDebug() << fileUrl + " was deleted";
+    }
+    else
+    {
+        qDebug() << fileUrl + " could not be deleted";
+    }
+}
+
+void FileManager::saveInFile(const QString &fileType, const QString &fileName, const QStringList &data)
+{
+    QString fileUrl = m_basePath + fileType + "_" + fileName + ".txt";
     QFile fileToUpdate (fileUrl);
 
     if (!fileToUpdate.open(QIODevice::WriteOnly | QIODevice::Text)) {
@@ -88,24 +125,9 @@ void FileManager::updateFile(const QString &fileType, const QString &fileName, c
 
         for (QString dataLine : data)
         {
-            writeStream << dataLine << endl;
+            writeStream << dataLine << ";" ;
         }
         qDebug() << "Saved Line in :" << fileUrl;
-    }
-}
-
-void FileManager::deleteFile( const QString &fileType, const QString &fileName )
-{
-    QString fileUrl = getBasePath() + fileType + "_" + fileName + ".txt";
-    QFile fileToDelete (fileUrl);
-
-    if(fileToDelete.remove())
-    {
-        qDebug() << fileUrl + " was deleted";
-    }
-    else
-    {
-        qDebug() << fileUrl + " could not be deleted";
     }
 }
 

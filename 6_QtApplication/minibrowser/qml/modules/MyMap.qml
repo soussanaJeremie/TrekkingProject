@@ -18,13 +18,20 @@ Item{
         anchors.fill: parent
         plugin: mapPlugin
         center: QtPositioning.coordinate(JSC.lastLat(), JSC.lastLng()) // Oslo
-        zoomLevel: 14
+        zoomLevel: 18
 
         MapPolyline {
             id: lineOfPathway
             line.width: 3
             line.color: 'green'
             path: JSC.pathwayToJSon()
+        }
+
+        MapPolyline {
+            id: lineOfTrace
+            line.width: 3
+            line.color: 'orange'
+            path: JSC.traceToJSon()
         }
     }
 }

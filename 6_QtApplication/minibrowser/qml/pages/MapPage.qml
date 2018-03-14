@@ -15,6 +15,7 @@ Page {
     property bool gpsActive : false
     property bool startNewTrek : false
     property var trekName : ""
+    property var leafletTrace: ""
     property bool map0_visibilite: false
     property bool map1_visibilite: true
 
@@ -45,7 +46,7 @@ Page {
             var coord = gpsPosition.position.coordinate;
             if (mapPage.gpsActive && startNewTrek)
             {
-                MyContext.startTrek(trekName, coord.latitude, coord.longitude);
+                MyContext.startTrek(trekName, coord.latitude, coord.longitude, leafletTrace);
                 startNewTrek = false;
             }
         }

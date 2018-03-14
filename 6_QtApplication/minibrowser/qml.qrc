@@ -35,6 +35,7 @@
         <file>qml/pages/HomePage/Etat2.qml</file>
         <file>qml/pages/MapPage/Etat0.qml</file>
         <file>qml/pages/MapPage/Etat1.qml</file>
+        <file>qml/pages/DebugPage/Etat1.qml</file>
         <file>qml/pages/PhotoPage/Etat1.qml</file>
         <file>qml/pages/PhotoPage/Etat2.qml</file>
         <file>images/defaultPhoto.png</file>
@@ -52,5 +53,9 @@
         <file>qml/pages/PhotoPage/Etat3.qml</file>
         <file>qml/modules/camera/PhotoPreview.qml</file>
         <file>qml/modules/camera/MyCamera.qml</file>
+        <file>qml/javascript/httpRequest.js</file>
+        <file>images/icon/logoAFPA.png</file>
+        <file>qml/modules/LogoAFPA.qml</file>
+        <file>qml/pages/MyDebuggingPage.qml</file>
     </qresource>
 </RCC>
